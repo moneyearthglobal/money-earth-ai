@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Earth AI Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Smooth Slow Marquee Animation */
+        @keyframes marqueeSlow {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-slow {
+            display: flex;
+            width: max-content;
+            animation: marqueeSlow 65s linear infinite;
+        }
+        .animate-marquee-slow:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeSlower {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-slower {
+            display: flex;
+            width: max-content;
+            animation: marqueeSlower 90s linear infinite;
+        }
+        .animate-marquee-slower:hover {
+            animation-play-state: paused;
+        }
+
+        /* Gentle Floating AI Robot */
+        @keyframes robotFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(2deg); }
+        }
+        .robot-float {
+            animation: robotFloat 3.5s ease-in-out infinite;
+        }
+
+        /* Grok-Style Cute Blob Bot Dance & Eye Roll Animations */
+        @keyframes blobDanceHappy {
+            0%, 100% { transform: translateY(0px) rotate(-4deg) scale(1, 1); }
+            25% { transform: translateY(-7px) rotate(4deg) scale(1.05, 0.95); }
+            50% { transform: translateY(0px) rotate(-3deg) scale(0.96, 1.05); }
+            75% { transform: translateY(-5px) rotate(5deg) scale(1.04, 0.96); }
+        }
+        .blob-dance-up {
+            animation: blobDanceHappy 2.2s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        @keyframes blobDroopDown {
+            0%, 100% { transform: translateY(0px) scale(1, 1); }
+            50% { transform: translateY(4px) scale(1.04, 0.94); }
+        }
+        .blob-droop-down {
+            animation: blobDroopDown 2.6s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        @keyframes eyeRollUp {
+            0%, 100% { transform: translate(0px, -1.5px); }
+            35% { transform: translate(2.5px, -3px); }
+            70% { transform: translate(-2.5px, -3px); }
+        }
+        .blob-eyes-up {
+            animation: eyeRollUp 2.4s ease-in-out infinite;
+        }
+
+        @keyframes eyeLookDown {
+            0%, 100% { transform: translate(0px, 2.5px); }
+            50% { transform: translate(-1.5px, 3.5px); }
+        }
+        .blob-eyes-down {
+            animation: eyeLookDown 2.6s ease-in-out infinite;
+        }
+
+        /* Black / Dark Theme Overrides */
+        body.dark-theme {
+            background-color: #020617 !important;
+            color: #f8fafc !important;
+        }
+        body.dark-theme .bg-white {
+            background-color: #0f172a !important;
+        }
+        body.dark-theme .bg-white\/80 {
+            background-color: rgba(15, 23, 42, 0.85) !important;
+        }
+        body.dark-theme .bg-slate-50 {
+            background-color: #1e293b !important;
+        }
+        body.dark-theme .bg-slate-100 {
+            background-color: #1e293b !important;
+        }
+        body.dark-theme .bg-emerald-50 {
+            background-color: rgba(16, 185, 129, 0.12) !important;
+        }
+        body.dark-theme .bg-sky-50 {
+            background-color: rgba(14, 165, 233, 0.12) !important;
+        }
+        body.dark-theme .bg-amber-50 {
+            background-color: rgba(245, 158, 11, 0.12) !important;
+        }
+        body.dark-theme .border-slate-200 {
+            border-color: #334155 !important;
+        }
+        body.dark-theme .border-emerald-200,
+        body.dark-theme .border-emerald-200\/80 {
+            border-color: rgba(16, 185, 129, 0.35) !important;
+        }
+        body.dark-theme .border-sky-200,
+        body.dark-theme .border-sky-200\/80 {
+            border-color: rgba(14, 165, 233, 0.35) !important;
+        }
+        body.dark-theme .border-amber-200,
+        body.dark-theme .border-amber-200\/80 {
+            border-color: rgba(245, 158, 11, 0.35) !important;
+        }
+        body.dark-theme .text-slate-900,
+        body.dark-theme .text-slate-800 {
+            color: #f8fafc !important;
+        }
+        body.dark-theme .text-slate-700,
+        body.dark-theme .text-slate-600 {
+            color: #cbd5e1 !important;
+        }
+        body.dark-theme .text-slate-500 {
+            color: #94a3b8 !important;
+        }
+        body.dark-theme .text-emerald-800,
+        body.dark-theme .text-emerald-700 {
+            color: #34d399 !important;
+        }
+        body.dark-theme .text-sky-800,
+        body.dark-theme .text-sky-700 {
+            color: #38bdf8 !important;
+        }
+        body.dark-theme .text-amber-800,
+        body.dark-theme .text-amber-700 {
+            color: #fbbf24 !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <!-- 1. TOP LIVE RATE TICKER (TAMIL NADU, INDIA & GLOBAL) -->
+    <div class="bg-slate-950 text-white border-b border-slate-800 overflow-hidden py-1.5 text-xs font-mono">
+        <div class="animate-marquee-slow flex items-center gap-8 px-4">
+            <span class="flex items-center gap-2"><span class="text-amber-400 font-bold">🇮🇳 CHENNAI / TN 24K GOLD:</span> <span class="font-extrabold">₹13,679/g</span> <span class="text-emerald-400">(+0.82%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-amber-300 font-bold">🇮🇳 TN 22K GOLD:</span> <span class="font-extrabold">₹12,539/g</span> <span class="text-emerald-400">(+0.83%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-sky-400 font-bold">🌍 GLOBAL XAU/USD:</span> <span class="font-extrabold">$4,462.40/oz</span> <span class="text-emerald-400">(+0.77%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-slate-300 font-bold">🥈 TN SILVER 999:</span> <span class="font-extrabold">₹168.50/g (₹1,68,500/kg)</span> <span class="text-emerald-400">(+1.15%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-emerald-400 font-bold">💱 USD/INR:</span> <span class="font-extrabold">₹84.42</span></span>
+            <!-- Duplicate for seamless loop -->
+            <span class="flex items-center gap-2"><span class="text-amber-400 font-bold">🇮🇳 CHENNAI / TN 24K GOLD:</span> <span class="font-extrabold">₹13,679/g</span> <span class="text-emerald-400">(+0.82%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-amber-300 font-bold">🇮🇳 TN 22K GOLD:</span> <span class="font-extrabold">₹12,539/g</span> <span class="text-emerald-400">(+0.83%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-sky-400 font-bold">🌍 GLOBAL XAU/USD:</span> <span class="font-extrabold">$4,462.40/oz</span> <span class="text-emerald-400">(+0.77%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-slate-300 font-bold">🥈 TN SILVER 999:</span> <span class="font-extrabold">₹168.50/g (₹1,68,500/kg)</span> <span class="text-emerald-400">(+1.15%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-emerald-400 font-bold">💱 USD/INR:</span> <span class="font-extrabold">₹84.42</span></span>
+        </div>
+    </div>
+
+    <!-- 2. UPCOMING GLOBAL NEWS & MACRO CATALYSTS TICKER (IST) -->
+    <div class="bg-sky-950 text-sky-100 border-b border-sky-900 overflow-hidden py-1.5 text-xs">
+        <div class="max-w-7xl mx-auto px-3 flex items-center gap-3">
+            <span class="shrink-0 px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold text-[10px] tracking-wider" data-i18n="upcomingTickerLabel">
+                🌐 UPCOMING GLOBAL NEWS (IST)
+            </span>
+            <div class="overflow-hidden flex-1">
+                <div class="animate-marquee-slower flex items-center gap-10 font-mono text-[11px]">
+                    <span>⏰ <strong>07:00 PM IST:</strong> US Housing Starts & Building Permits (High Gold Volatility)</span>
+                    <span>⏰ <strong>08:30 PM IST:</strong> Federal Reserve Officials Monetary Policy Remarks</span>
+                    <span>⏰ <strong>10:00 PM IST:</strong> COMEX Gold & Silver Open Interest Settlement Watch</span>
+                    <span>⏰ <strong>06:00 AM IST:</strong> Shanghai Gold Exchange (SGE) Physical Fix</span>
+                    <span>⏰ <strong>07:00 PM IST:</strong> US Housing Starts & Building Permits (High Gold Volatility)</span>
+                    <span>⏰ <strong>08:30 PM IST:</strong> Federal Reserve Officials Monetary Policy Remarks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. HEADER WITH CUSTOM SQUARE MONEY EARTH LOGO, LANGUAGE & WHITE/BLACK THEME SWITCHER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand Logo (Custom Black Square: MONEY White / EARTH Blue) + Normal Title -->
+            <div class="flex items-center gap-3">
+                <div style="background-color:#000000 !important;" class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex flex-col items-center justify-center leading-none shadow-md border border-slate-700 shrink-0 select-none">
+                    <span style="color:#FFFFFF !important;" class="font-black text-[11px] sm:text-xs tracking-wider">MONEY</span>
+                    <span style="color:#00B4D8 !important;" class="font-black text-[11px] sm:text-xs tracking-wider mt-0.5">EARTH</span>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-2xl font-black tracking-tight text-slate-900">
+                        Money Earth AI Dashboard
+                    </h1>
+                    <p class="text-[11px] sm:text-xs text-slate-500 font-medium" data-i18n="subtitle">
+                        Tamil Nadu, India & Global Live Precious Metals & AI Algo Intelligence
+                    </p>
+                </div>
+            </div>
+
+            <!-- Controls: Live IST Clock, API Key, White/Black Theme Toggle, EN/Tamil Toggle -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span id="ist-clock" class="hidden md:inline-block font-mono text-xs font-bold px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 border border-slate-200">
+                    IST --:--:--
+                </span>
+
+                <!-- API Key Button -->
+                <button onclick="openApiModal()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition flex items-center gap-1.5">
+                    <span>🔑</span>
+                    <span id="api-status-text" data-i18n="apiBtn">Live API Key</span>
+                </button>
+
+                <!-- White / Black Theme Toggle -->
+                <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-900 text-white hover:bg-slate-800 transition flex items-center gap-1.5 shadow-sm">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-label" data-i18n="themeBlack">Black</span>
+                </button>
+
+                <!-- Language Toggle (EN | தமிழ்) -->
+                <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-sky-500 text-slate-950 hover:bg-sky-400 transition shadow-sm">
+                    <span id="lang-btn-label">தமிழ் | EN</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-5 space-y-6 flex-1">
+
+        <!-- 3.5 ABOVE GRAPHS: TODAY OVERALL BIAS & AI DIRECTION FOCUS PLAN (BOTH INDIAN & GLOBAL MARKET) -->
+        <section class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200" data-i18n="masterPlanBadge">
+                        🧭 MASTER AI DIRECTION ENGINE • INDIA & GLOBAL
+                    </span>
+                    <h2 class="text-base sm:text-xl font-extrabold text-slate-900 mt-1.5" data-i18n="masterBiasTitle">
+                        Today Overall Bias & AI Direction Focus Plan (Indian & Global Market)
+                    </h2>
+                </div>
+
+                <!-- SLIGHTLY BIGGER CARTOON ROBOT BIAS SUGGESTION & MINI GRAPHICAL GAUGE -->
+                <div id="cartoon-bias-card" class="flex items-center gap-3.5 bg-gradient-to-r from-emerald-50 via-sky-50 to-amber-50 border-2 border-emerald-400 rounded-2xl px-4 py-3 shadow-sm shrink-0 transition-all">
+                    <!-- Grok-Style Cute Green/Red Blob Bot (Water-Drop / Cloud Shape with Rolling Eyes) -->
+                    <div class="relative shrink-0">
+                        <!-- GREEN HAPPY DANCING BLOB BOT (FOCUS ON UP) -->
+                        <div id="blob-bot-up" class="blob-dance-up cursor-pointer" onclick="setCartoonBiasPreview('UP')" title="Happy Green Bot: Focus on UP">
+                            <svg class="w-16 h-16 sm:w-[72px] sm:h-[72px]" viewBox="0 0 84 84" fill="none">
+                                <!-- Soft Glow -->
+                                <ellipse cx="42" cy="74" rx="20" ry="4" fill="#10B981" opacity="0.25"/>
+                                <!-- Grok-Style Green Cloud / Water-Drop Blob Body -->
+                                <path d="M23 58C14.5 58 10 51.5 11.5 43.5C12.5 38 16.5 34.5 18 30C20 22.5 27.5 17 37.5 17C47 17 54 22 56.5 29C58.5 34 63.5 37.5 64.5 43.5C66 51.5 61 58 52.5 58H23Z" fill="#10D96B"/>
+                                <!-- Cute Dancing Arms -->
+                                <path d="M13 45C8 41 7 36 10 33" stroke="#10D96B" stroke-width="4.5" stroke-linecap="round"/>
+                                <path d="M63 43C68 38 69 32 66 29" stroke="#10D96B" stroke-width="4.5" stroke-linecap="round"/>
+                                <!-- Rolling Happy Pill Eyes (Grok Style) -->
+                                <g class="blob-eyes-up">
+                                    <rect x="29" y="31" width="6.5" height="12" rx="3.25" transform="rotate(-8 29 31)" fill="#0A0F1C"/>
+                                    <rect x="41" y="30" width="6.5" height="12" rx="3.25" transform="rotate(-8 41 30)" fill="#0A0F1C"/>
+                                    <!-- Tiny Eye Sparkle -->
+                                    <circle cx="31.5" cy="34" r="1.3" fill="#FFFFFF"/>
+                                    <circle cx="43.5" cy="33" r="1.3" fill="#FFFFFF"/>
+                                </g>
+                                <!-- Happy Little Smile -->
+                                <path d="M35.5 46.5C37.5 49 41.5 49 43.5 46.5" stroke="#064E3B" stroke-width="2.5" stroke-linecap="round"/>
+                                <!-- Floating UP Arrow Badge -->
+                                <circle cx="67" cy="21" r="11" fill="#059669" stroke="#FFFFFF" stroke-width="2.5"/>
+                                <path d="M67 26V16M67 16L63 20M67 16L71 20" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <!-- RED SAD/WORRIED BLOB BOT (FOCUS ON DOWN) -->
+                        <div id="blob-bot-down" class="hidden blob-droop-down cursor-pointer" onclick="setCartoonBiasPreview('DOWN')" title="Sad Red Bot: Focus on DOWN">
+                            <svg class="w-16 h-16 sm:w-[72px] sm:h-[72px]" viewBox="0 0 84 84" fill="none">
+                                <!-- Soft Shadow -->
+                                <ellipse cx="42" cy="75" rx="22" ry="4" fill="#F43F5E" opacity="0.25"/>
+                                <!-- Grok-Style Red Water-Drop / Drooping Blob Body -->
+                                <path d="M20 60C12 60 9 53 12 45C14.5 38.5 18 34 20 28C23 20 30 17 38.5 17C47 17 54 20.5 57 28C59 34 62.5 38.5 65 45C68 53 64 60 56 60H20Z" fill="#FF2A54"/>
+                                <!-- Drooping Arms -->
+                                <path d="M13 48C9 52 9 56 12 58" stroke="#FF2A54" stroke-width="4.5" stroke-linecap="round"/>
+                                <path d="M64 48C68 52 68 56 65 58" stroke="#FF2A54" stroke-width="4.5" stroke-linecap="round"/>
+                                <!-- Sad / Downward Looking Pill Eyes -->
+                                <g class="blob-eyes-down">
+                                    <rect x="29" y="34" width="6.5" height="11" rx="3.25" transform="rotate(10 29 34)" fill="#0A0F1C"/>
+                                    <rect x="42" y="35" width="6.5" height="11" rx="3.25" transform="rotate(-10 42 35)" fill="#0A0F1C"/>
+                                </g>
+                                <!-- Sad Frown Mouth -->
+                                <path d="M35.5 50.5C37.5 48 41.5 48 43.5 50.5" stroke="#4C0519" stroke-width="2.5" stroke-linecap="round"/>
+                                <!-- Floating DOWN Arrow Badge -->
+                                <circle cx="67" cy="22" r="11" fill="#E11D48" stroke="#FFFFFF" stroke-width="2.5"/>
+                                <path d="M67 17V27M67 27L63 23M67 27L71 23" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Cartoon Speech Suggestion & Small Graphical UP/DOWN Meter -->
+                    <div class="space-y-1.5">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2 py-0.5 rounded-md bg-slate-900 text-amber-300 font-mono font-extrabold text-[10px] tracking-wide" data-i18n="robotBubbleTag">
+                                🤖 AI BOT SAYS:
+                            </span>
+                            <span id="overall-direction-text" class="text-xs sm:text-sm font-black text-emerald-800 tracking-tight" data-i18n="overallDirectionBadge">
+                                FOCUS ON UP ↑ • BUY ON DIPS
+                            </span>
+                            <!-- Interactive Mini Toggle to Preview Green UP Bot vs Red DOWN Bot -->
+                            <div class="inline-flex items-center bg-white/90 border border-slate-300 rounded-lg p-0.5 text-[10px] font-extrabold">
+                                <button id="btn-bot-up" onclick="setCartoonBiasPreview('UP')" class="px-1.5 py-0.5 rounded bg-emerald-500 text-white">UP ↑</button>
+                                <button id="btn-bot-down" onclick="setCartoonBiasPreview('DOWN')" class="px-1.5 py-0.5 rounded text-slate-600 hover:text-rose-600">DOWN ↓</button>
+                            </div>
+                        </div>
+
+                        <!-- Small Graphical UP vs DOWN Bias Bar + Mini Sparkline -->
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 min-w-[140px]">
+                                <div class="flex justify-between text-[10px] font-mono font-extrabold mb-0.5">
+                                    <span id="bias-up-label" class="text-emerald-700" data-i18n="biasUpPct">▲ UP BIAS 82%</span>
+                                    <span id="bias-down-label" class="text-rose-500" data-i18n="biasDownPct">▼ DOWN 18%</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-rose-200 rounded-full overflow-hidden flex border border-slate-300">
+                                    <div id="bias-meter-fill" class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-l-full transition-all duration-300" style="width: 82%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Mini Graphical Trend Sparkline -->
+                            <svg id="bias-sparkline-up" class="w-16 h-7 shrink-0 bg-white/90 rounded-lg border border-emerald-200 p-1" viewBox="0 0 60 24" fill="none">
+                                <path d="M3 20L15 15L24 17L36 9L45 11L57 3" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="57" cy="3" r="2.8" fill="#059669"/>
+                            </svg>
+                            <svg id="bias-sparkline-down" class="hidden w-16 h-7 shrink-0 bg-white/90 rounded-lg border border-rose-200 p-1" viewBox="0 0 60 24" fill="none">
+                                <path d="M3 4L15 9L24 7L36 15L45 13L57 21" stroke="#F43F5E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="57" cy="21" r="2.8" fill="#E11D48"/>
+                            </svg>
+                        </div>
+
+                        <p class="text-[11px] font-semibold text-slate-700" data-i18n="robotCartoonTip">
+                            “Dips are golden snacks! Stay focused on the UP wave — avoid panic selling!”
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI GENERATIVE SUGGESTION BAR RIGHT BELOW CARTOON BOT BOX (INTRADAY • SWING • LONG-TERM + REASON) -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-xl px-4 py-3 border border-sky-500/40 shadow-sm text-xs leading-relaxed" data-i18n="aiGenShortPlan">
+                <span class="inline-block px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold text-[10px] mr-1.5">✨ AI GENERATIVE SUGGESTION</span>
+                <strong>Intraday:</strong> Overall bias is <strong>UP</strong> — wait for low dips on 5m/15m timeframes to <strong>Buy Low &amp; Sell High</strong> rather than chasing spikes. <strong>Swing &amp; Long-Term:</strong> Accumulate pullbacks in the upward wave. <em>(Reason: Driven by both <strong>Technical</strong> higher-low structure above key support &amp; <strong>News</strong> central bank reserve buying + softening US yields).</em>
+            </div>
+
+            <!-- 5-Horizon Direction Focus Cards: Day, Week, Swing, Position & Long-Term (BOTH INDIA & GLOBAL) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+                <!-- DAY -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-extrabold text-slate-900" data-i18n="dirDayTitle">⚡ DAY (Intraday)</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-extrabold">BULLISH ↑</span>
+                        </div>
+                        <div class="space-y-1.5 text-[11px] text-slate-700 leading-relaxed" data-i18n="dirDayPlan">
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80">
+                                <span class="font-extrabold text-amber-700">🇮🇳 India:</span> Buy dips above <strong>₹13,540/g</strong> → Target <strong>₹13,760/g</strong>.
+                            </div>
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80">
+                                <span class="font-extrabold text-sky-700">🌍 Global:</span> Long above <strong>$4,435/oz</strong> → Target <strong>$4,495</strong>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-1.5 border-t border-emerald-200/70 text-[10px] font-mono font-bold text-emerald-800 flex justify-between">
+                        <span>Hold: 4–8 Hrs</span>
+                        <span>Direction: UP ↑</span>
+                    </div>
+                </div>
+
+                <!-- WEEK -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-extrabold text-slate-900" data-i18n="dirWeekTitle">📅 WEEK (1W)</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-extrabold">BUY DIPS ↑</span>
+                        </div>
+                        <div class="space-y-1.5 text-[11px] text-slate-700 leading-relaxed" data-i18n="dirWeekPlan">
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80">
+                                <span class="font-extrabold text-amber-700">🇮🇳 India:</span> Accumulate pullbacks near <strong>₹13,490/g</strong> (1W +1.9%).
+                            </div>
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80">
+                                <span class="font-extrabold text-sky-700">🌍 Global:</span> Higher-lows intact above <strong>$4,410/oz</strong> (1W +1.8%).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-1.5 border-t border-emerald-200/70 text-[10px] font-mono font-bold text-emerald-800 flex justify-between">
+                        <span>Hold: 3–7 Days</span>
+                        <span>Direction: UP ↑</span>
+                    </div>
+                </div>
+
+                <!-- SWING -->
+                <div class="bg-sky-50 border border-sky-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-extrabold text-slate-900" data-i18n="dirSwingTitle">🌊 SWING (2–3W)</span>
+                            <span class="px-2 py-0.5 rounded bg-sky-600 text-white text-[10px] font-extrabold">MOMENTUM ↑</span>
+                        </div>
+                        <div class="space-y-1.5 text-[11px] text-slate-700 leading-relaxed" data-i18n="dirSwingPlan">
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-sky-200/80">
+                                <span class="font-extrabold text-amber-700">🇮🇳 India:</span> Ride wave to <strong>₹13,850/g</strong>; SL below <strong>₹13,380/g</strong>.
+                            </div>
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-sky-200/80">
+                                <span class="font-extrabold text-sky-700">🌍 Global:</span> Breakout focus to <strong>$4,520/oz</strong>; SL <strong>$4,380</strong>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-1.5 border-t border-sky-200/70 text-[10px] font-mono font-bold text-sky-800 flex justify-between">
+                        <span>Hold: 5–21 Days</span>
+                        <span>Direction: UP ↑</span>
+                    </div>
+                </div>
+
+                <!-- POSITION -->
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-extrabold text-slate-900" data-i18n="dirPosTitle">🏛️ POSITION (1–6M)</span>
+                            <span class="px-2 py-0.5 rounded bg-amber-500 text-slate-950 text-[10px] font-extrabold">STRONG ↑</span>
+                        </div>
+                        <div class="space-y-1.5 text-[11px] text-slate-700 leading-relaxed" data-i18n="dirPosPlan">
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80">
+                                <span class="font-extrabold text-amber-700">🇮🇳 India:</span> TN wedding & festive flow → Target <strong>₹14,450/g</strong>.
+                            </div>
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80">
+                                <span class="font-extrabold text-sky-700">🌍 Global:</span> Central bank reserve buying → Target <strong>$4,700/oz</strong>.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-1.5 border-t border-amber-200/70 text-[10px] font-mono font-bold text-amber-800 flex justify-between">
+                        <span>Hold: 1–6 Months</span>
+                        <span>Direction: UP ↑</span>
+                    </div>
+                </div>
+
+                <!-- LONG-TERM -->
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="font-extrabold text-slate-900" data-i18n="dirLongTitle">🌍 LONG-TERM (1Y+)</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-900 text-amber-400 text-[10px] font-extrabold">ACCUMULATE ↑</span>
+                        </div>
+                        <div class="space-y-1.5 text-[11px] text-slate-700 leading-relaxed" data-i18n="dirLongPlan">
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80">
+                                <span class="font-extrabold text-amber-700">🇮🇳 India:</span> Monthly 24K Gold & 999 Silver SIP on 3–5% dips.
+                            </div>
+                            <div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80">
+                                <span class="font-extrabold text-sky-700">🌍 Global:</span> Secular bull cycle (+31% YoY); hold core bullion.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-1.5 border-t border-amber-200/70 text-[10px] font-mono font-bold text-amber-800 flex justify-between">
+                        <span>Hold: 1–5+ Years</span>
+                        <span>Direction: UP ↑</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unified AI Direction Action Summary (Both India & Global) -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                <div class="text-slate-700 leading-relaxed" data-i18n="aiMasterActionText">
+                    <strong>🤖 AI Overall Decision Summary (Day • Swing • Position):</strong> Backed by steady sovereign reserve accumulation, festive physical demand, and upcoming US macro data catalysts, the broader momentum remains constructive. For <strong>Day</strong> decisions, wait for intraday dips after news volatility settles rather than chasing spikes; for <strong>Swing</strong>, ride higher-low pullbacks with disciplined risk control; and for <strong>Position</strong>, stay aligned with the primary upward trend through staggered accumulation.
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. DUAL TRADINGVIEW CHARTS (INDIAN MARKET & GLOBAL MARKET) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+            <!-- LEFT CARD: INDIAN MARKET (TAMIL NADU & INDIA) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
+                <div>
+                    <!-- Section Header -->
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-lg" data-i18n="indiaGrowthBadge">
+                            🇮🇳 Weekly, Monthly & Yearly Growth Graph
+                        </span>
+                        <span class="text-[11px] font-mono text-slate-500" id="india-range-badge">1W</span>
+                    </div>
+
+                    <!-- Title & Live Price -->
+                    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+                        <div>
+                            <h2 class="text-base sm:text-lg font-extrabold text-slate-900" data-i18n="indiaGraphTitle">Gold Rate / Indian Rupee</h2>
+                            <p class="text-[11px] font-mono font-semibold text-slate-500"><span data-i18n="tnIndiaTag">TAMIL NADU & INDIA</span> • <span id="india-tf-label">1W</span></p>
+                        </div>
+                        <div class="text-right">
+                            <div class="flex items-baseline justify-end gap-1.5">
+                                <span id="india-tv-price" class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">₹13,679</span>
+                                <span class="text-xs font-bold text-slate-500">INR/g</span>
+                            </div>
+                            <div id="india-tv-change" class="text-xs font-mono font-bold text-emerald-600">
+                                +₹259 (+1.93%) 1W
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Canvas Container -->
+                    <div id="india-chart-wrap" class="relative w-full h-56 sm:h-64 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-crosshair select-none">
+                        <canvas id="indiaTopChart" class="w-full h-full block"></canvas>
+                        <!-- Interactive Cursor Tooltip (24K & 22K Movement) -->
+                        <div id="india-cursor-tooltip" class="hidden pointer-events-none absolute z-20 bg-slate-950/95 text-white rounded-xl px-3 py-2 text-[11px] font-mono shadow-xl border border-slate-700 min-w-[205px]">
+                            <div id="ind-tt-date" class="text-slate-300 font-bold border-b border-slate-700 pb-1 mb-1">17 Nov</div>
+                            <div class="flex justify-between gap-3">
+                                <span class="text-amber-400 font-bold">24K Gold:</span>
+                                <span id="ind-tt-24k" class="font-extrabold">₹13,679</span>
+                            </div>
+                            <div id="ind-tt-24k-chg" class="text-right text-[10px] text-emerald-400 mb-1">+₹259 (+1.93%)</div>
+                            <div class="flex justify-between gap-3 border-t border-slate-800 pt-1">
+                                <span class="text-amber-200 font-bold">22K Gold:</span>
+                                <span id="ind-tt-22k" class="font-extrabold">₹12,539</span>
+                            </div>
+                            <div id="ind-tt-22k-chg" class="text-right text-[10px] text-emerald-400">+₹238 (+1.93%)</div>
+                        </div>
+                    </div>
+
+                    <!-- Timeframe Selector Buttons UNDER GRAPH -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3 bg-slate-100 p-1.5 rounded-xl">
+                        <div class="flex flex-wrap items-center gap-1">
+                            <button onclick="setIndiaRange('1W', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs bg-amber-500 text-slate-950 font-extrabold shadow-sm">1W</button>
+                            <button onclick="setIndiaRange('1M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1M</button>
+                            <button onclick="setIndiaRange('3M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">3M</button>
+                            <button onclick="setIndiaRange('6M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">6M</button>
+                            <button onclick="setIndiaRange('1Y', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1Y</button>
+                            <button onclick="setIndiaRange('5Y', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">5Y</button>
+                            <button onclick="setIndiaRange('ALL', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">All</button>
+                        </div>
+                        <span class="text-[10px] font-mono text-slate-500 pr-1">24K & 22K INR</span>
+                    </div>
+                </div>
+
+                <!-- TAMIL NADU & INDIA: TODAY, WEEK, MONTH & YEAR BIAS + AI TRADE SUGGESTION -->
+                <div class="mt-4 pt-3 border-t border-slate-200 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-extrabold text-slate-800" data-i18n="indiaBiasHeading">🇮🇳 India Bias: Today, Week, Month & Year</span>
+                            <span class="text-[10px] font-semibold text-slate-500" data-i18n="holdingGuide">Detailed Horizon Bias</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblToday">Today</span>
+                                    <span class="font-extrabold text-emerald-700">BULLISH</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indTodayDet">Sup: ₹13,540 • +0.82%</div>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblWeek">Week</span>
+                                    <span class="font-extrabold text-emerald-700">BUY DIP</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indWeekDet">1W Gain: +₹259 (+1.9%)</div>
+                            </div>
+                            <div class="bg-sky-50 border border-sky-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblMonth">Month</span>
+                                    <span class="font-extrabold text-sky-700">UPTREND</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indMonthDet">1M Gain: +₹569 (+4.3%)</div>
+                            </div>
+                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblYear">Year</span>
+                                    <span class="font-extrabold text-amber-700">STRONG</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indYearDet">1Y Surge: +₹3,259 (+31%)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAMIL NADU & INDIA BUYERS AI TRADE SUGGESTION -->
+                    <div class="bg-slate-50 border border-amber-500/40 rounded-xl p-3 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-amber-700" data-i18n="tnAiSuggestTitle">🤖 Tamil Nadu & India Buyers — AI Trade Suggestion</span>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-700">AI CONFIDENCE: 84%</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                            <div class="bg-white border border-slate-200 rounded-lg p-2.5">
+                                <div class="font-extrabold text-emerald-700 mb-0.5" data-i18n="tnIntradayTitle">⚡ Intraday (4–8 Hrs)</div>
+                                <p class="text-slate-600 leading-relaxed" data-i18n="tnIntradayBody">Buy 24K dips near <strong>₹13,540–₹13,580/g</strong>. Target <strong>₹13,760/g</strong> | Strict SL: <strong>₹13,460/g</strong>.</p>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-lg p-2.5">
+                                <div class="font-extrabold text-sky-700 mb-0.5" data-i18n="tnSwingTitle">🌊 Swing & Jewellers (5–21 Days)</div>
+                                <p class="text-slate-600 leading-relaxed" data-i18n="tnSwingBody">22K Bridal/Retail buyers lock 50% quantity on dips toward <strong>₹12,380/g</strong>; trail target <strong>₹12,750/g</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT CARD: GLOBAL MARKET (XAU/USD) -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
+                <div>
+                    <!-- Section Header -->
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-sky-700 bg-sky-50 border border-sky-200 px-2.5 py-0.5 rounded-lg" data-i18n="globalGrowthBadge">
+                            🌍 Weekly, Monthly & Yearly Growth Graph
+                        </span>
+                        <span class="text-[11px] font-mono text-slate-500" id="global-range-badge">1W</span>
+                    </div>
+
+                    <!-- Title & Live Price -->
+                    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+                        <div>
+                            <h2 class="text-base sm:text-lg font-extrabold text-slate-900" data-i18n="globalGraphTitle">Gold Spot / US Dollar</h2>
+                            <p class="text-[11px] font-mono font-semibold text-slate-500">XAUUSD • <span data-i18n="globalSpotTag">GLOBAL SPOT</span> • <span id="global-tf-label">1W</span></p>
+                        </div>
+                        <div class="text-right">
+                            <div class="flex items-baseline justify-end gap-1.5">
+                                <span id="global-tv-price" class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">$4,462.40</span>
+                                <span class="text-xs font-bold text-slate-500">USD/oz</span>
+                            </div>
+                            <div id="global-tv-change" class="text-xs font-mono font-bold text-emerald-600">
+                                +$79.90 (+1.82%) 1W
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Canvas Container -->
+                    <div id="global-chart-wrap" class="relative w-full h-56 sm:h-64 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-crosshair select-none">
+                        <canvas id="tvGlobalChart" class="w-full h-full block"></canvas>
+                        <!-- Interactive Cursor Tooltip (Global Movement) -->
+                        <div id="global-cursor-tooltip" class="hidden pointer-events-none absolute z-20 bg-slate-950/95 text-white rounded-xl px-3 py-2 text-[11px] font-mono shadow-xl border border-slate-700 min-w-[195px]">
+                            <div id="glb-tt-date" class="text-slate-300 font-bold border-b border-slate-700 pb-1 mb-1">17 Nov</div>
+                            <div class="flex justify-between gap-3">
+                                <span class="text-sky-400 font-bold">XAU/USD:</span>
+                                <span id="glb-tt-price" class="font-extrabold">$4,462.40</span>
+                            </div>
+                            <div id="glb-tt-chg" class="text-right text-[10px] text-emerald-400 mt-0.5">+$79.90 (+1.82%)</div>
+                        </div>
+                    </div>
+
+                    <!-- Timeframe Selector Buttons UNDER GRAPH -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3 bg-slate-100 p-1.5 rounded-xl">
+                        <div class="flex flex-wrap items-center gap-1">
+                            <button onclick="setTvGlobalRange('1W', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs bg-sky-500 text-slate-950 font-extrabold shadow-sm">1W</button>
+                            <button onclick="setTvGlobalRange('1M', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1M</button>
+                            <button onclick="setTvGlobalRange('3M', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">3M</button>
+                            <button onclick="setTvGlobalRange('6M', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">6M</button>
+                            <button onclick="setTvGlobalRange('1Y', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1Y</button>
+                            <button onclick="setTvGlobalRange('5Y', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">5Y</button>
+                            <button onclick="setTvGlobalRange('ALL', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">All</button>
+                        </div>
+                        <span class="text-[10px] font-mono text-slate-500 pr-1">XAU/USD Spot</span>
+                    </div>
+                </div>
+
+                <!-- GLOBAL MARKET: TODAY, WEEK, MONTH & YEAR BIAS + GLOBAL AI TRADE SUGGESTION -->
+                <div class="mt-4 pt-3 border-t border-slate-200 space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-extrabold text-slate-800" data-i18n="globalBiasHeading">🌍 Global Bias: Today, Week, Month & Year</span>
+                            <span class="text-[10px] font-semibold text-slate-500">COMEX / LBMA Horizon</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblToday">Today</span>
+                                    <span class="font-extrabold text-emerald-700">BULLISH</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="glbTodayDet">Sup: $4,435 • +0.77%</div>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblWeek">Week</span>
+                                    <span class="font-extrabold text-emerald-700">UPTREND</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="glbWeekDet">1W Gain: +$79.9 (+1.8%)</div>
+                            </div>
+                            <div class="bg-sky-50 border border-sky-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblMonth">Month</span>
+                                    <span class="font-extrabold text-sky-700">BREAKOUT</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="glbMonthDet">1M Gain: +$197.4 (+4.6%)</div>
+                            </div>
+                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-slate-700" data-i18n="lblYear">Year</span>
+                                    <span class="font-extrabold text-amber-700">CORE BUY</span>
+                                </div>
+                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="glbYearDet">1Y Surge: +$1,072 (+31%)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GLOBAL MARKET AI TRADE SUGGESTION -->
+                    <div class="bg-slate-50 border border-sky-500/40 rounded-xl p-3 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-sky-700" data-i18n="glbAiSuggestTitle">🌐 Global Market (XAU/USD) — AI Trade Suggestion</span>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-700">NY / LONDON ALGO</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                            <div class="bg-white border border-slate-200 rounded-lg p-2.5">
+                                <div class="font-extrabold text-emerald-700 mb-0.5" data-i18n="glbIntradayTitle">⚡ Global Intraday (4–8 Hrs)</div>
+                                <p class="text-slate-600 leading-relaxed" data-i18n="glbIntradayBody">Long above <strong>$4,435</strong> support; TP1 <strong>$4,495</strong>, TP2 <strong>$4,520</strong> | SL: <strong>$4,412</strong> before 7:00 PM IST.</p>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-lg p-2.5">
+                                <div class="font-extrabold text-amber-700 mb-0.5" data-i18n="glbSwingTitle">🌊 Global Swing (5–21 Days)</div>
+                                <p class="text-slate-600 leading-relaxed" data-i18n="glbSwingBody">Higher-low structure intact above <strong>$4,380</strong>; breakout close above <strong>$4,500</strong> opens <strong>$4,620</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. AI NEWS SUMMARY & UPCOMING GLOBAL CATALYSTS (IST) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <!-- AI News Digest -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="aiNewsHeading">📰 AI Bullion News & Macro Impact Digest</h3>
+                        <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200" data-i18n="aiSentimentTag">
+                            AI SENTIMENT: BULLISH
+                        </span>
+                    </div>
+                    <div class="space-y-2.5 text-xs">
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+                            <div class="font-extrabold text-slate-900 mb-1" data-i18n="news1Title">1. Central Bank Reserves & Asian Physical Demand</div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="news1Body">Steady sovereign gold accumulation and strong South Indian wedding-season buying keep 24K & 22K floor protected on dips.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+                            <div class="font-extrabold text-slate-900 mb-1" data-i18n="news2Title">2. US Yield & Dollar Index (DXY) Watch</div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="news2Body">Softening US Treasury yields support XAU/USD above $4,435; watch tonight's 7:00 PM IST US Housing data for intraday spikes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-500 flex justify-between">
+                    <span data-i18n="aiNewsFooter">Updated by Money Earth AI Macro Engine</span>
+                    <span class="text-emerald-600 font-bold">● LIVE SYNC</span>
+                </div>
+            </div>
+
+            <!-- Upcoming Global News Calendar -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="upcomingCalHeading">📅 Upcoming Global News & Events (IST)</h3>
+                    <span class="text-[10px] font-mono text-slate-500">NEXT 12–24 HRS</span>
+                </div>
+                <div class="space-y-2 text-xs font-mono">
+                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                        <div>
+                            <span class="text-amber-600 font-extrabold">07:00 PM IST</span> • <span class="font-sans font-bold text-slate-800">US Housing Starts & Building Permits</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-rose-500/15 text-rose-600 font-bold text-[10px]">HIGH IMPACT</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                        <div>
+                            <span class="text-sky-600 font-extrabold">08:30 PM IST</span> • <span class="font-sans font-bold text-slate-800">Fed Monetary Policy Remarks</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-700 font-bold text-[10px]">GOLD MOVER</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                        <div>
+                            <span class="text-emerald-600 font-extrabold">06:00 AM IST</span> • <span class="font-sans font-bold text-slate-800">Shanghai SGE Physical Gold Fix</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-700 font-bold text-[10px]">ASIA FLOW</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TAMIL NADU TODAY GOLD & SILVER RATES + PERSONAL ALGO TRADE LEVELS BOARD -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <!-- Tamil Nadu Rates Table -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="tnRatesHeading">🇮🇳 Tamil Nadu Today's Gold & Silver Rates</h3>
+                    <span class="text-[11px] font-mono text-slate-500">Chennai / Madurai / CBE</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-500">
+                                <th class="py-2 font-sans" data-i18n="thWeight">Weight</th>
+                                <th class="py-2" data-i18n="th24k">24K Pure</th>
+                                <th class="py-2" data-i18n="th22k">22K Standard</th>
+                                <th class="py-2" data-i18n="th18k">18K Gold</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="py-2.5 font-sans font-bold text-slate-800" data-i18n="w1g">1 Gram</td>
+                                <td class="py-2.5 font-extrabold text-amber-600" id="rate-24k-1g">₹13,679</td>
+                                <td class="py-2.5 font-extrabold text-slate-900" id="rate-22k-1g">₹12,539</td>
+                                <td class="py-2.5 text-slate-600" id="rate-18k-1g">₹10,259</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2.5 font-sans font-bold text-slate-800" data-i18n="w8g">8 Grams (1 Sovereign)</td>
+                                <td class="py-2.5 font-extrabold text-amber-600" id="rate-24k-8g">₹1,09,432</td>
+                                <td class="py-2.5 font-extrabold text-slate-900" id="rate-22k-8g">₹1,00,312</td>
+                                <td class="py-2.5 text-slate-600" id="rate-18k-8g">₹82,072</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2.5 font-sans font-bold text-slate-800" data-i18n="w10g">10 Grams</td>
+                                <td class="py-2.5 font-extrabold text-amber-600" id="rate-24k-10g">₹1,36,790</td>
+                                <td class="py-2.5 font-extrabold text-slate-900" id="rate-22k-10g">₹1,25,390</td>
+                                <td class="py-2.5 text-slate-600" id="rate-18k-10g">₹1,02,590</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="py-2.5 font-sans font-extrabold text-slate-800" data-i18n="wSilver">🥈 Silver (1g / 1kg)</td>
+                                <td class="py-2.5 font-extrabold text-sky-600" colspan="3">₹168.50 / gram &nbsp;|&nbsp; ₹1,68,500 / kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Interactive Algo Trade Levels Board -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="algoBoardHeading">🎯 AI Algo Trade Levels & Strategy</h3>
+                        <div class="flex gap-1 bg-slate-100 p-1 rounded-xl text-[11px] font-bold">
+                            <button onclick="selectAlgoAsset('GOLD24', this)" class="algo-asset-btn px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-extrabold">24K INR</button>
+                            <button onclick="selectAlgoAsset('XAUUSD', this)" class="algo-asset-btn px-2.5 py-1 rounded-lg text-slate-600">XAU/USD</button>
+                            <button onclick="selectAlgoAsset('SILVER', this)" class="algo-asset-btn px-2.5 py-1 rounded-lg text-slate-600">SILVER</button>
+                        </div>
+                    </div>
+
+                    <div id="trade-levels-grid" class="grid grid-cols-3 gap-2.5 font-mono text-xs">
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5">
+                            <div class="text-[10px] text-slate-500">BUY ZONE (S1)</div>
+                            <div class="font-extrabold text-emerald-700 text-sm">₹13,540 / g</div>
+                        </div>
+                        <div class="bg-rose-500/10 border border-rose-500/30 rounded-xl p-2.5">
+                            <div class="text-[10px] text-slate-500">STOP LOSS</div>
+                            <div class="font-extrabold text-rose-600 text-sm">₹13,460 / g</div>
+                        </div>
+                        <div class="bg-sky-50 border border-sky-200 rounded-xl p-2.5">
+                            <div class="text-[10px] text-slate-500">TARGET (R1)</div>
+                            <div class="font-extrabold text-sky-700 text-sm">₹13,760 / g</div>
+                        </div>
+                    </div>
+                </div>
+                <p id="trade-levels-note" class="text-[11px] text-slate-600 mt-3 bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                    Kaveri Intraday & Nilgiri Swing Algo: Accumulate near S1 (₹13,540/g) with strict SL below ₹13,460/g before 7:00 PM IST US data.
+                </p>
+            </div>
+        </section>
+
+        <!-- 7. BOTTOM SECTION: INVEST EARTH ALGO STRATEGY [SWING • POSITION • LONG-TERM] -->
+        <section class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                <div>
+                    <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                        ⚡ MONEY EARTH PROPRIETARY QUANT ENGINE
+                    </span>
+                    <h2 class="text-base sm:text-lg font-extrabold text-slate-900 mt-1" data-i18n="investEarthAlgoTitle">
+                        Invest Earth Algo Strategy — [ Swing • Position • Long-Term ]
+                    </h2>
+                </div>
+                <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-xl" data-i18n="algoWinRate">
+                    ACTIVE ALGO BIAS: BULLISH ACCUMULATION
+                </span>
+            </div>
+
+            <!-- TWO SEPARATE SECTIONS: 1. INDIAN MARKET ALGO & 2. GLOBAL MARKET ALGO -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+                <!-- SECTION 1: INDIAN MARKET ALGO STRATEGY -->
+                <div class="bg-slate-50 border border-amber-300/70 rounded-2xl p-4 space-y-3.5">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">🇮🇳</span>
+                            <div>
+                                <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="indAlgoSecTitle">Indian Market Algo Strategy (TN & India)</h3>
+                                <p class="text-[11px] font-mono text-amber-700 font-bold" data-i18n="indAlgoSecSub">24K Gold • 22K Retail • 999 Silver (INR)</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-0.5 rounded-lg bg-amber-500 text-slate-950 font-extrabold text-[10px]">MCX / INR</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <!-- India Swing -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-sky-700" data-i18n="indAlgoSwingTitle">🌊 Swing Algo (5–21 Days)</span>
+                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200">Nilgiri Pullback</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="indAlgoSwingDesc">Accumulate 24K Gold on intraday/4H dips near <strong>₹13,520–₹13,580/g</strong> with strict stop-loss below <strong>₹13,380/g</strong>; target <strong>₹13,880/g</strong>.</p>
+                        </div>
+
+                        <!-- India Position -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-amber-700" data-i18n="indAlgoPosTitle">🏛️ Position Algo (1–6 Months)</span>
+                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">Kaveri Festive</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="indAlgoPosDesc">Ride Tamil Nadu wedding & festive demand wave from <strong>₹13,350–₹13,550/g</strong> zone toward quarterly target <strong>₹14,450/g</strong> (22K lock near <strong>₹12,380/g</strong>).</p>
+                        </div>
+
+                        <!-- India Long-Term -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-emerald-700" data-i18n="indAlgoLongTitle">🌍 Long-Term Algo (1–5+ Years)</span>
+                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Smart INR SIP</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="indAlgoLongDesc">75% 24K Gold + 25% 999 Silver automated monthly SIP; double allocation whenever Indian bullion dips 3% below 50-DMA.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: GLOBAL MARKET ALGO STRATEGY -->
+                <div class="bg-slate-50 border border-sky-300/70 rounded-2xl p-4 space-y-3.5">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">🌍</span>
+                            <div>
+                                <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="glbAlgoSecTitle">Global Market Algo Strategy (Spot & COMEX)</h3>
+                                <p class="text-[11px] font-mono text-sky-700 font-bold" data-i18n="glbAlgoSecSub">XAU/USD • XAG/USD • Macro Quant (USD)</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-0.5 rounded-lg bg-sky-500 text-slate-950 font-extrabold text-[10px]">NY / LONDON</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <!-- Global Swing -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-sky-700" data-i18n="glbAlgoSwingTitle">🌊 Swing Algo (5–21 Days)</span>
+                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200">4H EMA Breakout</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="glbAlgoSwingDesc">Enter XAU/USD pullbacks at <strong>$4,420–$4,440/oz</strong> with SL below <strong>$4,380</strong>; breakout close above <strong>$4,500</strong> targets <strong>$4,530–$4,620</strong>.</p>
+                        </div>
+
+                        <!-- Global Position -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-amber-700" data-i18n="glbAlgoPosTitle">🏛️ Position Algo (1–6 Months)</span>
+                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">Sovereign Flow</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="glbAlgoPosDesc">Aligned with Central Bank reserve buying & softening US real yields; hold core long from <strong>$4,350–$4,420/oz</strong> toward <strong>$4,700/oz</strong>.</p>
+                        </div>
+
+                        <!-- Global Long-Term -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-emerald-700" data-i18n="glbAlgoLongTitle">🌍 Long-Term Algo (1–5+ Years)</span>
+                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Secular Bull</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="glbAlgoLongDesc">Core USD hedge portfolio (+31% YoY trend); scale into physical/ETF bullion on 3–5% macro corrections for multi-year compounding.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500 space-y-1">
+        <div class="font-bold text-slate-700" data-i18n="footerMain">Money Earth AI Dashboard • Tamil Nadu, India & Global Precious Metals Intelligence</div>
+        <div class="text-[11px]" data-i18n="footerSub">Educational & Algo Analytics Only. Verify live jeweller/MCX quotes before executing trades.</div>
+    </footer>
+
+    <!-- FLOATING SMILING AI CHATBOT ROBOT (ASK INVEST & ALGO + TODAY TRADE PLAN) -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col items-end">
+        <!-- Chat Drawer -->
+        <div id="ai-chat-drawer" class="hidden mb-3 w-80 sm:w-96 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-slate-950 text-white px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-xl">🤖</span>
+                    <div>
+                        <div class="font-extrabold text-sm">Money Earth AI Coach</div>
+                        <div class="text-[10px] text-sky-400 font-semibold" data-i18n="coachSub">Gold Trade Plan, Invest & Algo</div>
+                    </div>
+                </div>
+                <button onclick="toggleAiChat()" class="text-slate-400 hover:text-white text-lg font-bold px-2">✕</button>
+            </div>
+
+            <!-- Topic Pills: Today Trade Plan, Ask Investment & Ask Invest & Algo -->
+            <div class="bg-slate-100 px-2.5 py-2 flex flex-wrap gap-1.5 border-b border-slate-200">
+                <button onclick="askQuickCoach('TRADEPLAN')" class="flex-1 py-1.5 px-2 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-[11px] hover:bg-emerald-400 transition" data-i18n="pillTradePlan">
+                    📊 Today Trade Plan
+                </button>
+                <button onclick="askQuickCoach('INVEST')" class="flex-1 py-1.5 px-2 rounded-xl bg-amber-500 text-slate-950 font-extrabold text-[11px] hover:bg-amber-400 transition" data-i18n="pillInvest">
+                    🪙 Ask Investment
+                </button>
+                <button onclick="askQuickCoach('ALGO')" class="w-full py-1.5 px-2 rounded-xl bg-sky-500 text-slate-950 font-extrabold text-[11px] hover:bg-sky-400 transition" data-i18n="pillAlgo">
+                    🤖 Ask Invest & Algo
+                </button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="ai-chat-messages" class="p-3 h-64 overflow-y-auto space-y-2.5 text-xs bg-slate-50">
+                <div class="bg-white border border-slate-200 rounded-xl p-2.5 text-slate-700 leading-relaxed">
+                    Vanakkam! 🙏 I am your <strong>Money Earth Gold AI Coach</strong>. Tap <strong>Today Trade Plan</strong>, <strong>Ask Investment</strong>, or <strong>Ask Invest & Algo</strong> for Intraday, Swing & Position focus!
+                </div>
+            </div>
+
+            <!-- Input -->
+            <form onsubmit="handleChatSubmit(event)" class="p-2.5 bg-white border-t border-slate-200 flex gap-2">
+                <input id="ai-chat-input" type="text" placeholder="Ask Today Trade Plan, Swing, Position..." class="flex-1 text-xs px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 focus:outline-none focus:border-sky-500 text-slate-900">
+                <button type="submit" class="px-3.5 py-2 rounded-xl bg-slate-950 text-white text-xs font-extrabold hover:bg-slate-800" data-i18n="btnSend">Send</button>
+            </form>
+        </div>
+
+        <!-- Floating Smiling Robot Button -->
+        <button onclick="toggleAiChat()" class="robot-float group flex items-center gap-2.5 bg-slate-950 text-white border-2 border-sky-400 rounded-full px-4 py-2.5 shadow-2xl hover:scale-105 transition">
+            <!-- Smiling SVG Robot -->
+            <svg class="w-8 h-8 shrink-0" viewBox="0 0 64 64" fill="none">
+                <line x1="32" y1="6" x2="32" y2="15" stroke="#00B4D8" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="32" cy="5" r="4" fill="#FBBF24"/>
+                <rect x="12" y="15" width="40" height="34" rx="10" fill="#1E293B" stroke="#00B4D8" stroke-width="2.5"/>
+                <circle cx="24" cy="29" r="3.5" fill="#38BDF8"/>
+                <circle cx="40" cy="29" r="3.5" fill="#38BDF8"/>
+                <path d="M23 38C25.5 42 38.5 42 41 38" stroke="#34D399" stroke-width="3" stroke-linecap="round"/>
+                <rect x="22" y="51" width="20" height="7" rx="3.5" fill="#00B4D8"/>
+            </svg>
+            <div class="text-left">
+                <div class="text-[11px] font-black text-sky-400 leading-tight" data-i18n="coachBadge">Ask Invest & Algo</div>
+                <div class="text-[10px] text-slate-300 leading-tight">AI Coach</div>
+            </div>
+        </button>
+    </div>
+
+    <!-- API KEY MODAL -->
+    <div id="api-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-5 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-base font-extrabold text-slate-900">🔑 Connect Live Bullion API Key</h3>
+                <button onclick="closeApiModal()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">✕</button>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Enter your <strong>GoldAPI.io</strong> or <strong>Metals.dev</strong> key to sync live spot XAU/USD & Indian Rupee rates automatically.
+            </p>
+            <input id="api-key-input" type="password" placeholder="Paste API key (e.g., goldapi-xxxx)..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono focus:outline-none focus:border-amber-500">
+            <div class="flex justify-end gap-2">
+                <button onclick="closeApiModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700">Cancel</button>
+                <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950">Save & Sync</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- STATE ---
+        let currentLang = 'EN';
+        let isDarkTheme = false;
+        let currentIndiaRange = '1W';
+        let currentGlobalRange = '1W';
+
+        // --- HISTORICAL & MULTI-HORIZON SERIES DATA ---
+        const INDIA_SERIES = {
+            '1W': {
+                labels: ['11 Nov', '12 Nov', '13 Nov', '14 Nov', '15 Nov', '16 Nov', '17 Nov'],
+                values: [13420, 13465, 13440, 13510, 13567, 13615, 13679],
+                changeText: '+₹259 (+1.93%) 1W'
+            },
+            '1M': {
+                labels: ['18 Oct', '23 Oct', '28 Oct', '02 Nov', '07 Nov', '12 Nov', '17 Nov'],
+                values: [13110, 13190, 13260, 13340, 13450, 13560, 13679],
+                changeText: '+₹569 (+4.34%) 1M'
+            },
+            '3M': {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov'],
+                values: [12480, 12890, 13240, 13679],
+                changeText: '+₹1,199 (+9.61%) 3M'
+            },
+            '6M': {
+                labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                values: [11750, 12120, 12480, 12890, 13240, 13679],
+                changeText: '+₹1,929 (+16.4%) 6M'
+            },
+            '1Y': {
+                labels: ['Nov 25', 'Feb 26', 'May 26', 'Aug 26', 'Nov 26'],
+                values: [10420, 11180, 11890, 12650, 13679],
+                changeText: '+₹3,259 (+31.3%) 1Y'
+            },
+            '5Y': {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                values: [5280, 6320, 7890, 10420, 13679],
+                changeText: '+₹8,399 (+159%) 5Y'
+            },
+            'ALL': {
+                labels: ['2016', '2018', '2020', '2022', '2024', '2026'],
+                values: [2960, 3140, 4860, 5280, 7890, 13679],
+                changeText: '+₹10,719 (+362%) ALL'
+            }
+        };
+
+        const GLOBAL_SERIES = {
+            '1W': {
+                labels: ['11 Nov', '12 Nov', '13 Nov', '14 Nov', '15 Nov', '16 Nov', '17 Nov'],
+                values: [4382.5, 4395.0, 4388.4, 4412.8, 4428.2, 4445.1, 4462.4],
+                changeText: '+$79.90 (+1.82%) 1W'
+            },
+            '1M': {
+                labels: ['18 Oct', '23 Oct', '28 Oct', '02 Nov', '07 Nov', '12 Nov', '17 Nov'],
+                values: [4265.0, 4298.5, 4330.0, 4362.4, 4395.0, 4428.2, 4462.4],
+                changeText: '+$197.40 (+4.63%) 1M'
+            },
+            '3M': {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov'],
+                values: [4065.0, 4195.0, 4320.0, 4462.4],
+                changeText: '+$397.40 (+9.78%) 3M'
+            },
+            '6M': {
+                labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                values: [3810.0, 3940.0, 4065.0, 4195.0, 4320.0, 4462.4],
+                changeText: '+$652.40 (+17.1%) 6M'
+            },
+            '1Y': {
+                labels: ['Nov 25', 'Feb 26', 'May 26', 'Aug 26', 'Nov 26'],
+                values: [3390.0, 3640.0, 3880.0, 4120.0, 4462.4],
+                changeText: '+$1,072.40 (+31.6%) 1Y'
+            },
+            '5Y': {
+                labels: ['2022', '2023', '2024', '2025', '2026'],
+                values: [1820.0, 2065.0, 2690.0, 3390.0, 4462.4],
+                changeText: '+$2,642.40 (+145%) 5Y'
+            },
+            'ALL': {
+                labels: ['2016', '2018', '2020', '2022', '2024', '2026'],
+                values: [1150.0, 1280.0, 1895.0, 1820.0, 2690.0, 4462.4],
+                changeText: '+$3,312.40 (+288%) ALL'
+            }
+        };
+
+        // --- COMPLETE TAMIL & ENGLISH DICTIONARY ---
+        const I18N = {
+            EN: {
+                upcomingTickerLabel: '🌐 UPCOMING GLOBAL NEWS (IST)',
+                subtitle: 'Tamil Nadu, India & Global Live Precious Metals & AI Algo Intelligence',
+                apiBtn: 'Live API Key',
+                themeBlack: 'Black',
+                themeWhite: 'White',
+                masterPlanBadge: '🧭 MASTER AI DIRECTION ENGINE • INDIA & GLOBAL',
+                masterBiasTitle: 'Today Overall Bias & AI Direction Focus Plan (Indian & Global Market)',
+                robotBubbleTag: '🤖 AI BOT SAYS:',
+                overallDirectionBadge: 'FOCUS ON UP ↑ • BUY ON DIPS',
+                biasUpPct: '▲ UP BIAS 82%',
+                biasDownPct: '▼ DOWN 18%',
+                robotCartoonTip: '“Dips are golden snacks! Stay focused on the UP wave — avoid panic selling!”',
+                aiGenShortPlan: '<span class="inline-block px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold text-[10px] mr-1.5">✨ AI GENERATIVE SUGGESTION</span> <strong>Intraday:</strong> Overall bias is <strong>UP</strong> — wait for low dips on 5m/15m timeframes to <strong>Buy Low &amp; Sell High</strong> rather than chasing spikes. <strong>Swing &amp; Long-Term:</strong> Accumulate pullbacks in the upward wave. <em>(Reason: Driven by both <strong>Technical</strong> higher-low structure above key support &amp; <strong>News</strong> central bank reserve buying + softening US yields).</em>',
+                dirDayTitle: '⚡ DAY (Intraday)',
+                dirDayPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-amber-700">🇮🇳 India:</span> Buy dips above <strong>₹13,540/g</strong> → Target <strong>₹13,760/g</strong>.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-sky-700">🌍 Global:</span> Long above <strong>$4,435/oz</strong> → Target <strong>$4,495</strong>.</div>',
+                dirWeekTitle: '📅 WEEK (1W)',
+                dirWeekPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-amber-700">🇮🇳 India:</span> Accumulate pullbacks near <strong>₹13,490/g</strong> (1W +1.9%).</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-sky-700">🌍 Global:</span> Higher-lows intact above <strong>$4,410/oz</strong> (1W +1.8%).</div>',
+                dirSwingTitle: '🌊 SWING (2–3W)',
+                dirSwingPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-sky-200/80"><span class="font-extrabold text-amber-700">🇮🇳 India:</span> Ride wave to <strong>₹13,850/g</strong>; SL below <strong>₹13,380/g</strong>.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-sky-200/80"><span class="font-extrabold text-sky-700">🌍 Global:</span> Breakout focus to <strong>$4,520/oz</strong>; SL <strong>$4,380</strong>.</div>',
+                dirPosTitle: '🏛️ POSITION (1–6M)',
+                dirPosPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-amber-700">🇮🇳 India:</span> TN wedding & festive flow → Target <strong>₹14,450/g</strong>.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-sky-700">🌍 Global:</span> Central bank reserve buying → Target <strong>$4,700/oz</strong>.</div>',
+                dirLongTitle: '🌍 LONG-TERM (1Y+)',
+                dirLongPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-amber-700">🇮🇳 India:</span> Monthly 24K Gold & 999 Silver SIP on 3–5% dips.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-sky-700">🌍 Global:</span> Secular bull cycle (+31% YoY); hold core bullion.</div>',
+                aiMasterActionText: '<strong>🤖 AI Overall Decision Summary (Day • Swing • Position):</strong> Backed by steady sovereign reserve accumulation, festive physical demand, and upcoming US macro data catalysts, the broader momentum remains constructive. For <strong>Day</strong> decisions, wait for intraday dips after news volatility settles rather than chasing spikes; for <strong>Swing</strong>, ride higher-low pullbacks with disciplined risk control; and for <strong>Position</strong>, stay aligned with the primary upward trend through staggered accumulation.',
+                indiaGrowthBadge: '🇮🇳 Weekly, Monthly & Yearly Growth Graph',
+                indiaGraphTitle: 'Gold Rate / Indian Rupee',
+                tnIndiaTag: 'TAMIL NADU & INDIA',
+                indiaBiasHeading: '🇮🇳 India Bias: Today, Week, Month & Year',
+                holdingGuide: 'Detailed Horizon Bias',
+                lblToday: 'Today',
+                lblWeek: 'Week',
+                lblMonth: 'Month',
+                lblYear: 'Year',
+                indTodayDet: 'Sup: ₹13,540 • +0.82%',
+                indWeekDet: '1W Gain: +₹259 (+1.9%)',
+                indMonthDet: '1M Gain: +₹569 (+4.3%)',
+                indYearDet: '1Y Surge: +₹3,259 (+31%)',
+                tnAiSuggestTitle: '🤖 Tamil Nadu & India Buyers — AI Trade Suggestion',
+                tnIntradayTitle: '⚡ Intraday (4–8 Hrs)',
+                tnIntradayBody: 'Buy 24K dips near <strong>₹13,540–₹13,580/g</strong>. Target <strong>₹13,760/g</strong> | Strict SL: <strong>₹13,460/g</strong>.',
+                tnSwingTitle: '🌊 Swing & Jewellers (5–21 Days)',
+                tnSwingBody: '22K Bridal/Retail buyers lock 50% quantity on dips toward <strong>₹12,380/g</strong>; trail target <strong>₹12,750/g</strong>.',
+                globalGrowthBadge: '🌍 Weekly, Monthly & Yearly Growth Graph',
+                globalGraphTitle: 'Gold Spot / US Dollar',
+                globalSpotTag: 'GLOBAL SPOT',
+                globalBiasHeading: '🌍 Global Bias: Today, Week, Month & Year',
+                glbTodayDet: 'Sup: $4,435 • +0.77%',
+                glbWeekDet: '1W Gain: +$79.9 (+1.8%)',
+                glbMonthDet: '1M Gain: +$197.4 (+4.6%)',
+                glbYearDet: '1Y Surge: +$1,072 (+31%)',
+                glbAiSuggestTitle: '🌐 Global Market (XAU/USD) — AI Trade Suggestion',
+                glbIntradayTitle: '⚡ Global Intraday (4–8 Hrs)',
+                glbIntradayBody: 'Long above <strong>$4,435</strong> support; TP1 <strong>$4,495</strong>, TP2 <strong>$4,520</strong> | SL: <strong>$4,412</strong> before 7:00 PM IST.',
+                glbSwingTitle: '🌊 Global Swing (5–21 Days)',
+                glbSwingBody: 'Higher-low structure intact above <strong>$4,380</strong>; breakout close above <strong>$4,500</strong> opens <strong>$4,620</strong>.',
+                aiNewsHeading: '📰 AI Bullion News & Macro Impact Digest',
+                aiSentimentTag: 'AI SENTIMENT: BULLISH',
+                news1Title: '1. Central Bank Reserves & Asian Physical Demand',
+                news1Body: 'Steady sovereign gold accumulation and strong South Indian wedding-season buying keep 24K & 22K floor protected on dips.',
+                news2Title: '2. US Yield & Dollar Index (DXY) Watch',
+                news2Body: "Softening US Treasury yields support XAU/USD above $4,435; watch tonight's 7:00 PM IST US Housing data for intraday spikes.",
+                aiNewsFooter: 'Updated by Money Earth AI Macro Engine',
+                upcomingCalHeading: '📅 Upcoming Global News & Events (IST)',
+                tnRatesHeading: "🇮🇳 Tamil Nadu Today's Gold & Silver Rates",
+                thWeight: 'Weight',
+                th24k: '24K Pure',
+                th22k: '22K Standard',
+                th18k: '18K Gold',
+                w1g: '1 Gram',
+                w8g: '8 Grams (1 Sovereign)',
+                w10g: '10 Grams',
+                wSilver: '🥈 Silver (1g / 1kg)',
+                algoBoardHeading: '🎯 AI Algo Trade Levels & Strategy',
+                investEarthAlgoTitle: 'Invest Earth Algo Strategy — [ Swing • Position • Long-Term ]',
+                algoWinRate: 'ACTIVE ALGO BIAS: BULLISH ACCUMULATION',
+                indAlgoSecTitle: 'Indian Market Algo Strategy (TN & India)',
+                indAlgoSecSub: '24K Gold • 22K Retail • 999 Silver (INR)',
+                indAlgoSwingTitle: '🌊 Swing Algo (5–21 Days)',
+                indAlgoSwingDesc: 'Accumulate 24K Gold on intraday/4H dips near <strong>₹13,520–₹13,580/g</strong> with strict stop-loss below <strong>₹13,380/g</strong>; target <strong>₹13,880/g</strong>.',
+                indAlgoPosTitle: '🏛️ Position Algo (1–6 Months)',
+                indAlgoPosDesc: 'Ride Tamil Nadu wedding & festive demand wave from <strong>₹13,350–₹13,550/g</strong> zone toward quarterly target <strong>₹14,450/g</strong> (22K lock near <strong>₹12,380/g</strong>).',
+                indAlgoLongTitle: '🌍 Long-Term Algo (1–5+ Years)',
+                indAlgoLongDesc: '75% 24K Gold + 25% 999 Silver automated monthly SIP; double allocation whenever Indian bullion dips 3% below 50-DMA.',
+                glbAlgoSecTitle: 'Global Market Algo Strategy (Spot & COMEX)',
+                glbAlgoSecSub: 'XAU/USD • XAG/USD • Macro Quant (USD)',
+                glbAlgoSwingTitle: '🌊 Swing Algo (5–21 Days)',
+                glbAlgoSwingDesc: 'Enter XAU/USD pullbacks at <strong>$4,420–$4,440/oz</strong> with SL below <strong>$4,380</strong>; breakout close above <strong>$4,500</strong> targets <strong>$4,530–$4,620</strong>.',
+                glbAlgoPosTitle: '🏛️ Position Algo (1–6 Months)',
+                glbAlgoPosDesc: 'Aligned with Central Bank reserve buying & softening US real yields; hold core long from <strong>$4,350–$4,420/oz</strong> toward <strong>$4,700/oz</strong>.',
+                glbAlgoLongTitle: '🌍 Long-Term Algo (1–5+ Years)',
+                glbAlgoLongDesc: 'Core USD hedge portfolio (+31% YoY trend); scale into physical/ETF bullion on 3–5% macro corrections for multi-year compounding.',
+                coachSub: 'Gold Trade Plan, Invest & Algo',
+                coachBadge: 'Ask Invest & Algo',
+                pillTradePlan: '📊 Today Trade Plan',
+                pillInvest: '🪙 Ask Investment',
+                pillAlgo: '🤖 Ask Invest & Algo',
+                btnSend: 'Send',
+                footerMain: 'Money Earth AI Dashboard • Tamil Nadu, India & Global Precious Metals Intelligence',
+                footerSub: 'Educational & Algo Analytics Only. Verify live jeweller/MCX quotes before executing trades.'
+            },
+            TA: {
+                upcomingTickerLabel: '🌐 வரவிருக்கும் குளோபல் செய்திகள் (IST)',
+                subtitle: 'தமிழ்நாடு, இந்தியா & குளோபல் நேரலை தங்கம், வெள்ளி & AI அல்கோ டேஷ்போர்டு',
+                apiBtn: 'நேரலை API இணைப்பு',
+                themeBlack: 'கருப்பு',
+                themeWhite: 'வெள்ளை',
+                masterPlanBadge: '🧭 முதன்மை AI திசை வழிகாட்டி • இந்தியா & குளோபல்',
+                masterBiasTitle: 'இன்றைய ஒட்டுமொத்த போக்கு (Overall Bias) & AI திசை செயல்திட்டம்',
+                robotBubbleTag: '🤖 AI ரோபோட் ஆலோசனை:',
+                overallDirectionBadge: 'ஏற்றத்தில் கவனம் (FOCUS ON UP ↑)',
+                biasUpPct: '▲ ஏற்றம் (UP) 82%',
+                biasDownPct: '▼ இறக்கம் 18%',
+                robotCartoonTip: '“விலை சரிவுகள் வாங்கும் வாய்ப்பு! ஏற்றத் திசையில் (UP) கவனம் செலுத்துங்கள்!”',
+                aiGenShortPlan: '<span class="inline-block px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold text-[10px] mr-1.5">✨ AI ஜெனரேட்டிவ் ஆலோசனை</span> <strong>இன்ட்ராடே (Intraday):</strong> ஒட்டுமொத்த போக்கு <strong>UP (ஏற்றம்)</strong> — 5 நிமிட சார்ட்டில் விலை குறையும்போது (Buy Low) வாங்கி உயரும்போது (Sell High) விற்கவும். <strong>ஸ்விங் &amp; நீண்ட காலம்:</strong> ஏற்றப் போக்கில் சரிவுகளைப் பயன்படுத்தி வாங்கிச் சேமிக்கவும். <em>(காரணம்: <strong>டெக்னிக்கல்</strong> சப்போர்ட்டிற்கு மேல் வலுவான ஏற்ற அமைப்பு &amp; <strong>செய்தி</strong> மத்திய வங்கிகள் கொள்முதல் + அமெரிக்க வட்டி குறைவு எதிர்பார்ப்பு).</em>',
+                dirDayTitle: '⚡ நாள் (Day / Intraday)',
+                dirDayPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-amber-700">🇮🇳 இந்தியா:</span> <strong>₹13,540/g</strong>-க்கு மேல் வாங்கலாம் → இலக்கு <strong>₹13,760/g</strong>.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-sky-700">🌍 குளோபல்:</span> <strong>$4,435/oz</strong>-க்கு மேல் ஏற்றம் → இலக்கு <strong>$4,495</strong>.</div>',
+                dirWeekTitle: '📅 வாரம் (Week 1W)',
+                dirWeekPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-amber-700">🇮🇳 இந்தியா:</span> <strong>₹13,490/g</strong> அருகே குறையும்போது சேமிக்கலாம் (1W +1.9%).</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-emerald-200/80"><span class="font-extrabold text-sky-700">🌍 குளோபல்:</span> <strong>$4,410/oz</strong>-க்கு மேல் வாராந்திர ஏற்றம் வலுவாக உள்ளது.</div>',
+                dirSwingTitle: '🌊 ஸ்விங் (Swing 2–3W)',
+                dirSwingPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-sky-200/80"><span class="font-extrabold text-amber-700">🇮🇳 இந்தியா:</span> இலக்கு <strong>₹13,850/g</strong>; SL <strong>₹13,380/g</strong>-க்கு கீழ்.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-sky-200/80"><span class="font-extrabold text-sky-700">🌍 குளோபல்:</span> பிரேக்அவுட் இலக்கு <strong>$4,520/oz</strong>; SL <strong>$4,380</strong>.</div>',
+                dirPosTitle: '🏛️ பொசிஷன் (Position 1–6M)',
+                dirPosPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-amber-700">🇮🇳 இந்தியா:</span> தமிழக திருமண & பண்டிகை தேவை → இலக்கு <strong>₹14,450/g</strong>.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-sky-700">🌍 குளோபல்:</span> மத்திய வங்கிகள் கொள்முதல் → இலக்கு <strong>$4,700/oz</strong>.</div>',
+                dirLongTitle: '🌍 நீண்ட காலம் (Long-Term)',
+                dirLongPlan: '<div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-amber-700">🇮🇳 இந்தியா:</span> 3–5% சரிவில் மாதாந்திர 24K தங்கம் & 999 வெள்ளி SIP.</div><div class="bg-white/80 rounded-lg px-2 py-1 border border-amber-200/80"><span class="font-extrabold text-sky-700">🌍 குளோபல்:</span> நீண்ட கால ஏற்றச் சுழற்சி (+31% YoY); தொடர்ந்து வைத்திருக்கலாம்.</div>',
+                aiMasterActionText: '<strong>🤖 AI செயல்திட்டம் — ஒட்டுமொத்த முடிவுச் சுருக்கம் (Day • Swing • Position):</strong> மத்திய வங்கிகளின் தொடர் கொள்முதல், உள்ளூர் பண்டிகை தேவை மற்றும் வரவிருக்கும் அமெரிக்கப் பொருளாதாரச் செய்திகளின் தாக்கத்தால் ஒட்டுமொத்த சந்தை போக்கு சாதகமாக உள்ளது. <strong>இன்றைய (Day)</strong> முடிவிற்கு செய்தி நேர ஏற்ற இறக்கங்கள் தணிந்த பிறகு சரிவில் வாங்குவது சிறந்தது; <strong>ஸ்விங் (Swing)</strong> வர்த்தகத்தில் சிறிய சரிவுகளைப் பயன்படுத்தி ஏற்றப் போக்குடன் பயணிக்கலாம்; <strong>பொசிஷன் (Position)</strong> முதலீட்டாளர்கள் முதன்மை ஏற்றத் திசையைப் பின்பற்றி படிப்படியாகச் சேமிப்பதில் கவனம் செலுத்தலாம்.',
+                indiaGrowthBadge: '🇮🇳 வாராந்திர, மாதாந்திர & வருடாந்திர வளர்ச்சி வரைபடம்',
+                indiaGraphTitle: 'தங்கம் விலை / இந்திய ரூபாய் (INR)',
+                tnIndiaTag: 'தமிழ்நாடு & இந்தியா',
+                indiaBiasHeading: '🇮🇳 இந்தியா போக்கு: இன்று, வாரம், மாதம் & ஆண்டு',
+                holdingGuide: 'விரிவான கால அளவு போக்கு',
+                lblToday: 'இன்று',
+                lblWeek: 'வாரம்',
+                lblMonth: 'மாதம்',
+                lblYear: 'ஆண்டு',
+                indTodayDet: 'ஆதரவு: ₹13,540 • +0.82%',
+                indWeekDet: '1W உயர்வு: +₹259 (+1.9%)',
+                indMonthDet: '1M உயர்வு: +₹569 (+4.3%)',
+                indYearDet: '1Y உயர்வு: +₹3,259 (+31%)',
+                tnAiSuggestTitle: '🤖 தமிழ்நாடு & இந்திய வாங்குபவர்களுக்கான AI டிரேட் ஆலோசனை',
+                tnIntradayTitle: '⚡ இன்ட்ராடே (Intraday 4–8 மணி)',
+                tnIntradayBody: '24K தங்கம் <strong>₹13,540–₹13,580/g</strong> அருகே குறையும்போது வாங்கலாம். இலக்கு <strong>₹13,760/g</strong> | SL: <strong>₹13,460/g</strong>.',
+                tnSwingTitle: '🌊 ஸ்விங் & நகை வாங்குபவர்கள் (5–21 நாட்கள்)',
+                tnSwingBody: '22K நகை வாங்குபவர்கள் <strong>₹12,380/g</strong> அருகே 50% முன்பதிவு செய்யலாம்; அடுத்த இலக்கு <strong>₹12,750/g</strong>.',
+                globalGrowthBadge: '🌍 வாராந்திர, மாதாந்திர & வருடாந்திர வளர்ச்சி வரைபடம்',
+                globalGraphTitle: 'சர்வதேச தங்கம் / அமெரிக்க டாலர் (XAU/USD)',
+                globalSpotTag: 'குளோபல் ஸ்பாட்',
+                globalBiasHeading: '🌍 குளோபல் போக்கு: இன்று, வாரம், மாதம் & ஆண்டு',
+                glbTodayDet: 'ஆதரவு: $4,435 • +0.77%',
+                glbWeekDet: '1W உயர்வு: +$79.9 (+1.8%)',
+                glbMonthDet: '1M உயர்வு: +$197.4 (+4.6%)',
+                glbYearDet: '1Y உயர்வு: +$1,072 (+31%)',
+                glbAiSuggestTitle: '🌐 குளோபல் மார்க்கெட் (XAU/USD) — AI டிரேட் ஆலோசனை',
+                glbIntradayTitle: '⚡ குளோபல் இன்ட்ராடே (4–8 மணி)',
+                glbIntradayBody: '<strong>$4,435</strong> சப்போர்ட்டுக்கு மேல் வாங்கலாம்; இலக்கு 1: <strong>$4,495</strong>, இலக்கு 2: <strong>$4,520</strong> | SL: <strong>$4,412</strong>.',
+                glbSwingTitle: '🌊 குளோபல் ஸ்விங் (5–21 நாட்கள்)',
+                glbSwingBody: '<strong>$4,380</strong>-க்கு மேல் ஏற்றம் வலுவாக உள்ளது; <strong>$4,500</strong>-க்கு மேல் நிலைத்தால் இலக்கு <strong>$4,620</strong>.',
+                aiNewsHeading: '📰 AI தங்கம்-வெள்ளி செய்திகள் & மார்க்கெட் தாக்கம்',
+                aiSentimentTag: 'AI போக்கு: ஏற்றம் (BULLISH)',
+                news1Title: '1. மத்திய வங்கிகள் கொள்முதல் & தென்னிந்திய தேவை',
+                news1Body: 'உலக மத்திய வங்கிகளின் தங்கம் சேமிப்பு மற்றும் தமிழக திருமண சீசன் தேவையால் 24K & 22K விலை சரிவில் வலுவான ஆதரவு உள்ளது.',
+                news2Title: '2. அமெரிக்க டாலர் குறியீடு (DXY) & வட்டி விகித கவனம்',
+                news2Body: 'அமெரிக்க பத்திர வட்டி குறைவதால் XAU/USD $4,435-க்கு மேல் வலுவாக உள்ளது; இரவு 7:00 PM IST செய்தியை கவனிக்கவும்.',
+                aiNewsFooter: 'Money Earth AI செய்தி பகுப்பாய்வு மையம்',
+                upcomingCalHeading: '📅 வரவிருக்கும் முக்கிய குளோபல் செய்திகள் (IST)',
+                tnRatesHeading: '🇮🇳 தமிழ்நாடு இன்றைய தங்கம் & வெள்ளி விலை நிலவரம்',
+                thWeight: 'அளவு',
+                th24k: '24K சுத்தத் தங்கம்',
+                th22k: '22K ஆபரணத் தங்கம்',
+                th18k: '18K தங்கம்',
+                w1g: '1 கிராம்',
+                w8g: '8 கிராம் (1 பவுன்)',
+                w10g: '10 கிராம்',
+                wSilver: '🥈 வெள்ளி (1 கிராம் / 1 கிலோ)',
+                algoBoardHeading: '🎯 AI அல்கோ டிரேட் நிலைகள் & வியூகம்',
+                investEarthAlgoTitle: 'Invest Earth Algo Strategy — [ ஸ்விங் • பொசிஷன் • நீண்ட காலம் ]',
+                algoWinRate: 'அல்கோ போக்கு: ஏற்றத்தில் சேமிப்பு (BULLISH)',
+                indAlgoSecTitle: 'இந்திய சந்தை அல்கோ வியூகம் (தமிழ்நாடு & இந்தியா)',
+                indAlgoSecSub: '24K தங்கம் • 22K நகை • 999 வெள்ளி (INR)',
+                indAlgoSwingTitle: '🌊 ஸ்விங் அல்கோ (5–21 நாட்கள்)',
+                indAlgoSwingDesc: '24K தங்கம் <strong>₹13,520–₹13,580/g</strong> அருகே குறையும்போது வாங்கி, <strong>₹13,380/g</strong> SL உடன் <strong>₹13,880/g</strong> இலக்கு வைக்கவும்.',
+                indAlgoPosTitle: '🏛️ பொசிஷன் அல்கோ (1–6 மாதங்கள்)',
+                indAlgoPosDesc: 'தமிழக திருமண & பண்டிகை தேவையுடன் <strong>₹13,350–₹13,550/g</strong> பகுதியிலிருந்து <strong>₹14,450/g</strong> இலக்கு நோக்கிப் பயணிக்கலாம் (22K <strong>₹12,380/g</strong>).',
+                indAlgoLongTitle: '🌍 நீண்ட கால அல்கோ (1–5+ ஆண்டுகள்)',
+                indAlgoLongDesc: '75% 24K தங்கம் + 25% 999 வெள்ளி மாதாந்திர SIP; விலை 3% குறையும்போதெல்லாம் கூடுதல் முதலீடு செய்யவும்.',
+                glbAlgoSecTitle: 'குளோபல் சந்தை அல்கோ வியூகம் (Spot & COMEX)',
+                glbAlgoSecSub: 'XAU/USD • XAG/USD • மேக்ரோ குவாண்ட் (USD)',
+                glbAlgoSwingTitle: '🌊 ஸ்விங் அல்கோ (5–21 நாட்கள்)',
+                glbAlgoSwingDesc: 'XAU/USD <strong>$4,420–$4,440/oz</strong> சரிவில் நுழைந்து (SL <strong>$4,380</strong>), <strong>$4,500</strong> பிரேக்அவுட்டில் <strong>$4,530–$4,620</strong> இலக்கு வைக்கவும்.',
+                glbAlgoPosTitle: '🏛️ பொசிஷன் அல்கோ (1–6 மாதங்கள்)',
+                glbAlgoPosDesc: 'மத்திய வங்கிகள் கொள்முதல் & அமெரிக்க வட்டி விகித ஆதரவுடன் <strong>$4,350–$4,420/oz</strong> பகுதியிலிருந்து <strong>$4,700/oz</strong> இலக்கு வைக்கலாம்.',
+                glbAlgoLongTitle: '🌍 நீண்ட கால அல்கோ (1–5+ ஆண்டுகள்)',
+                glbAlgoLongDesc: 'நீண்ட கால டாலர் பாதுகாப்பு போர்ட்ஃபோலியோ (+31% YoY); 3–5% சரிவுகளில் படிப்படியாகச் சேமிக்கவும்.',
+                coachSub: 'தங்கம் டிரேட் பிளான், முதலீடு & அல்கோ',
+                coachBadge: 'Ask Invest & Algo',
+                pillTradePlan: '📊 Today Trade Plan',
+                pillInvest: '🪙 முதலீட்டு ஆலோசனை',
+                pillAlgo: '🤖 அல்கோ & முதலீடு',
+                btnSend: 'அனுப்பு',
+                footerMain: 'Money Earth AI Dashboard • தமிழ்நாடு, இந்தியா & குளோபல் தங்கம்-வெள்ளி நுண்ணறிவு',
+                footerSub: 'கல்வி மற்றும் அல்கோ பகுப்பாய்விற்கு மட்டுமே. முதலீடு செய்வதற்கு முன் நேரலை விலையைச் சரிபார்க்கவும்.'
+            }
+        };
+
+        // --- DRAW TRADINGVIEW CHART (RIGHT SIDE PRICE AXIS & WHITE/BLACK ADAPTIVE) ---
+        function drawAreaChart(canvasId, series, accentColor, hoverIndex = -1, prefix = '₹') {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            const w = rect.width;
+            const h = rect.height;
+            const padLeft = 14;
+            const padRight = 64; // Right-side price Y-axis
+            const padTop = 16;
+            const padBottom = 26;
+            const plotW = w - padLeft - padRight;
+            const plotH = h - padTop - padBottom;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const vals = series.values;
+            const labels = series.labels;
+            const minVal = Math.min(...vals) * 0.996;
+            const maxVal = Math.max(...vals) * 1.004;
+            const range = maxVal - minVal || 1;
+
+            // Grid lines & Right-side Price Labels
+            const gridColor = isDarkTheme ? 'rgba(148, 163, 184, 0.14)' : 'rgba(148, 163, 184, 0.25)';
+            const textColor = isDarkTheme ? '#94a3b8' : '#64748b';
+            ctx.font = '600 10px JetBrains Mono, monospace';
+            ctx.textAlign = 'left';
+
+            for (let i = 0; i <= 4; i++) {
+                const y = padTop + (plotH * i) / 4;
+                const price = maxVal - (range * i) / 4;
+                ctx.strokeStyle = gridColor;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(padLeft, y);
+                ctx.lineTo(w - padRight, y);
+                ctx.stroke();
+
+                ctx.fillStyle = textColor;
+                const formatted = prefix === '₹'
+                    ? '₹' + Math.round(price).toLocaleString('en-IN')
+                    : '$' + price.toFixed(0);
+                ctx.fillText(formatted, w - padRight + 6, y + 3);
+            }
+
+            // Compute Point Coordinates
+            const points = vals.map((v, idx) => {
+                const x = padLeft + (plotW * idx) / (vals.length - 1 || 1);
+                const y = padTop + plotH - ((v - minVal) / range) * plotH;
+                return { x, y, v };
+            });
+
+            // Area Gradient Fill
+            const grad = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
+            grad.addColorStop(0, accentColor + '44');
+            grad.addColorStop(1, accentColor + '02');
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, padTop + plotH);
+            points.forEach(p => ctx.lineTo(p.x, p.y));
+            ctx.lineTo(points[points.length - 1].x, padTop + plotH);
+            ctx.closePath();
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Main Trend Line
+            ctx.beginPath();
+            points.forEach((p, idx) => idx === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+            ctx.strokeStyle = accentColor;
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            // X-Axis Time Labels
+            ctx.textAlign = 'center';
+            ctx.fillStyle = textColor;
+            points.forEach((p, idx) => {
+                if (points.length <= 7 || idx % 2 === 0 || idx === points.length - 1) {
+                    ctx.fillText(labels[idx], p.x, h - 8);
+                }
+            });
+
+            // Active Hover Crosshair & Dot
+            if (hoverIndex >= 0 && hoverIndex < points.length) {
+                const hp = points[hoverIndex];
+                ctx.save();
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = isDarkTheme ? '#cbd5e1' : '#334155';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(hp.x, padTop);
+                ctx.lineTo(hp.x, padTop + plotH);
+                ctx.stroke();
+                ctx.restore();
+
+                ctx.beginPath();
+                ctx.arc(hp.x, hp.y, 5, 0, Math.PI * 2);
+                ctx.fillStyle = accentColor;
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        function renderAllCharts() {
+            drawAreaChart('indiaTopChart', INDIA_SERIES[currentIndiaRange], '#f59e0b', -1, '₹');
+            drawAreaChart('tvGlobalChart', GLOBAL_SERIES[currentGlobalRange], '#0ea5e9', -1, '$');
+        }
+
+        function setIndiaRange(range, btn) {
+            currentIndiaRange = range;
+            document.querySelectorAll('.india-range-btn').forEach(b => {
+                b.className = 'india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900';
+            });
+            btn.className = 'india-range-btn px-2.5 py-1 rounded-lg text-xs bg-amber-500 text-slate-950 font-extrabold shadow-sm';
+            document.getElementById('india-range-badge').textContent = range;
+            document.getElementById('india-tf-label').textContent = range;
+            document.getElementById('india-tv-change').textContent = INDIA_SERIES[range].changeText;
+            drawAreaChart('indiaTopChart', INDIA_SERIES[range], '#f59e0b', -1, '₹');
+        }
+
+        function setTvGlobalRange(range, btn) {
+            currentGlobalRange = range;
+            document.querySelectorAll('.tv-range-btn').forEach(b => {
+                b.className = 'tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900';
+            });
+            btn.className = 'tv-range-btn px-2.5 py-1 rounded-lg text-xs bg-sky-500 text-slate-950 font-extrabold shadow-sm';
+            document.getElementById('global-range-badge').textContent = range;
+            document.getElementById('global-tf-label').textContent = range;
+            document.getElementById('global-tv-change').textContent = GLOBAL_SERIES[range].changeText;
+            drawAreaChart('tvGlobalChart', GLOBAL_SERIES[range], '#0ea5e9', -1, '$');
+        }
+
+        // --- INTERACTIVE CURSOR HOVER MOVEMENT (24K/22K INDIA & GLOBAL XAU/USD) ---
+        function attachChartHover() {
+            const indWrap = document.getElementById('india-chart-wrap');
+            const indTip = document.getElementById('india-cursor-tooltip');
+            indWrap.addEventListener('mousemove', (e) => {
+                const rect = indWrap.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const series = INDIA_SERIES[currentIndiaRange];
+                const idx = Math.max(0, Math.min(series.values.length - 1, Math.round((x / rect.width) * (series.values.length - 1))));
+                drawAreaChart('indiaTopChart', series, '#f59e0b', idx, '₹');
+
+                const val24 = series.values[idx];
+                const base24 = series.values[0];
+                const diff24 = val24 - base24;
+                const pct24 = ((diff24 / base24) * 100).toFixed(2);
+
+                const val22 = Math.round(val24 * 0.9166);
+                const base22 = Math.round(base24 * 0.9166);
+                const diff22 = val22 - base22;
+                const pct22 = ((diff22 / base22) * 100).toFixed(2);
+
+                document.getElementById('ind-tt-date').textContent = `${series.labels[idx]} (${currentIndiaRange})`;
+                document.getElementById('ind-tt-24k').textContent = `₹${val24.toLocaleString('en-IN')}`;
+                document.getElementById('ind-tt-24k-chg').textContent = `${diff24 >= 0 ? '+' : ''}₹${diff24.toLocaleString('en-IN')} (${diff24 >= 0 ? '+' : ''}${pct24}%)`;
+                document.getElementById('ind-tt-22k').textContent = `₹${val22.toLocaleString('en-IN')}`;
+                document.getElementById('ind-tt-22k-chg').textContent = `${diff22 >= 0 ? '+' : ''}₹${diff22.toLocaleString('en-IN')} (${diff22 >= 0 ? '+' : ''}${pct22}%)`;
+
+                indTip.style.left = Math.min(rect.width - 215, Math.max(8, x - 95)) + 'px';
+                indTip.style.top = '10px';
+                indTip.classList.remove('hidden');
+            });
+
+            indWrap.addEventListener('mouseleave', () => {
+                indTip.classList.add('hidden');
+                drawAreaChart('indiaTopChart', INDIA_SERIES[currentIndiaRange], '#f59e0b', -1, '₹');
+            });
+
+            const glbWrap = document.getElementById('global-chart-wrap');
+            const glbTip = document.getElementById('global-cursor-tooltip');
+            glbWrap.addEventListener('mousemove', (e) => {
+                const rect = glbWrap.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const series = GLOBAL_SERIES[currentGlobalRange];
+                const idx = Math.max(0, Math.min(series.values.length - 1, Math.round((x / rect.width) * (series.values.length - 1))));
+                drawAreaChart('tvGlobalChart', series, '#0ea5e9', idx, '$');
+
+                const val = series.values[idx];
+                const base = series.values[0];
+                const diff = val - base;
+                const pct = ((diff / base) * 100).toFixed(2);
+
+                document.getElementById('glb-tt-date').textContent = `${series.labels[idx]} (${currentGlobalRange})`;
+                document.getElementById('glb-tt-price').textContent = `$${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                document.getElementById('glb-tt-chg').textContent = `${diff >= 0 ? '+' : ''}$${diff.toFixed(2)} (${diff >= 0 ? '+' : ''}${pct}%)`;
+
+                glbTip.style.left = Math.min(rect.width - 205, Math.max(8, x - 95)) + 'px';
+                glbTip.style.top = '10px';
+                glbTip.classList.remove('hidden');
+            });
+
+            glbWrap.addEventListener('mouseleave', () => {
+                glbTip.classList.add('hidden');
+                drawAreaChart('tvGlobalChart', GLOBAL_SERIES[currentGlobalRange], '#0ea5e9', -1, '$');
+            });
+        }
+
+        // --- CARTOON GROK-STYLE BLOB BOT PREVIEW SWITCHER (UP HAPPY GREEN vs DOWN SAD RED) ---
+        function setCartoonBiasPreview(mode) {
+            const card = document.getElementById('cartoon-bias-card');
+            const botUp = document.getElementById('blob-bot-up');
+            const botDown = document.getElementById('blob-bot-down');
+            const dirText = document.getElementById('overall-direction-text');
+            const btnUp = document.getElementById('btn-bot-up');
+            const btnDown = document.getElementById('btn-bot-down');
+            const fill = document.getElementById('bias-meter-fill');
+            const sparkUp = document.getElementById('bias-sparkline-up');
+            const sparkDown = document.getElementById('bias-sparkline-down');
+
+            if (mode === 'UP') {
+                botUp.classList.remove('hidden');
+                botDown.classList.add('hidden');
+                sparkUp.classList.remove('hidden');
+                sparkDown.classList.add('hidden');
+                card.className = 'flex items-center gap-3.5 bg-gradient-to-r from-emerald-50 via-sky-50 to-amber-50 border-2 border-emerald-400 rounded-2xl px-4 py-3 shadow-sm shrink-0 transition-all';
+                dirText.className = 'text-xs sm:text-sm font-black text-emerald-800 tracking-tight';
+                dirText.textContent = currentLang === 'TA' ? 'ஏற்றத்தில் கவனம் (FOCUS ON UP ↑)' : 'FOCUS ON UP ↑ • BUY ON DIPS';
+                btnUp.className = 'px-1.5 py-0.5 rounded bg-emerald-500 text-white';
+                btnDown.className = 'px-1.5 py-0.5 rounded text-slate-600 hover:text-rose-600';
+                fill.className = 'bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-l-full transition-all duration-300';
+                fill.style.width = '82%';
+            } else {
+                botUp.classList.add('hidden');
+                botDown.classList.remove('hidden');
+                sparkUp.classList.add('hidden');
+                sparkDown.classList.remove('hidden');
+                card.className = 'flex items-center gap-3.5 bg-gradient-to-r from-rose-50 via-amber-50 to-slate-50 border-2 border-rose-400 rounded-2xl px-4 py-3 shadow-sm shrink-0 transition-all';
+                dirText.className = 'text-xs sm:text-sm font-black text-rose-700 tracking-tight';
+                dirText.textContent = currentLang === 'TA' ? 'இறக்க எச்சரிக்கை (FOCUS ON DOWN ↓)' : 'FOCUS ON DOWN ↓ • CAUTION PULLBACK';
+                btnDown.className = 'px-1.5 py-0.5 rounded bg-rose-500 text-white';
+                btnUp.className = 'px-1.5 py-0.5 rounded text-slate-600 hover:text-emerald-600';
+                fill.className = 'bg-gradient-to-r from-rose-500 to-rose-400 h-full rounded-l-full transition-all duration-300';
+                fill.style.width = '28%';
+            }
+        }
+
+        // --- WHITE / BLACK THEME SWITCHER ---
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            document.body.classList.toggle('dark-theme', isDarkTheme);
+            const icon = document.getElementById('theme-icon');
+            const label = document.getElementById('theme-label');
+            const dict = I18N[currentLang];
+            if (isDarkTheme) {
+                icon.textContent = '☀️';
+                label.textContent = dict.themeWhite;
+            } else {
+                icon.textContent = '🌙';
+                label.textContent = dict.themeBlack;
+            }
+            renderAllCharts();
+        }
+
+        // --- COMPLETE TAMIL / ENGLISH LANGUAGE SWITCHER ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'EN' ? 'TA' : 'EN';
+            const dict = I18N[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerHTML = dict[key];
+            });
+            const label = document.getElementById('theme-label');
+            label.textContent = isDarkTheme ? dict.themeWhite : dict.themeBlack;
+        }
+
+        // --- ALGO TRADE LEVELS ASSET SWITCHER ---
+        function selectAlgoAsset(asset, btn) {
+            document.querySelectorAll('.algo-asset-btn').forEach(b => {
+                b.className = 'algo-asset-btn px-2.5 py-1 rounded-lg text-slate-600';
+            });
+            btn.className = 'algo-asset-btn px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-extrabold';
+
+            const grid = document.getElementById('trade-levels-grid');
+            const note = document.getElementById('trade-levels-note');
+            if (asset === 'GOLD24') {
+                grid.innerHTML = `
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">BUY ZONE (S1)</div><div class="font-extrabold text-emerald-700 text-sm">₹13,540 / g</div></div>
+                    <div class="bg-rose-500/10 border border-rose-500/30 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">STOP LOSS</div><div class="font-extrabold text-rose-600 text-sm">₹13,460 / g</div></div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">TARGET (R1)</div><div class="font-extrabold text-sky-700 text-sm">₹13,760 / g</div></div>`;
+                note.textContent = 'Kaveri Intraday & Nilgiri Swing Algo: Accumulate near S1 (₹13,540/g) with strict SL below ₹13,460/g.';
+            } else if (asset === 'XAUUSD') {
+                grid.innerHTML = `
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">BUY ZONE (S1)</div><div class="font-extrabold text-emerald-700 text-sm">$4,435 / oz</div></div>
+                    <div class="bg-rose-500/10 border border-rose-500/30 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">STOP LOSS</div><div class="font-extrabold text-rose-600 text-sm">$4,412 / oz</div></div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">TARGET (R1)</div><div class="font-extrabold text-sky-700 text-sm">$4,520 / oz</div></div>`;
+                note.textContent = 'NY/London Session Algo: Hold long above $4,435 support; breakout above $4,500 accelerates toward $4,520+.';
+            } else {
+                grid.innerHTML = `
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">BUY ZONE (S1)</div><div class="font-extrabold text-emerald-700 text-sm">₹1,66,200 / kg</div></div>
+                    <div class="bg-rose-500/10 border border-rose-500/30 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">STOP LOSS</div><div class="font-extrabold text-rose-600 text-sm">₹1,64,500 / kg</div></div>
+                    <div class="bg-sky-50 border border-sky-200 rounded-xl p-2.5"><div class="text-[10px] text-slate-500">TARGET (R1)</div><div class="font-extrabold text-sky-700 text-sm">₹1,72,500 / kg</div></div>`;
+                note.textContent = 'Silver 999 Industrial + Bullion Algo: Strong industrial demand supports dips toward ₹1,66,200/kg.';
+            }
+        }
+
+        // --- AI COACH CHAT (TODAY TRADE PLAN + INVEST & ALGO FOR GOLD) ---
+        function toggleAiChat() {
+            document.getElementById('ai-chat-drawer').classList.toggle('hidden');
+        }
+
+        function appendChatBubble(text, isUser = false) {
+            const box = document.getElementById('ai-chat-messages');
+            const div = document.createElement('div');
+            div.className = isUser
+                ? 'ml-8 bg-slate-900 text-white rounded-xl p-2.5 leading-relaxed'
+                : 'mr-4 bg-white border border-slate-200 text-slate-700 rounded-xl p-2.5 leading-relaxed';
+            div.innerHTML = text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function askQuickCoach(topic) {
+            if (topic === 'TRADEPLAN') {
+                appendChatBubble(currentLang === 'TA' ? '📊 இன்றைய தங்கம் டிரேட் பிளான் (Today Trade Plan) என்ன?' : '📊 What is Today’s Gold Trade Plan (Intraday, Swing & Position)?', true);
+                appendChatBubble(currentLang === 'TA'
+                    ? '<strong>📊 இன்றைய தங்கம் (Gold) டிரேட் பிளான்:</strong><br>• <strong>⚡ Intraday Focus (UP ↑):</strong> அவசரப்பட்டு உச்சத்தில் வாங்காமல், 5m/15m சார்ட்டில் விலை சப்போர்ட் அருகே குறையும்போது (Buy Low) வாங்கி உயரும்போது (Sell High) லாபம் எடுக்கவும். இரவு 7:00 PM IST அமெரிக்க செய்தி நேர ஏற்ற இறக்கத்தைக் கவனிக்கவும்.<br>• <strong>🌊 Swing Focus (5–21 நாட்கள்):</strong> ஏற்றப் போக்கு (Higher-Lows) வலுவாக உள்ளதால் சிறிய சரிவுகளைப் பயன்படுத்தி வாங்கித் தொடரலாம்.<br>• <strong>🏛️ Position Focus (1–6 மாதங்கள்):</strong> மத்திய வங்கிகள் கொள்முதல் மற்றும் உள்ளூர் தேவை காரணமாக முதன்மை ஏற்றத் திசையில் படிப்படியாகச் சேமிப்பது சிறந்தது.'
+                    : '<strong>📊 Today’s Gold Market Trade Plan:</strong><br>• <strong>⚡ Intraday Focus (UP ↑):</strong> Avoid chasing spikes; wait for low dips on 5m/15m timeframes to <strong>Buy Low & Sell High</strong> before tonight’s 7:00 PM IST US macro data volatility.<br>• <strong>🌊 Swing Focus (5–21 Days):</strong> Higher-low structure remains intact — ride pullbacks in the upward wave with disciplined risk control.<br>• <strong>🏛️ Position Focus (1–6 Months):</strong> Backed by sovereign reserve buying & festive demand, stay aligned with the primary uptrend via staggered accumulation.');
+            } else if (topic === 'INVEST') {
+                appendChatBubble(currentLang === 'TA' ? '🪙 தங்கம் முதலீட்டு ஆலோசனை என்ன?' : '🪙 What is the best Gold Investment plan?', true);
+                appendChatBubble(currentLang === 'TA'
+                    ? '<strong>🪙 Money Earth தங்கம் முதலீட்டு வழிகாட்டி:</strong><br>• <strong>80% 24K தங்கம் + 20% 22K/Bullion</strong> விகிதத்தில் மாதாந்திர SIP செய்யுங்கள்.<br>• விலை 3% குறையும்போதெல்லாம் கூடுதல் யூனிட் சேர்ப்பது நீண்ட காலத்தில் சிறந்த லாபம் தரும்.'
+                    : '<strong>🪙 Money Earth Gold Investment Plan:</strong><br>• Allocate <strong>80% in 24K Pure Gold + 20% in Physical/ETF Bullion</strong> via disciplined monthly SIP.<br>• Double your tranche whenever Gold dips 3% near S1 support for superior compounding.');
+            } else {
+                appendChatBubble(currentLang === 'TA' ? '🤖 Invest & Algo வியூகம் விளக்கவும்' : '🤖 Explain Gold Invest & Algo Strategy', true);
+                appendChatBubble(currentLang === 'TA'
+                    ? '<strong>🤖 Invest Earth Gold Algo (Swing • Position • Long-Term):</strong><br>• <strong>Swing (5–21 நாட்கள்):</strong> 4H சார்ட்டில் சப்போர்ட் சரிவில் நுழைந்து ஏற்ற அலையில் லாபம் எடுக்கவும்.<br>• <strong>Position (1–6 மாதங்கள்):</strong> மத்திய வங்கிகள் கொள்முதல் போக்குடன் 70% இருப்பு தொடரலாம்.<br>• <strong>Long-Term (1–5+ ஆண்டுகள்):</strong> ஸ்மார்ட் SIP மூலம் செல்வத்தைப் பெருக்குங்கள்.'
+                    : '<strong>🤖 Invest Earth Gold Algo [Swing • Position • Long-Term]:</strong><br>• <strong>Swing (5–21D):</strong> Buy 4H pullbacks near support & trail upward momentum.<br>• <strong>Position (1–6M):</strong> Ride sovereign reserve & festive demand wave.<br>• <strong>Long-Term (1–5Y+):</strong> Automated Gold Smart SIP on 3–5% macro dips.');
+            }
+        }
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('ai-chat-input');
+            const q = input.value.trim();
+            if (!q) return;
+            appendChatBubble(q, true);
+            input.value = '';
+            const lower = q.toLowerCase();
+            let topic = 'TRADEPLAN';
+            if (lower.includes('algo')) topic = 'ALGO';
+            else if (lower.includes('invest') || lower.includes('sip')) topic = 'INVEST';
+            setTimeout(() => askQuickCoach(topic), 350);
+        }
+
+        // --- API KEY MODAL ---
+        function openApiModal() { document.getElementById('api-modal').classList.remove('hidden'); }
+        function closeApiModal() { document.getElementById('api-modal').classList.add('hidden'); }
+        function saveApiKey() {
+            const val = document.getElementById('api-key-input').value.trim();
+            if (val) {
+                document.getElementById('api-status-text').textContent = 'API Connected ●';
+            }
+            closeApiModal();
+        }
+
+        // --- LIVE IST CLOCK ---
+        function updateIstClock() {
+            const now = new Date();
+            const ist = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
+            const el = document.getElementById('ist-clock');
+            if (el) el.textContent = 'IST ' + ist;
+        }
+
+        window.addEventListener('load', () => {
+            renderAllCharts();
+            attachChartHover();
+            updateIstClock();
+            setInterval(updateIstClock, 1000);
+        });
+        window.addEventListener('resize', renderAllCharts);
+    </script>
+</body>
+</html>
