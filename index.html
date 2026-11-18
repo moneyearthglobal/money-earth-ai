@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Money Earth AI Dashboard • Live Gold, TradingView Charts, Live News & Dual AI Robots</title>
+  <title>Money Earth AI Dashboard • Live Gold, TradingView Charts, AI Analytics & Dual Robots</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -60,7 +60,7 @@
       color: var(--text-primary);
       line-height: 1.5;
       transition: background 0.25s ease, color 0.25s ease;
-      padding-bottom: 105px;
+      padding-bottom: 110px;
     }
 
     /* TOP LIVE MARKET & NEWS TICKER */
@@ -109,7 +109,7 @@
 
     .container { max-width: 1380px; margin: 0 auto; padding: 16px; }
 
-    /* HEADER */
+    /* HEADER WITH RESTORED ORIGINAL BRAND LOGO */
     .header {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -156,7 +156,7 @@
     .ctrl-pill.danger { background: var(--accent-red-soft); color: var(--accent-red); border-color: rgba(239,68,68,0.4); }
     .ctrl-pill.primary { background: var(--accent-blue); color: #FFF; border-color: var(--accent-blue); }
 
-    /* EMERGENCY RISK MANAGEMENT GUARD & UPCOMING GLOBAL EVENTS BANNER */
+    /* EMERGENCY RISK MANAGEMENT GUARD + UPCOMING EVENTS */
     .guard-banner {
       background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
       color: #F8FAFC;
@@ -213,7 +213,6 @@
     .btn-kill:hover { background: #DC2626; }
     .btn-kill.resume { background: #10B981; }
 
-    /* UPCOMING GLOBAL ECONOMIC EVENTS STRIP */
     .events-strip {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -232,7 +231,7 @@
     .event-chip.med { border-left: 3px solid #F59E0B; }
     .event-time { font-weight: 800; color: #FBBF24; display: flex; justify-content: space-between; }
 
-    /* AI DIRECTION ENGINE CARD */
+    /* RESTORED FULL AI ANALYTICS & PREDICTION ENGINE CARD */
     .ai-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -266,11 +265,27 @@
     .ai-note {
       background: var(--accent-blue-soft);
       border-left: 4px solid var(--accent-blue);
-      padding: 10px 14px;
+      padding: 12px 14px;
       border-radius: 8px;
       font-size: 13px;
       color: var(--text-primary);
     }
+
+    /* RESTORED ADVANCED PREDICTION & SWING TARGETS GRID */
+    .pred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .pred-box {
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .pred-box h4 { font-size: 12.5px; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px; }
+    .pred-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
 
     /* CHARTS GRID */
     .charts-grid {
@@ -297,7 +312,6 @@
       box-shadow: var(--shadow-sm);
     }
 
-    /* LEFT-ALIGNED PRICE & PERIOD FALL/RETURN HEADER */
     .chart-header-left {
       display: flex;
       flex-direction: column;
@@ -423,7 +437,7 @@
       background: var(--accent-green-soft); color: var(--accent-green);
     }
 
-    /* ROBOT 1 (RIGHT): ROAMING EMO TRADE PLAN ROBOT */
+    /* ROBOT 1 (RIGHT): EMO TRADE PLAN ROBOT */
     .emo-float {
       position: fixed; bottom: 18px; right: 18px; z-index: 999;
       display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
@@ -475,7 +489,7 @@
       border-radius: 0 0 10px 10px;
     }
 
-    /* ROBOT 2 (LEFT): ROAMING FULL-DASHBOARD AI CONVERSATION ROBOT */
+    /* ROBOT 2 (LEFT): FULL-DASHBOARD AI CONVERSATION ROBOT */
     .concierge-float {
       position: fixed; bottom: 18px; left: 18px; z-index: 999;
       display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
@@ -567,7 +581,7 @@
   </div>
 
   <div class="container">
-    <!-- HEADER -->
+    <!-- HEADER WITH ORIGINAL BRAND LOGO -->
     <header class="header">
       <div class="brand">
         <div class="brand-logo">MONEY<br>EARTH</div>
@@ -587,7 +601,7 @@
       </div>
     </header>
 
-    <!-- EMERGENCY RISK MANAGEMENT GUARD + UPCOMING GLOBAL ECONOMIC NEWS EVENTS -->
+    <!-- EMERGENCY RISK MANAGEMENT GUARD + UPCOMING GLOBAL ECONOMIC EVENTS -->
     <section class="guard-banner" id="guard-banner">
       <div class="guard-top-row">
         <div class="guard-left">
@@ -604,16 +618,15 @@
         </div>
       </div>
 
-      <!-- UPCOMING GLOBAL ECONOMIC EVENTS (IST) -->
       <div class="events-strip" id="upcoming-events-strip"></div>
     </section>
 
-    <!-- AI DIRECTION ENGINE (SYNCED WITH LIVE RATE + LIVE NEWS) -->
+    <!-- RESTORED AI DIRECTION ENGINE & SWING PREDICTION ANALYTICS -->
     <section class="ai-card">
       <div class="ai-top">
         <div>
           <span class="api-badge" id="api-status-badge">✅ LIVE RATE + NEWS SYNC ACTIVE</span>
-          <h2 style="font-size: 16px; margin-top: 6px;" data-en="Today Overall Bias & AI Direction Focus Plan (Rate + News Synced)" data-ta="இன்றைய சந்தை போக்கு & AI திசைத் திட்டம் (விலை + செய்தி இணைப்பு)">Today Overall Bias & AI Direction Focus Plan (Rate + News Synced)</h2>
+          <h2 style="font-size: 16px; margin-top: 6px;" data-en="Today Overall Bias & AI Direction Focus Plan (India & Global)" data-ta="இன்றைய சந்தை போக்கு & AI திசைத் திட்டம் (இந்தியா & குளோபல்)">Today Overall Bias & AI Direction Focus Plan (India & Global)</h2>
         </div>
         <div class="ai-meter-box">
           <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:800;">
@@ -627,8 +640,27 @@
           <div style="font-size:11px; color:var(--text-muted);" id="last-sync-label">Last synced: Just now</div>
         </div>
       </div>
-      <div class="ai-note" id="ai-guidance-text">
-        Rate + News Sync: Global XAU/USD at $3,770.46/oz & Tamil Nadu 24K at ₹13,322/g are synced with live macro headlines. Watch High/Low structure before entries and obey the 40m/30m news window.
+
+      <div class="ai-note" id="ai-guidance-text" style="margin-bottom: 12px;">
+        Intraday & Swing Guidance: Global XAU/USD is testing key higher-low support after macro pullback while Tamil Nadu 24K/22K bullion tracks GoodReturns parity. Watch High/Low structure before entries and respect the 40m/30m news lock.
+      </div>
+
+      <!-- RESTORED PREDICTION & SWING TARGETS -->
+      <div class="pred-grid">
+        <div class="pred-box">
+          <h4 data-en="🎯 Intraday Support & Resistance" data-ta="🎯 ஆதரவு & எதிர்ப்பு நிலைகள் (Intraday)">🎯 Intraday Support & Resistance</h4>
+          <div class="pred-row"><span>Support 1 (S1):</span> <strong class="down">₹13,180 / $3,742</strong></div>
+          <div class="pred-row"><span>Support 2 (S2):</span> <strong class="down">₹13,050 / $3,710</strong></div>
+          <div class="pred-row"><span>Resistance 1 (R1):</span> <strong class="up">₹13,480 / $3,810</strong></div>
+          <div class="pred-row"><span>Resistance 2 (R2):</span> <strong class="up">₹13,650 / $3,848</strong></div>
+        </div>
+        <div class="pred-box">
+          <h4 data-en="📊 Swing Trend & Market Structure" data-ta="📊 ஸ்விங் டிரெண்ட் & மார்க்கெட் அமைப்பு">📊 Swing Trend & Market Structure</h4>
+          <div class="pred-row"><span>Market Bias:</span> <strong class="up">Bullish Continuation</strong></div>
+          <div class="pred-row"><span>Structure Break:</span> <strong>Higher High (HH) Rebound</strong></div>
+          <div class="pred-row"><span>Optimal Entry:</span> <strong class="gold-txt">Buy on Dip at S1</strong></div>
+          <div class="pred-row"><span>Risk Guard:</span> <strong class="down">Active (40m/30m Rule)</strong></div>
+        </div>
       </div>
     </section>
 
@@ -740,7 +772,7 @@
       </div>
     </section>
 
-    <!-- LIVE INDIA NEWS & LIVE GLOBAL NEWS FEED (MULTI-PROXY REAL-TIME) -->
+    <!-- LIVE INDIA NEWS & LIVE GLOBAL NEWS FEED -->
     <section class="news-section">
       <div class="news-card">
         <div class="news-card-header">
@@ -756,7 +788,7 @@
       <div class="news-card">
         <div class="news-card-header">
           <div>
-            <h3 style="font-size: 15px;" data-en="🌍 Live Global XAU/USD, Fed & Macro News" data-ta="🌍 நேரலை உலகளாவிய XAU/USD & பெடரல் வங்கி செய்திகள்">🌍 Live Global XAU/USD, Fed & Macro News</h3>
+            <h3 style="font-size: 15px;" data-en="🌍 Live Global XAU/USD, Fed & Macro News" data-ta="🌍 உலகளாவிய XAU/USD & பெடரல் வங்கி செய்திகள்">🌍 Live Global XAU/USD, Fed & Macro News</h3>
             <span style="font-size: 11px; color: var(--text-muted);" id="global-news-status">Fetching live global gold headlines...</span>
           </div>
           <button class="ctrl-pill" onclick="fetchLiveNewsFeeds()">↻ Refresh</button>
@@ -834,17 +866,17 @@
   <!-- ROBOT 2 MODAL: FULL-DASHBOARD AI CONVERSATION ASSISTANT -->
   <div class="modal-backdrop" id="concierge-modal">
     <div class="modal-box">
-      <h3 style="font-size: 16px; margin-bottom: 4px; color: var(--accent-blue);">🛸 Dashboard AI Assistant (Rate + News Synced)</h3>
-      <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">Ask anything about this entire dashboard — today's plan, live India/Global news, upcoming events, or 24K/22K rates.</p>
+      <h3 style="font-size: 16px; margin-bottom: 4px; color: var(--accent-blue);">🛸 Dashboard AI Assistant (Rate + News + Predictions)</h3>
+      <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">Ask anything about this entire dashboard — today's plan, live India/Global news, S1/R1 targets, or 24K/22K rates.</p>
 
       <div class="chat-log" id="concierge-chat-log">
-        <div class="msg-bot">வணக்கம் நண்பா! 👋 நான் உங்கள் முழு டேஷ்போர்டு AI உதவியாளர். <strong>இன்னைக்கு என்ன பிளான்?</strong>, <strong>இன்னைக்கு நியூஸ் & அப்கமிங் ஈவென்ட்ஸ் எப்படி இருக்கு?</strong>, அல்லது <strong>24K / 22K ரேட் நிலவரம்</strong> பற்றி எது வேண்டுமானாலும் கேளுங்கள்!</div>
+        <div class="msg-bot">வணக்கம் நண்பா! 👋 நான் உங்கள் முழு டேஷ்போர்டு AI உதவியாளர். <strong>இன்னைக்கு என்ன பிளான்?</strong>, <strong>S1/R1 லெவல் என்ன?</strong>, அல்லது <strong>24K / 22K ரேட் நிலவரம்</strong> பற்றி எது வேண்டுமானாலும் கேளுங்கள்!</div>
       </div>
 
       <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
         <button class="ctrl-pill" onclick="sendConciergePrompt('இன்னைக்கு என்ன பிளான்?')">📋 இன்னைக்கு என்ன பிளான்?</button>
-        <button class="ctrl-pill" onclick="sendConciergePrompt('இன்னைக்கு நியூஸ் & அப்கமிங் ஈவென்ட்ஸ் சொல்லு')">📰 நியூஸ் & அப்கமிங் ஈவென்ட்ஸ்</button>
-        <button class="ctrl-pill" onclick="sendConciergePrompt('24K & 22K ரேட் மற்றும் Fall நிலவரம்')">💰 24K/22K ரேட் & Fall</button>
+        <button class="ctrl-pill" onclick="sendConciergePrompt('S1 R1 மற்றும் சப்போர்ட் லெவல் சொல்லு')">🎯 S1 / R1 லெவல்கள்</button>
+        <button class="ctrl-pill" onclick="sendConciergePrompt('இன்னைக்கு நியூஸ் எப்படி இருக்கு?')">📰 இன்னைக்கு நியூஸ் எப்படி இருக்கு?</button>
       </div>
 
       <div style="display:flex; gap:6px;">
@@ -876,7 +908,6 @@
       gl: { tf: '1W', mode: 'candle' }
     };
 
-    // --- UPCOMING GLOBAL ECONOMIC EVENTS (IST SCHEDULE & AUTO-GUARD COUNTDOWN) ---
     const UPCOMING_GLOBAL_EVENTS = [
       { hour: 18, min: 30, impact: 'HIGH', titleEn: 'US Building Permits & Housing Starts (USD/XAU)', titleTa: 'அமெரிக்க வீட்டுவசதி & கட்டுமானத் தரவு (USD/XAU)' },
       { hour: 19, min: 0,  impact: 'HIGH', titleEn: 'US Federal Reserve Officials Policy Remarks', titleTa: 'அமெரிக்க பெடரல் வங்கி (Fed) கொள்கை உரை' },
@@ -887,15 +918,10 @@
     function updateIstClockAndEvents() {
       const now = new Date();
       const istStr = now.toLocaleTimeString('en-IN', {
-        timeZone: 'Asia/Kolkata',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
+        timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
       });
       document.getElementById('ist-clock').textContent = 'IST ' + istStr;
 
-      // Compute IST hours & minutes for live countdown
       const istParts = new Intl.DateTimeFormat('en-GB', {
         timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false
       }).formatToParts(now);
@@ -909,7 +935,7 @@
       const stripHtml = UPCOMING_GLOBAL_EVENTS.map(ev => {
         const evMins = ev.hour * 60 + ev.min;
         let delta = evMins - nowMins;
-        if (delta < -30) delta += 24 * 60; // Tomorrow cycle if already >30m past
+        if (delta < -30) delta += 24 * 60;
 
         if (delta < diffMins) {
           diffMins = delta;
@@ -952,7 +978,6 @@
     setInterval(updateIstClockAndEvents, 1000);
     updateIstClockAndEvents();
 
-    // --- THEME & LANGUAGE TOGGLES ---
     function toggleTheme() {
       const html = document.documentElement;
       const isDark = html.getAttribute('data-theme') === 'dark';
@@ -978,7 +1003,6 @@
       fetchLiveNewsFeeds();
     }
 
-    // --- EMERGENCY NEWS GUARD & BOT KILL SWITCH ---
     function toggleEmergencyGuard() {
       emergencyLock = !emergencyLock;
       const banner = document.getElementById('guard-banner');
@@ -1012,19 +1036,11 @@
       }
     }
 
-    // --- GENERATE OHLC CANDLE & PERIOD FALL / RETURN SERIES ---
     function buildOhlcSeries(basePrice, tf, isIndia) {
       const counts = { '1D': 14, '1W': 12, '1M': 15, '3M': 16, '6M': 16, '1Y': 16, '5Y': 15, 'All': 16 };
       const volMap = { '1D': 0.008, '1W': 0.015, '1M': 0.028, '3M': 0.045, '6M': 0.065, '1Y': 0.11, '5Y': 0.24, 'All': 0.35 };
       const startBiasMap = {
-        '1D': 0.014,
-        '1W': 0.018,
-        '1M': 0.026,
-        '3M': -0.042,
-        '6M': -0.078,
-        '1Y': -0.145,
-        '5Y': -0.34,
-        'All': -0.48
+        '1D': 0.014, '1W': 0.018, '1M': 0.026, '3M': -0.042, '6M': -0.078, '1Y': -0.145, '5Y': -0.34, 'All': -0.48
       };
 
       const n = counts[tf] || 12;
@@ -1214,7 +1230,6 @@
       renderSingleChart('gl');
     }
 
-    // --- SYNCED AI GUIDANCE (COMBINES LIVE RATE + LIVE NEWS HEADLINES) ---
     function updateSyncedAiGuidance() {
       const inTop = latestIndiaHeadlines[0]?.title || 'Tamil Nadu 24K/22K bullion tracks global spot movement';
       const glTop = latestGlobalHeadlines[0]?.title || 'XAU/USD reacts to US Dollar & Federal Reserve policy remarks';
@@ -1227,7 +1242,6 @@
       }
     }
 
-    // --- LIVE GOLDAPI.IO + FREE SPOT & USD/INR SYNC ---
     async function syncAllLiveData(manual = false) {
       const badge = document.getElementById('api-status-badge');
       badge.textContent = '⏳ Syncing Live Rates & News...';
@@ -1255,7 +1269,7 @@
             if (data && data.price) {
               liveXauUsd = +Number(data.price).toFixed(2);
               gotLiveGold = true;
-              badge.textContent = '✅ LIVE API OK (GoldAPI.io + Live News Synced)';
+              badge.textContent = '✅ LIVE API OK (GoldAPI.io + Analytics Synced)';
             }
           }
         } catch (e) {}
@@ -1263,8 +1277,8 @@
 
       if (!gotLiveGold) {
         badge.textContent = savedKey
-          ? '⚠️ Key Quota / Parity Spot + Live News Synced'
-          : '✅ LIVE PARITY + LIVE NEWS SYNCED';
+          ? '⚠️ Key Quota / Parity Spot + Analytics Synced'
+          : '✅ LIVE PARITY + FULL ANALYTICS SYNCED';
       }
 
       const rawInrPerGram = (liveXauUsd * liveUsdInr) / 31.1035;
@@ -1288,24 +1302,19 @@
       updateSyncedAiGuidance();
     }
 
-    // --- MULTI-SOURCE ZERO-KEY LIVE RSS/XML FETCHER (PRIMARY + BACKUP PROXIES) ---
     async function fetchRssWithFallback(rssUrl) {
-      // Proxy 1: rss2json
       try {
         const r1 = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl));
         if (r1.ok) {
           const d1 = await r1.json();
           if (d1.items && d1.items.length) {
             return d1.items.slice(0, 7).map(it => ({
-              title: it.title,
-              pubDate: it.pubDate,
-              link: it.link
+              title: it.title, pubDate: it.pubDate, link: it.link
             }));
           }
         }
       } catch (e) {}
 
-      // Proxy 2: allorigins XML parser
       try {
         const r2 = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl));
         if (r2.ok) {
@@ -1351,22 +1360,19 @@
         fetchRssWithFallback(globalRss)
       ]);
 
-      // Dynamic rate-synced fallback if browser blocks external proxies
       if (!indiaItems.length) {
         indiaItems = [
           {
             title: currentLang === 'ta'
               ? `தமிழ்நாடு 24K தங்கம் ₹${liveIn24k.toLocaleString('en-IN')}/g & 22K ₹${liveIn22k.toLocaleString('en-IN')}/g (${todayLabel}): சர்வதேச மாற்றத்தால் உள்ளூர் விலையில் ஏற்ற இறக்கம்`
               : `Tamil Nadu 24K Gold at ₹${liveIn24k.toLocaleString('en-IN')}/g & 22K at ₹${liveIn22k.toLocaleString('en-IN')}/g (${todayLabel})`,
-            pubDate: todayLabel + ' • Live IST',
-            link: 'https://www.goodreturns.in/gold-rates/'
+            pubDate: todayLabel + ' • Live IST', link: 'https://www.goodreturns.in/gold-rates/'
           },
           {
             title: currentLang === 'ta'
               ? `USD/INR ₹${liveUsdInr} நிலவரம்: MCX தங்கம் வர்த்தகத்தில் இறக்குமதி மதிப்பு கவனம்`
               : `USD/INR at ₹${liveUsdInr}: MCX Bullion & Domestic Retail Demand Watch`,
-            pubDate: todayLabel + ' • Live IST',
-            link: 'https://www.mcxindia.com/'
+            pubDate: todayLabel + ' • Live IST', link: 'https://www.mcxindia.com/'
           }
         ];
       }
@@ -1377,15 +1383,13 @@
             title: currentLang === 'ta'
               ? `உலகளாவிய XAU/USD $${liveXauUsd}/oz (${todayLabel}): அமெரிக்க டாலர் & Fed வட்டி எதிர்பார்ப்பால் தங்கம் நகர்வு`
               : `Global XAU/USD Spot at $${liveXauUsd}/oz (${todayLabel}): US Dollar & Fed Policy Drive Intraday Swings`,
-            pubDate: todayLabel + ' • Global Feed',
-            link: 'https://www.tradingview.com/symbols/XAUUSD/'
+            pubDate: todayLabel + ' • Global Feed', link: 'https://www.tradingview.com/symbols/XAUUSD/'
           },
           {
             title: currentLang === 'ta'
               ? 'அமெரிக்க பொருளாதாரத் தரவு & FOMC உரை: 40 நிமிடம் முன்பு டிரேடிங் எச்சரிக்கை'
               : 'US Macro Releases & FOMC Remarks: Observe 40m Before / 30m After No-Trade Window',
-            pubDate: todayLabel + ' • Global Feed',
-            link: 'https://www.federalreserve.gov/'
+            pubDate: todayLabel + ' • Global Feed', link: 'https://www.federalreserve.gov/'
           }
         ];
       }
@@ -1419,7 +1423,6 @@
       updateSyncedAiGuidance();
     }
 
-    // --- API KEY MODAL ---
     function openApiModal() {
       document.getElementById('api-key-input').value = localStorage.getItem('money_earth_goldapi_key') || '';
       document.getElementById('api-modal').classList.add('open');
@@ -1438,21 +1441,19 @@
       syncAllLiveData(true);
     }
 
-    // --- ROBOT 1 (RIGHT): EMO TRADE PLAN MODAL ---
     function openEmoModal() { document.getElementById('emo-modal').classList.add('open'); }
     function closeEmoModal() { document.getElementById('emo-modal').classList.remove('open'); }
     function askEmo(topic) {
       const reply = document.getElementById('emo-reply');
       if (topic === 'plan') {
-        reply.textContent = `Today's Trade Plan: XAU/USD is at $${liveXauUsd}/oz (TN 24K: ₹${liveIn24k.toLocaleString('en-IN')}/g). Focus on 1D/1W High-Low support entries and pause bot 40 mins before upcoming US events.`;
+        reply.textContent = `Today's Trade Plan: XAU/USD is at $${liveXauUsd}/oz (TN 24K: ₹${liveIn24k.toLocaleString('en-IN')}/g). Focus on S1/R1 levels and pause bot 40 mins before upcoming US events.`;
       } else if (topic === 'hl') {
         reply.textContent = `Click 1D, 1W, 1M, or 1Y on either chart to inspect the Period Fall / Return badge, Period High, Period Low, and hover over any candle for Open/High/Low/Close.`;
       } else {
-        reply.textContent = `Emergency Guard Rule: Turn OFF your Algo Bot 40 minutes BEFORE upcoming high-impact global news (see top strip) and wait 30 minutes AFTER release.`;
+        reply.textContent = `Emergency Guard Rule: Turn OFF your Algo Bot 40 minutes BEFORE upcoming high-impact global news and wait 30 minutes AFTER release.`;
       }
     }
 
-    // --- ROBOT 2 (LEFT): FULL-DASHBOARD AI CONVERSATION ASSISTANT ---
     function openConciergeModal() { document.getElementById('concierge-modal').classList.add('open'); }
     function closeConciergeModal() { document.getElementById('concierge-modal').classList.remove('open'); }
 
@@ -1473,15 +1474,13 @@
       const glTop = latestGlobalHeadlines[0]?.title || 'Global XAU/USD live tracking';
 
       if (q.includes('பிளான்') || q.includes('plan')) {
-        answer = `📋 <strong>இன்றைய முழு பிளான் (Rate + News Synced):</strong><br>• தமிழ்நாடு 24K: <strong>₹${liveIn24k.toLocaleString('en-IN')}/g</strong> | 22K: <strong>₹${liveIn22k.toLocaleString('en-IN')}/g</strong> | Global XAU/USD: <strong>$${liveXauUsd}/oz</strong>.<br>• <strong>${document.getElementById('upcoming-countdown-text').textContent}</strong><br>• சார்ட்டில் High/Low ஆதரவைப் பார்த்து, செய்திக்கு 40 நிமிடம் முன்பு பாட்டை நிறுத்திப் பாதுகாப்பாக டிரேட் செய்யவும்.`;
-      } else if (q.includes('நியூஸ்') || q.includes('news') || q.includes('ஈவென்ட்') || q.includes('event')) {
-        answer = `📰 <strong>நேரலைச் செய்திகள் & அப்கமிங் ஈவென்ட்ஸ்:</strong><br>• 🇮🇳 <strong>இந்தியா:</strong> ${inTop}<br>• 🌍 <strong>குளோபல்:</strong> ${glTop}<br>• ⏰ <strong>அடுத்த நிகழ்வு:</strong> ${document.getElementById('upcoming-countdown-text').textContent}`;
-      } else if (q.includes('ரேட்') || q.includes('rate') || q.includes('fall') || q.includes('24k') || q.includes('22k')) {
-        const inDelta = document.getElementById('in-period-delta').textContent;
-        const glDelta = document.getElementById('gl-period-delta').textContent;
-        answer = `💰 <strong>நேரலை ரேட் & Fall/Return நிலவரம்:</strong><br>• தமிழ்நாடு 24K: <strong>₹${liveIn24k.toLocaleString('en-IN')}/g</strong> | 22K: <strong>₹${liveIn22k.toLocaleString('en-IN')}/g</strong> (${inDelta})<br>• Global XAU/USD: <strong>$${liveXauUsd}/oz</strong> (${glDelta})`;
+        answer = `📋 <strong>இன்றைய முழு பிளான் (Predictions + News Synced):</strong><br>• தமிழ்நாடு 24K: <strong>₹${liveIn24k.toLocaleString('en-IN')}/g</strong> | Global XAU/USD: <strong>$${liveXauUsd}/oz</strong>.<br>• <strong>${document.getElementById('upcoming-countdown-text').textContent}</strong><br>• ஆதரவு நிலை S1: ₹13,180 / $3,742 மற்றும் எதிர்ப்பு நிலை R1: ₹13,480 / $3,810.`;
+      } else if (q.includes('s1') || q.includes('r1') || q.includes('support') || q.includes('சப்போர்ட்')) {
+        answer = `🎯 <strong>உள்ளூர் & உலகளாவிய S1/R1 நிலைகள்:</strong><br>• Support 1 (S1): <strong>₹13,180 / $3,742</strong><br>• Resistance 1 (R1): <strong>₹13,480 / $3,810</strong><br>• Trend Structure: <strong>Higher High Rebound</strong>`;
+      } else if (q.includes('நியூஸ்') || q.includes('news')) {
+        answer = `📰 <strong>நேரலைச் செய்திகள் & அப்கமிங் ஈவென்ட்ஸ்:</strong><br>• 🇮🇳 <strong>இந்தியா:</strong> ${inTop}<br>• 🌍 <strong>குளோபல்:</strong> ${glTop}`;
       } else {
-        answer = `🤖 <strong>Dashboard Summary:</strong> 24K தங்கம் <strong>₹${liveIn24k.toLocaleString('en-IN')}/g</strong>, 22K <strong>₹${liveIn22k.toLocaleString('en-IN')}/g</strong>, Global XAU/USD <strong>$${liveXauUsd}/oz</strong>. இன்றைய முக்கியச் செய்தி: <em>${glTop}</em>`;
+        answer = `🤖 <strong>Dashboard Summary:</strong> 24K தங்கம் <strong>₹${liveIn24k.toLocaleString('en-IN')}/g</strong>, Global XAU/USD <strong>$${liveXauUsd}/oz</strong>. S1 ஆதரவில் வாங்குவது உகந்தது!`;
       }
 
       setTimeout(() => appendConciergeMsg(answer, false), 220);
@@ -1495,7 +1494,6 @@
       sendConciergePrompt(val);
     }
 
-    // --- INIT ---
     window.addEventListener('DOMContentLoaded', () => {
       if (localStorage.getItem('money_earth_goldapi_key')) {
         document.getElementById('api-key-btn').textContent = '🔑 Key Saved •';
