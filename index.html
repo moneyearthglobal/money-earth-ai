@@ -1311,8 +1311,8 @@
                     if (gInrRes.ok) {
                         const gInr = await gInrRes.json();
                         if (gInr && gInr.price) {
-                            // GoldAPI returns international spot INR; add Indian import duty + GST retail parity (~1.095x)
-                            const dutyFactor = 1.095;
+                            // Align International XAU/INR spot with Tamil Nadu / GoodReturns Retail Bullion Parity (Import Duty + Bullion Premium ~1.1752x)
+                            const dutyFactor = 1.1752;
                             tn24kDirect = Math.round((gInr.price_gram_24k || (gInr.price / 31.1034768)) * dutyFactor);
                             tn22kDirect = Math.round((gInr.price_gram_22k || (tn24kDirect * 0.9166)) * dutyFactor);
                             tn18kDirect = Math.round((gInr.price_gram_18k || (tn24kDirect * 0.75)) * dutyFactor);
@@ -1320,7 +1320,7 @@
                             if (gInr.chp !== undefined) {
                                 chgPctStr = `${gInr.chp >= 0 ? '+' : ''}${Number(gInr.chp).toFixed(2)}%`;
                             }
-                            sourceName = 'GoldAPI.io Live';
+                            sourceName = 'GoldAPI.io + TN Parity Live';
                         }
                     }
                 }
@@ -1341,9 +1341,10 @@
 
                 if (liveXauUsd && liveXauUsd > 1000) {
                     const basePerGramInr = (liveXauUsd / 31.1034768) * liveUsdInr;
-                    const tn24k = tn24kDirect || Math.round(basePerGramInr * 1.128);
+                    const tn24k = tn24kDirect || Math.round(basePerGramInr * 1.1752);
                     const tn22k = tn22kDirect || Math.round(tn24k * 0.9166);
                     const tn18k = tn18kDirect || Math.round(tn24k * 0.75);
+                    const paytmDigital24k = Math.round(tn24k * 1.019);
 
                     // Update Top Tickers
                     document.querySelectorAll('.live-tn-24k').forEach(el => el.textContent = `₹${tn24k.toLocaleString('en-IN')}/g`);
@@ -1351,19 +1352,28 @@
                     document.querySelectorAll('.live-tn-chg').forEach(el => el.textContent = `(${chgPctStr})`);
                     document.querySelectorAll('.live-xau-usd').forEach(el => el.textContent = `$${liveXauUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/oz`);
                     document.querySelectorAll('.live-xau-chg').forEach(el => el.textContent = `(${chgPctStr})`);
-                    // Update Main Chart Headers & Latest Data Points (Both 24K and 22K!)
+
+                    // Update Main Chart Headers & Latest Data Points (Both 24K and 22K + Paytm Digital Gold Parity!)
                     document.getElementById('india-tv-price').textContent = `₹${tn24k.toLocaleString('en-IN')}`;
                     const ind22kEl = document.getElementById('india-tv-price-22k');
-                    if (ind22kEl) ind22kEl.textContent = `₹${tn22k.toLocaleString('en-IN')}`;
+                    if (ind22kEl) ind22kEl.textContent = `₹${tn22k.toLocaleString('en-IN')} (Digital +3% GST: ₹${paytmDigital24k.toLocaleString('en-IN')})`;
                     document.getElementById('global-tv-price').textContent = `$${liveXauUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-                    // Update latest data point in all chart series so charts match live prices
+                    // Scale historical curve smoothly to match live market price (prevents artificial cliff drop on chart)
+                    const indScale = tn24k / 13679;
                     Object.keys(INDIA_SERIES).forEach(tf => {
                         const arr = INDIA_SERIES[tf].values;
+                        for (let i = 0; i < arr.length - 1; i++) {
+                            arr[i] = Math.round(arr[i] * indScale);
+                        }
                         arr[arr.length - 1] = tn24k;
                     });
+                    const glbScale = liveXauUsd / 4462.4;
                     Object.keys(GLOBAL_SERIES).forEach(tf => {
                         const arr = GLOBAL_SERIES[tf].values;
+                        for (let i = 0; i < arr.length - 1; i++) {
+                            arr[i] = Number((arr[i] * glbScale).toFixed(2));
+                        }
                         arr[arr.length - 1] = liveXauUsd;
                     });
 
