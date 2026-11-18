@@ -87,6 +87,39 @@
             animation: eyeLookDown 2.6s ease-in-out infinite;
         }
 
+        /* Roaming EMO Helper Robot Animations (Gliding, Blinking & Eye Tracking) */
+        @keyframes emoRoam {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            25% { transform: translate(-45px, -10px) rotate(-4deg); }
+            50% { transform: translate(-95px, 4px) rotate(3deg); }
+            75% { transform: translate(-40px, -12px) rotate(-3deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+        .emo-roaming-wrap {
+            animation: emoRoam 12s ease-in-out infinite;
+        }
+        .emo-roaming-wrap:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes emoBlink {
+            0%, 44%, 48%, 92%, 96%, 100% { transform: scaleY(1); }
+            46%, 94% { transform: scaleY(0.1); }
+        }
+        .emo-eye-blink {
+            transform-origin: center 31px;
+            animation: emoBlink 4.2s infinite;
+        }
+
+        @keyframes emoEyeScan {
+            0%, 100% { transform: translateX(0px); }
+            30% { transform: translateX(-2.5px); }
+            70% { transform: translateX(2.5px); }
+        }
+        .emo-eye-scan {
+            animation: emoEyeScan 5s ease-in-out infinite;
+        }
+
         /* Black / Dark Theme Overrides */
         body.dark-theme {
             background-color: #020617 !important;
@@ -155,43 +188,43 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-    <!-- 1. TOP LIVE RATE TICKER (TAMIL NADU, INDIA & GLOBAL) -->
+    <!-- 1. TOP LIVE RATE TICKER (TAMIL NADU, INDIA & GLOBAL — AUTO-SYNCED WITH LIVE API) -->
     <div class="bg-slate-950 text-white border-b border-slate-800 overflow-hidden py-1.5 text-xs font-mono">
         <div class="animate-marquee-slow flex items-center gap-8 px-4">
-            <span class="flex items-center gap-2"><span class="text-amber-400 font-bold">🇮🇳 CHENNAI / TN 24K GOLD:</span> <span class="font-extrabold">₹13,679/g</span> <span class="text-emerald-400">(+0.82%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-amber-300 font-bold">🇮🇳 TN 22K GOLD:</span> <span class="font-extrabold">₹12,539/g</span> <span class="text-emerald-400">(+0.83%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-sky-400 font-bold">🌍 GLOBAL XAU/USD:</span> <span class="font-extrabold">$4,462.40/oz</span> <span class="text-emerald-400">(+0.77%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-slate-300 font-bold">🥈 TN SILVER 999:</span> <span class="font-extrabold">₹168.50/g (₹1,68,500/kg)</span> <span class="text-emerald-400">(+1.15%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-emerald-400 font-bold">💱 USD/INR:</span> <span class="font-extrabold">₹84.42</span></span>
+            <span class="flex items-center gap-2"><span class="text-amber-400 font-bold">🇮🇳 CHENNAI / TN 24K GOLD:</span> <span class="font-extrabold live-tn-24k">₹13,679/g</span> <span class="text-emerald-400 live-tn-chg">(+0.82%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-amber-300 font-bold">🇮🇳 TN 22K GOLD:</span> <span class="font-extrabold live-tn-22k">₹12,539/g</span> <span class="text-emerald-400">(+0.83%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-sky-400 font-bold">🌍 GLOBAL XAU/USD:</span> <span class="font-extrabold live-xau-usd">$4,462.40/oz</span> <span class="text-emerald-400 live-xau-chg">(+0.77%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-slate-300 font-bold">🥈 TN SILVER 999:</span> <span class="font-extrabold live-tn-silver">₹168.50/g (₹1,68,500/kg)</span> <span class="text-emerald-400">(+1.15%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-emerald-400 font-bold">💱 USD/INR:</span> <span class="font-extrabold live-usd-inr">₹84.42</span></span>
             <!-- Duplicate for seamless loop -->
-            <span class="flex items-center gap-2"><span class="text-amber-400 font-bold">🇮🇳 CHENNAI / TN 24K GOLD:</span> <span class="font-extrabold">₹13,679/g</span> <span class="text-emerald-400">(+0.82%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-amber-300 font-bold">🇮🇳 TN 22K GOLD:</span> <span class="font-extrabold">₹12,539/g</span> <span class="text-emerald-400">(+0.83%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-sky-400 font-bold">🌍 GLOBAL XAU/USD:</span> <span class="font-extrabold">$4,462.40/oz</span> <span class="text-emerald-400">(+0.77%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-slate-300 font-bold">🥈 TN SILVER 999:</span> <span class="font-extrabold">₹168.50/g (₹1,68,500/kg)</span> <span class="text-emerald-400">(+1.15%)</span></span>
-            <span class="flex items-center gap-2"><span class="text-emerald-400 font-bold">💱 USD/INR:</span> <span class="font-extrabold">₹84.42</span></span>
+            <span class="flex items-center gap-2"><span class="text-amber-400 font-bold">🇮🇳 CHENNAI / TN 24K GOLD:</span> <span class="font-extrabold live-tn-24k">₹13,679/g</span> <span class="text-emerald-400 live-tn-chg">(+0.82%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-amber-300 font-bold">🇮🇳 TN 22K GOLD:</span> <span class="font-extrabold live-tn-22k">₹12,539/g</span> <span class="text-emerald-400">(+0.83%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-sky-400 font-bold">🌍 GLOBAL XAU/USD:</span> <span class="font-extrabold live-xau-usd">$4,462.40/oz</span> <span class="text-emerald-400 live-xau-chg">(+0.77%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-slate-300 font-bold">🥈 TN SILVER 999:</span> <span class="font-extrabold live-tn-silver">₹168.50/g (₹1,68,500/kg)</span> <span class="text-emerald-400">(+1.15%)</span></span>
+            <span class="flex items-center gap-2"><span class="text-emerald-400 font-bold">💱 USD/INR:</span> <span class="font-extrabold live-usd-inr">₹84.42</span></span>
         </div>
     </div>
 
-    <!-- 2. UPCOMING GLOBAL NEWS & MACRO CATALYSTS TICKER (IST) -->
+    <!-- 2. LIVE INDIA & GLOBAL BREAKING GOLD NEWS TICKER (REAL-TIME RSS SYNC) -->
     <div class="bg-sky-950 text-sky-100 border-b border-sky-900 overflow-hidden py-1.5 text-xs">
         <div class="max-w-7xl mx-auto px-3 flex items-center gap-3">
             <span class="shrink-0 px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold text-[10px] tracking-wider" data-i18n="upcomingTickerLabel">
-                🌐 UPCOMING GLOBAL NEWS (IST)
+                🌐 LIVE INDIA & GLOBAL NEWS
             </span>
             <div class="overflow-hidden flex-1">
-                <div class="animate-marquee-slower flex items-center gap-10 font-mono text-[11px]">
+                <div id="live-news-ticker-track" class="animate-marquee-slower flex items-center gap-10 font-mono text-[11px]">
+                    <span>🇮🇳 <strong>INDIA BULLION:</strong> Chennai & Coimbatore 24K/22K gold demand holds firm ahead of festive bookings</span>
+                    <span>🌍 <strong>GLOBAL XAU/USD:</strong> Spot gold holds key support as central bank reserve buying continues</span>
                     <span>⏰ <strong>07:00 PM IST:</strong> US Housing Starts & Building Permits (High Gold Volatility)</span>
                     <span>⏰ <strong>08:30 PM IST:</strong> Federal Reserve Officials Monetary Policy Remarks</span>
-                    <span>⏰ <strong>10:00 PM IST:</strong> COMEX Gold & Silver Open Interest Settlement Watch</span>
-                    <span>⏰ <strong>06:00 AM IST:</strong> Shanghai Gold Exchange (SGE) Physical Fix</span>
-                    <span>⏰ <strong>07:00 PM IST:</strong> US Housing Starts & Building Permits (High Gold Volatility)</span>
-                    <span>⏰ <strong>08:30 PM IST:</strong> Federal Reserve Officials Monetary Policy Remarks</span>
+                    <span>🇮🇳 <strong>INDIA BULLION:</strong> Chennai & Coimbatore 24K/22K gold demand holds firm ahead of festive bookings</span>
+                    <span>🌍 <strong>GLOBAL XAU/USD:</strong> Spot gold holds key support as central bank reserve buying continues</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. HEADER WITH CUSTOM SQUARE MONEY EARTH LOGO, LANGUAGE & WHITE/BLACK THEME SWITCHER -->
+    <!-- 3. HEADER WITH CUSTOM SQUARE MONEY EARTH LOGO, LIVE API CHECKUP, LANGUAGE & WHITE/BLACK THEME SWITCHER -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
             <!-- Brand Logo (Custom Black Square: MONEY White / EARTH Blue) + Normal Title -->
@@ -210,16 +243,28 @@
                 </div>
             </div>
 
-            <!-- Controls: Live IST Clock, API Key, White/Black Theme Toggle, EN/Tamil Toggle -->
+            <!-- Controls: Live IST Clock, Emergency Alert Switch, Instant Live Sync, API Key, Theme & Language -->
             <div class="flex flex-wrap items-center gap-2">
                 <span id="ist-clock" class="hidden md:inline-block font-mono text-xs font-bold px-2.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 border border-slate-200">
                     IST --:--:--
                 </span>
 
-                <!-- API Key Button -->
+                <!-- Emergency Alert & Bot Risk Guard Quick Toggle -->
+                <button onclick="toggleEmergencyMode()" id="header-emergency-btn" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-rose-50 text-rose-700 border border-rose-300 hover:bg-rose-100 transition flex items-center gap-1.5" title="Simulate or Activate Sudden Global Market News Emergency">
+                    <span>🚨</span>
+                    <span id="header-emergency-label" data-i18n="emergencyBtnOff">News Guard: SAFE</span>
+                </button>
+
+                <!-- 1-Click Live Market Sync & API Checkup Button -->
+                <button onclick="fetchLiveMarketRates(true)" id="live-sync-btn" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition flex items-center gap-1.5" title="Sync Live Gold, Forex & News API Now">
+                    <span id="live-sync-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="live-sync-label">Live Sync ●</span>
+                </button>
+
+                <!-- Optional Custom API Key Button -->
                 <button onclick="openApiModal()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition flex items-center gap-1.5">
                     <span>🔑</span>
-                    <span id="api-status-text" data-i18n="apiBtn">Live API Key</span>
+                    <span id="api-status-text" data-i18n="apiBtn">API Key</span>
                 </button>
 
                 <!-- White / Black Theme Toggle -->
@@ -239,43 +284,96 @@
     <!-- MAIN CONTENT CONTAINER -->
     <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-5 space-y-6 flex-1">
 
+        <!-- 3.2 EMERGENCY GLOBAL NEWS AWARENESS & RISK MANAGEMENT BOT GUARD PANEL -->
+        <section id="emergency-guard-banner" class="bg-slate-900 text-white border-2 border-amber-500/60 rounded-2xl p-4 sm:p-5 shadow-lg transition-all">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <!-- Left: Awareness Robot SVG + Risk Management Warning -->
+                <div class="flex items-start sm:items-center gap-3.5">
+                    <div id="awareness-robot-icon" class="shrink-0 bg-slate-800 border-2 border-amber-400 rounded-2xl p-2 shadow-md">
+                        <svg class="w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 64 64" fill="none">
+                            <!-- Siren Beacon -->
+                            <path d="M26 14C26 10.6863 28.6863 8 32 8C35.3137 8 38 10.6863 38 14V17H26V14Z" fill="#F43F5E" class="animate-pulse"/>
+                            <line x1="32" y1="3" x2="32" y2="6" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="21" y1="7" x2="23" y2="9" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="43" y1="7" x2="41" y2="9" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Robot Head -->
+                            <rect x="13" y="17" width="38" height="32" rx="9" fill="#0F172A" stroke="#FBBF24" stroke-width="2.5"/>
+                            <!-- Alert Eyes -->
+                            <circle cx="24" cy="30" r="3.5" fill="#FBBF24"/>
+                            <circle cx="40" cy="30" r="3.5" fill="#FBBF24"/>
+                            <!-- Shield / Warning Mouth -->
+                            <rect x="22" y="39" width="20" height="4" rx="2" fill="#F43F5E"/>
+                            <!-- Ears -->
+                            <rect x="8" y="26" width="4" height="12" rx="2" fill="#38BDF8"/>
+                            <rect x="52" y="26" width="4" height="12" rx="2" fill="#38BDF8"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span id="emergency-status-pill" class="px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-mono font-extrabold text-[10px] tracking-wider" data-i18n="riskGuardPill">
+                                🛡️ NEWS RISK MANAGEMENT GUARD • 40M BEFORE / 30M AFTER RULE
+                            </span>
+                            <span id="news-window-countdown" class="text-[11px] font-mono font-bold text-amber-300" data-i18n="newsWindowCountdown">
+                                Next High-Impact Window: 06:20 PM – 07:30 PM IST (US Housing)
+                            </span>
+                        </div>
+                        <h3 id="emergency-headline" class="text-sm sm:text-base font-extrabold text-white" data-i18n="riskGuardHeadline">
+                            ⚠️ Risk Management Rule: DO NOT TRADE 40 Mins Before & 30 Mins After High-Impact Global News!
+                        </h3>
+                        <p id="emergency-subtext" class="text-xs text-slate-300 leading-relaxed" data-i18n="riskGuardSubtext">
+                            Sudden global news spikes cause unpredictable slippage. Pause your Algo Bot <strong>40 minutes before</strong> major news (07:00 PM & 08:30 PM IST) and resume only <strong>30 minutes after</strong> volatility settles.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Algo Bot Master Kill-Switch (ON / OFF) + Emergency Test Toggle -->
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2.5 shrink-0 bg-slate-800/90 border border-slate-700 rounded-xl p-3">
+                    <div class="text-left pr-2">
+                        <div class="text-[10px] font-mono text-slate-400 uppercase" data-i18n="botPowerLabel">ALGO BOT EXECUTION</div>
+                        <div id="bot-power-status" class="text-xs font-extrabold text-emerald-400" data-i18n="botStatusActive">● BOT ACTIVE (MONITORING)</div>
+                    </div>
+                    <button onclick="toggleAlgoBotSwitch()" id="bot-kill-switch-btn" class="px-4 py-2 rounded-xl text-xs font-black bg-rose-600 hover:bg-rose-500 text-white shadow-md transition flex items-center gap-1.5">
+                        <span>🛑</span>
+                        <span id="bot-switch-btn-text" data-i18n="btnTurnOffBot">TURN OFF BOT</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- 3.5 ABOVE GRAPHS: TODAY OVERALL BIAS & AI DIRECTION FOCUS PLAN (BOTH INDIAN & GLOBAL MARKET) -->
         <section class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                 <div>
-                    <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200" data-i18n="masterPlanBadge">
-                        🧭 MASTER AI DIRECTION ENGINE • INDIA & GLOBAL
-                    </span>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200" data-i18n="masterPlanBadge">
+                            🧭 MASTER AI DIRECTION ENGINE • INDIA & GLOBAL
+                        </span>
+                        <span id="live-feed-badge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                            📡 LIVE API: READY TO SYNC
+                        </span>
+                    </div>
                     <h2 class="text-base sm:text-xl font-extrabold text-slate-900 mt-1.5" data-i18n="masterBiasTitle">
                         Today Overall Bias & AI Direction Focus Plan (Indian & Global Market)
                     </h2>
                 </div>
 
-                <!-- SLIGHTLY BIGGER CARTOON ROBOT BIAS SUGGESTION & MINI GRAPHICAL GAUGE -->
+                <!-- CARTOON ROBOT BIAS SUGGESTION & MINI GRAPHICAL GAUGE -->
                 <div id="cartoon-bias-card" class="flex items-center gap-3.5 bg-gradient-to-r from-emerald-50 via-sky-50 to-amber-50 border-2 border-emerald-400 rounded-2xl px-4 py-3 shadow-sm shrink-0 transition-all">
-                    <!-- Grok-Style Cute Green/Red Blob Bot (Water-Drop / Cloud Shape with Rolling Eyes) -->
                     <div class="relative shrink-0">
                         <!-- GREEN HAPPY DANCING BLOB BOT (FOCUS ON UP) -->
                         <div id="blob-bot-up" class="blob-dance-up cursor-pointer" onclick="setCartoonBiasPreview('UP')" title="Happy Green Bot: Focus on UP">
                             <svg class="w-16 h-16 sm:w-[72px] sm:h-[72px]" viewBox="0 0 84 84" fill="none">
-                                <!-- Soft Glow -->
                                 <ellipse cx="42" cy="74" rx="20" ry="4" fill="#10B981" opacity="0.25"/>
-                                <!-- Grok-Style Green Cloud / Water-Drop Blob Body -->
                                 <path d="M23 58C14.5 58 10 51.5 11.5 43.5C12.5 38 16.5 34.5 18 30C20 22.5 27.5 17 37.5 17C47 17 54 22 56.5 29C58.5 34 63.5 37.5 64.5 43.5C66 51.5 61 58 52.5 58H23Z" fill="#10D96B"/>
-                                <!-- Cute Dancing Arms -->
                                 <path d="M13 45C8 41 7 36 10 33" stroke="#10D96B" stroke-width="4.5" stroke-linecap="round"/>
                                 <path d="M63 43C68 38 69 32 66 29" stroke="#10D96B" stroke-width="4.5" stroke-linecap="round"/>
-                                <!-- Rolling Happy Pill Eyes (Grok Style) -->
                                 <g class="blob-eyes-up">
                                     <rect x="29" y="31" width="6.5" height="12" rx="3.25" transform="rotate(-8 29 31)" fill="#0A0F1C"/>
                                     <rect x="41" y="30" width="6.5" height="12" rx="3.25" transform="rotate(-8 41 30)" fill="#0A0F1C"/>
-                                    <!-- Tiny Eye Sparkle -->
                                     <circle cx="31.5" cy="34" r="1.3" fill="#FFFFFF"/>
                                     <circle cx="43.5" cy="33" r="1.3" fill="#FFFFFF"/>
                                 </g>
-                                <!-- Happy Little Smile -->
                                 <path d="M35.5 46.5C37.5 49 41.5 49 43.5 46.5" stroke="#064E3B" stroke-width="2.5" stroke-linecap="round"/>
-                                <!-- Floating UP Arrow Badge -->
                                 <circle cx="67" cy="21" r="11" fill="#059669" stroke="#FFFFFF" stroke-width="2.5"/>
                                 <path d="M67 26V16M67 16L63 20M67 16L71 20" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -284,21 +382,15 @@
                         <!-- RED SAD/WORRIED BLOB BOT (FOCUS ON DOWN) -->
                         <div id="blob-bot-down" class="hidden blob-droop-down cursor-pointer" onclick="setCartoonBiasPreview('DOWN')" title="Sad Red Bot: Focus on DOWN">
                             <svg class="w-16 h-16 sm:w-[72px] sm:h-[72px]" viewBox="0 0 84 84" fill="none">
-                                <!-- Soft Shadow -->
                                 <ellipse cx="42" cy="75" rx="22" ry="4" fill="#F43F5E" opacity="0.25"/>
-                                <!-- Grok-Style Red Water-Drop / Drooping Blob Body -->
                                 <path d="M20 60C12 60 9 53 12 45C14.5 38.5 18 34 20 28C23 20 30 17 38.5 17C47 17 54 20.5 57 28C59 34 62.5 38.5 65 45C68 53 64 60 56 60H20Z" fill="#FF2A54"/>
-                                <!-- Drooping Arms -->
                                 <path d="M13 48C9 52 9 56 12 58" stroke="#FF2A54" stroke-width="4.5" stroke-linecap="round"/>
                                 <path d="M64 48C68 52 68 56 65 58" stroke="#FF2A54" stroke-width="4.5" stroke-linecap="round"/>
-                                <!-- Sad / Downward Looking Pill Eyes -->
                                 <g class="blob-eyes-down">
                                     <rect x="29" y="34" width="6.5" height="11" rx="3.25" transform="rotate(10 29 34)" fill="#0A0F1C"/>
                                     <rect x="42" y="35" width="6.5" height="11" rx="3.25" transform="rotate(-10 42 35)" fill="#0A0F1C"/>
                                 </g>
-                                <!-- Sad Frown Mouth -->
                                 <path d="M35.5 50.5C37.5 48 41.5 48 43.5 50.5" stroke="#4C0519" stroke-width="2.5" stroke-linecap="round"/>
-                                <!-- Floating DOWN Arrow Badge -->
                                 <circle cx="67" cy="22" r="11" fill="#E11D48" stroke="#FFFFFF" stroke-width="2.5"/>
                                 <path d="M67 17V27M67 27L63 23M67 27L71 23" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -314,14 +406,12 @@
                             <span id="overall-direction-text" class="text-xs sm:text-sm font-black text-emerald-800 tracking-tight" data-i18n="overallDirectionBadge">
                                 FOCUS ON UP ↑ • BUY ON DIPS
                             </span>
-                            <!-- Interactive Mini Toggle to Preview Green UP Bot vs Red DOWN Bot -->
                             <div class="inline-flex items-center bg-white/90 border border-slate-300 rounded-lg p-0.5 text-[10px] font-extrabold">
                                 <button id="btn-bot-up" onclick="setCartoonBiasPreview('UP')" class="px-1.5 py-0.5 rounded bg-emerald-500 text-white">UP ↑</button>
                                 <button id="btn-bot-down" onclick="setCartoonBiasPreview('DOWN')" class="px-1.5 py-0.5 rounded text-slate-600 hover:text-rose-600">DOWN ↓</button>
                             </div>
                         </div>
 
-                        <!-- Small Graphical UP vs DOWN Bias Bar + Mini Sparkline -->
                         <div class="flex items-center gap-3">
                             <div class="flex-1 min-w-[140px]">
                                 <div class="flex justify-between text-[10px] font-mono font-extrabold mb-0.5">
@@ -333,7 +423,6 @@
                                 </div>
                             </div>
 
-                            <!-- Mini Graphical Trend Sparkline -->
                             <svg id="bias-sparkline-up" class="w-16 h-7 shrink-0 bg-white/90 rounded-lg border border-emerald-200 p-1" viewBox="0 0 60 24" fill="none">
                                 <path d="M3 20L15 15L24 17L36 9L45 11L57 3" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <circle cx="57" cy="3" r="2.8" fill="#059669"/>
@@ -351,15 +440,14 @@
                 </div>
             </div>
 
-            <!-- AI GENERATIVE SUGGESTION BAR RIGHT BELOW CARTOON BOT BOX (INTRADAY • SWING • LONG-TERM + REASON) -->
+            <!-- AI GENERATIVE SUGGESTION BAR RIGHT BELOW CARTOON BOT BOX -->
             <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-xl px-4 py-3 border border-sky-500/40 shadow-sm text-xs leading-relaxed" data-i18n="aiGenShortPlan">
                 <span class="inline-block px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold text-[10px] mr-1.5">✨ AI GENERATIVE SUGGESTION</span>
                 <strong>Intraday:</strong> Overall bias is <strong>UP</strong> — wait for low dips on 5m/15m timeframes to <strong>Buy Low &amp; Sell High</strong> rather than chasing spikes. <strong>Swing &amp; Long-Term:</strong> Accumulate pullbacks in the upward wave. <em>(Reason: Driven by both <strong>Technical</strong> higher-low structure above key support &amp; <strong>News</strong> central bank reserve buying + softening US yields).</em>
             </div>
 
-            <!-- 5-Horizon Direction Focus Cards: Day, Week, Swing, Position & Long-Term (BOTH INDIA & GLOBAL) -->
+            <!-- 5-Horizon Direction Focus Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
-                <!-- DAY -->
                 <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
@@ -381,7 +469,6 @@
                     </div>
                 </div>
 
-                <!-- WEEK -->
                 <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
@@ -403,7 +490,6 @@
                     </div>
                 </div>
 
-                <!-- SWING -->
                 <div class="bg-sky-50 border border-sky-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
@@ -425,7 +511,6 @@
                     </div>
                 </div>
 
-                <!-- POSITION -->
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
@@ -447,7 +532,6 @@
                     </div>
                 </div>
 
-                <!-- LONG-TERM -->
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex flex-col justify-between space-y-2">
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
@@ -470,7 +554,6 @@
                 </div>
             </div>
 
-            <!-- Unified AI Direction Action Summary (Both India & Global) -->
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                 <div class="text-slate-700 leading-relaxed" data-i18n="aiMasterActionText">
                     <strong>🤖 AI Overall Decision Summary (Day • Swing • Position):</strong> Backed by steady sovereign reserve accumulation, festive physical demand, and upcoming US macro data catalysts, the broader momentum remains constructive. For <strong>Day</strong> decisions, wait for intraday dips after news volatility settles rather than chasing spikes; for <strong>Swing</strong>, ride higher-low pullbacks with disciplined risk control; and for <strong>Position</strong>, stay aligned with the primary upward trend through staggered accumulation.
@@ -481,40 +564,57 @@
         <!-- 4. DUAL TRADINGVIEW CHARTS (INDIAN MARKET & GLOBAL MARKET) -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
-            <!-- LEFT CARD: INDIAN MARKET (TAMIL NADU & INDIA) -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
+            <!-- LEFT CARD: INDIAN MARKET (TAMIL NADU & INDIA — LUXURY 24K GOLDEN CARD THEME) -->
+            <div style="background: linear-gradient(160deg, #1b160c 0%, #261d0d 55%, #14110a 100%) !important;" class="border-2 border-amber-500/60 rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between text-amber-50">
                 <div>
-                    <!-- Section Header -->
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-lg" data-i18n="indiaGrowthBadge">
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider text-amber-300 bg-amber-500/15 border border-amber-400/40 px-2.5 py-0.5 rounded-lg" data-i18n="indiaGrowthBadge">
                             🇮🇳 Weekly, Monthly & Yearly Growth Graph
                         </span>
-                        <span class="text-[11px] font-mono text-slate-500" id="india-range-badge">1W</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-500/40 text-rose-300 font-mono font-extrabold text-[10px] animate-pulse">● LIVE</span>
+                            <span class="text-[11px] font-mono text-amber-300 font-bold" id="india-range-badge">1W</span>
+                        </div>
                     </div>
 
-                    <!-- Title & Live Price -->
-                    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+                    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
                         <div>
-                            <h2 class="text-base sm:text-lg font-extrabold text-slate-900" data-i18n="indiaGraphTitle">Gold Rate / Indian Rupee</h2>
-                            <p class="text-[11px] font-mono font-semibold text-slate-500"><span data-i18n="tnIndiaTag">TAMIL NADU & INDIA</span> • <span id="india-tf-label">1W</span></p>
+                            <h2 class="text-base sm:text-lg font-extrabold text-amber-100" data-i18n="indiaGraphTitle">Gold Rate / Indian Rupee</h2>
+                            <p class="text-[11px] font-mono font-semibold text-amber-300/80"><span data-i18n="tnIndiaTag">TAMIL NADU & INDIA</span> • <span id="india-tf-label">1W</span></p>
                         </div>
-                        <div class="text-right">
+                        <div class="text-right space-y-0.5">
                             <div class="flex items-baseline justify-end gap-1.5">
-                                <span id="india-tv-price" class="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900">₹13,679</span>
-                                <span class="text-xs font-bold text-slate-500">INR/g</span>
+                                <span class="text-[10px] font-mono font-extrabold px-1.5 py-0.5 rounded bg-amber-400 text-slate-950">24K</span>
+                                <span id="india-tv-price" class="text-2xl sm:text-3xl font-black font-mono text-amber-300">₹13,679</span>
+                                <span class="text-[11px] font-bold text-amber-200/70">INR/g</span>
                             </div>
-                            <div id="india-tv-change" class="text-xs font-mono font-bold text-emerald-600">
+                            <div class="flex items-baseline justify-end gap-1.5">
+                                <span class="text-[10px] font-mono font-extrabold px-1.5 py-0.5 rounded bg-amber-500/25 text-amber-200 border border-amber-400/30">22K</span>
+                                <span id="india-tv-price-22k" class="text-sm sm:text-base font-extrabold font-mono text-amber-200">₹12,539</span>
+                                <span class="text-[10px] font-bold text-amber-200/70">INR/g</span>
+                            </div>
+                            <div id="india-tv-change" class="text-xs font-mono font-bold text-emerald-400">
                                 +₹259 (+1.93%) 1W
                             </div>
                         </div>
                     </div>
 
-                    <!-- Interactive Canvas Container -->
-                    <div id="india-chart-wrap" class="relative w-full h-56 sm:h-64 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-crosshair select-none">
+                    <!-- 1 Week Highest & 1 Week Lowest Bar (Inspired by Golden Live Rate Card) -->
+                    <div class="flex items-center justify-between gap-2 bg-amber-950/50 border border-amber-500/30 rounded-xl px-3 py-2 mb-3 text-xs font-mono">
+                        <div>
+                            <div id="india-high-val" class="font-extrabold text-amber-200">₹13,679/g</div>
+                            <div class="text-[10px] text-amber-300/70 font-sans" data-i18n="indRangeHighLbl">Range Highest</div>
+                        </div>
+                        <div class="text-right">
+                            <div id="india-low-val" class="font-extrabold text-amber-200">₹13,420/g</div>
+                            <div class="text-[10px] text-amber-300/70 font-sans" data-i18n="indRangeLowLbl">Range Lowest</div>
+                        </div>
+                    </div>
+
+                    <div id="india-chart-wrap" style="background: linear-gradient(180deg, rgba(245, 158, 11, 0.14) 0%, rgba(15, 12, 6, 0.92) 100%) !important;" class="relative w-full h-56 sm:h-64 border border-amber-500/40 rounded-xl overflow-hidden cursor-crosshair select-none">
                         <canvas id="indiaTopChart" class="w-full h-full block"></canvas>
-                        <!-- Interactive Cursor Tooltip (24K & 22K Movement) -->
-                        <div id="india-cursor-tooltip" class="hidden pointer-events-none absolute z-20 bg-slate-950/95 text-white rounded-xl px-3 py-2 text-[11px] font-mono shadow-xl border border-slate-700 min-w-[205px]">
-                            <div id="ind-tt-date" class="text-slate-300 font-bold border-b border-slate-700 pb-1 mb-1">17 Nov</div>
+                        <div id="india-cursor-tooltip" class="hidden pointer-events-none absolute z-20 bg-slate-950/95 text-white rounded-xl px-3 py-2 text-[11px] font-mono shadow-xl border border-amber-400/60 min-w-[205px]">
+                            <div id="ind-tt-date" class="text-amber-300 font-bold border-b border-amber-500/30 pb-1 mb-1">17 Nov</div>
                             <div class="flex justify-between gap-3">
                                 <span class="text-amber-400 font-bold">24K Gold:</span>
                                 <span id="ind-tt-24k" class="font-extrabold">₹13,679</span>
@@ -528,74 +628,72 @@
                         </div>
                     </div>
 
-                    <!-- Timeframe Selector Buttons UNDER GRAPH -->
-                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3 bg-slate-100 p-1.5 rounded-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mt-3 bg-amber-950/60 border border-amber-500/30 p-1.5 rounded-xl">
                         <div class="flex flex-wrap items-center gap-1">
-                            <button onclick="setIndiaRange('1W', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs bg-amber-500 text-slate-950 font-extrabold shadow-sm">1W</button>
-                            <button onclick="setIndiaRange('1M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1M</button>
-                            <button onclick="setIndiaRange('3M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">3M</button>
-                            <button onclick="setIndiaRange('6M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">6M</button>
-                            <button onclick="setIndiaRange('1Y', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1Y</button>
-                            <button onclick="setIndiaRange('5Y', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">5Y</button>
-                            <button onclick="setIndiaRange('ALL', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">All</button>
+                            <button onclick="setIndiaRange('1D', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">1D</button>
+                            <button onclick="setIndiaRange('1W', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs bg-amber-400 text-slate-950 font-extrabold shadow-sm">1W</button>
+                            <button onclick="setIndiaRange('1M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">1M</button>
+                            <button onclick="setIndiaRange('3M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">3M</button>
+                            <button onclick="setIndiaRange('6M', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">6M</button>
+                            <button onclick="setIndiaRange('1Y', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">1Y</button>
+                            <button onclick="setIndiaRange('5Y', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">5Y</button>
+                            <button onclick="setIndiaRange('ALL', this)" class="india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white">All</button>
                         </div>
-                        <span class="text-[10px] font-mono text-slate-500 pr-1">24K & 22K INR</span>
+                        <span class="text-[10px] font-mono text-amber-300 pr-1">24K & 22K INR</span>
                     </div>
                 </div>
 
-                <!-- TAMIL NADU & INDIA: TODAY, WEEK, MONTH & YEAR BIAS + AI TRADE SUGGESTION -->
-                <div class="mt-4 pt-3 border-t border-slate-200 space-y-3">
+                <div class="mt-4 pt-3 border-t border-amber-500/30 space-y-3">
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-extrabold text-slate-800" data-i18n="indiaBiasHeading">🇮🇳 India Bias: Today, Week, Month & Year</span>
-                            <span class="text-[10px] font-semibold text-slate-500" data-i18n="holdingGuide">Detailed Horizon Bias</span>
+                            <span class="text-xs font-extrabold text-amber-200" data-i18n="indiaBiasHeading">🇮🇳 India Bias: Today, Week, Month & Year</span>
+                            <span class="text-[10px] font-semibold text-amber-300/70" data-i18n="holdingGuide">Detailed Horizon Bias</span>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2">
+                            <div class="bg-amber-950/60 border border-amber-500/35 rounded-xl p-2">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-slate-700" data-i18n="lblToday">Today</span>
-                                    <span class="font-extrabold text-emerald-700">BULLISH</span>
+                                    <span class="font-bold text-amber-100" data-i18n="lblToday">Today</span>
+                                    <span class="font-extrabold text-emerald-400">BULLISH</span>
                                 </div>
-                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indTodayDet">Sup: ₹13,540 • +0.82%</div>
+                                <div class="text-[10px] text-amber-200/80 mt-0.5" data-i18n="indTodayDet">Sup: ₹13,540 • +0.82%</div>
                             </div>
-                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2">
+                            <div class="bg-amber-950/60 border border-amber-500/35 rounded-xl p-2">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-slate-700" data-i18n="lblWeek">Week</span>
-                                    <span class="font-extrabold text-emerald-700">BUY DIP</span>
+                                    <span class="font-bold text-amber-100" data-i18n="lblWeek">Week</span>
+                                    <span class="font-extrabold text-emerald-400">BUY DIP</span>
                                 </div>
-                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indWeekDet">1W Gain: +₹259 (+1.9%)</div>
+                                <div class="text-[10px] text-amber-200/80 mt-0.5" data-i18n="indWeekDet">1W Gain: +₹259 (+1.9%)</div>
                             </div>
-                            <div class="bg-sky-50 border border-sky-200 rounded-xl p-2">
+                            <div class="bg-amber-950/60 border border-amber-500/35 rounded-xl p-2">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-slate-700" data-i18n="lblMonth">Month</span>
-                                    <span class="font-extrabold text-sky-700">UPTREND</span>
+                                    <span class="font-bold text-amber-100" data-i18n="lblMonth">Month</span>
+                                    <span class="font-extrabold text-sky-300">UPTREND</span>
                                 </div>
-                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indMonthDet">1M Gain: +₹569 (+4.3%)</div>
+                                <div class="text-[10px] text-amber-200/80 mt-0.5" data-i18n="indMonthDet">1M Gain: +₹569 (+4.3%)</div>
                             </div>
-                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-2">
+                            <div class="bg-amber-950/60 border border-amber-500/35 rounded-xl p-2">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-slate-700" data-i18n="lblYear">Year</span>
-                                    <span class="font-extrabold text-amber-700">STRONG</span>
+                                    <span class="font-bold text-amber-100" data-i18n="lblYear">Year</span>
+                                    <span class="font-extrabold text-amber-300">STRONG</span>
                                 </div>
-                                <div class="text-[10px] text-slate-600 mt-0.5" data-i18n="indYearDet">1Y Surge: +₹3,259 (+31%)</div>
+                                <div class="text-[10px] text-amber-200/80 mt-0.5" data-i18n="indYearDet">1Y Surge: +₹3,259 (+31%)</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- TAMIL NADU & INDIA BUYERS AI TRADE SUGGESTION -->
-                    <div class="bg-slate-50 border border-amber-500/40 rounded-xl p-3 space-y-2">
+                    <div class="bg-amber-950/65 border border-amber-400/40 rounded-xl p-3 space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-extrabold text-amber-700" data-i18n="tnAiSuggestTitle">🤖 Tamil Nadu & India Buyers — AI Trade Suggestion</span>
-                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-700">AI CONFIDENCE: 84%</span>
+                            <span class="text-xs font-extrabold text-amber-300" data-i18n="tnAiSuggestTitle">🤖 Tamil Nadu & India Buyers — AI Trade Suggestion</span>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">AI CONFIDENCE: 84%</span>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
-                            <div class="bg-white border border-slate-200 rounded-lg p-2.5">
-                                <div class="font-extrabold text-emerald-700 mb-0.5" data-i18n="tnIntradayTitle">⚡ Intraday (4–8 Hrs)</div>
-                                <p class="text-slate-600 leading-relaxed" data-i18n="tnIntradayBody">Buy 24K dips near <strong>₹13,540–₹13,580/g</strong>. Target <strong>₹13,760/g</strong> | Strict SL: <strong>₹13,460/g</strong>.</p>
+                            <div class="bg-black/40 border border-amber-500/30 rounded-lg p-2.5">
+                                <div class="font-extrabold text-emerald-400 mb-0.5" data-i18n="tnIntradayTitle">⚡ Intraday (4–8 Hrs)</div>
+                                <p class="text-amber-100/90 leading-relaxed" data-i18n="tnIntradayBody">Buy 24K dips near <strong>₹13,540–₹13,580/g</strong>. Target <strong>₹13,760/g</strong> | Strict SL: <strong>₹13,460/g</strong>.</p>
                             </div>
-                            <div class="bg-white border border-slate-200 rounded-lg p-2.5">
-                                <div class="font-extrabold text-sky-700 mb-0.5" data-i18n="tnSwingTitle">🌊 Swing & Jewellers (5–21 Days)</div>
-                                <p class="text-slate-600 leading-relaxed" data-i18n="tnSwingBody">22K Bridal/Retail buyers lock 50% quantity on dips toward <strong>₹12,380/g</strong>; trail target <strong>₹12,750/g</strong>.</p>
+                            <div class="bg-black/40 border border-amber-500/30 rounded-lg p-2.5">
+                                <div class="font-extrabold text-amber-300 mb-0.5" data-i18n="tnSwingTitle">🌊 Swing & Jewellers (5–21 Days)</div>
+                                <p class="text-amber-100/90 leading-relaxed" data-i18n="tnSwingBody">22K Bridal/Retail buyers lock 50% quantity on dips toward <strong>₹12,380/g</strong>; trail target <strong>₹12,750/g</strong>.</p>
                             </div>
                         </div>
                     </div>
@@ -605,7 +703,6 @@
             <!-- RIGHT CARD: GLOBAL MARKET (XAU/USD) -->
             <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
                 <div>
-                    <!-- Section Header -->
                     <div class="flex items-center justify-between gap-2 mb-2">
                         <span class="text-[11px] font-bold uppercase tracking-wider text-sky-700 bg-sky-50 border border-sky-200 px-2.5 py-0.5 rounded-lg" data-i18n="globalGrowthBadge">
                             🌍 Weekly, Monthly & Yearly Growth Graph
@@ -613,7 +710,6 @@
                         <span class="text-[11px] font-mono text-slate-500" id="global-range-badge">1W</span>
                     </div>
 
-                    <!-- Title & Live Price -->
                     <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
                         <div>
                             <h2 class="text-base sm:text-lg font-extrabold text-slate-900" data-i18n="globalGraphTitle">Gold Spot / US Dollar</h2>
@@ -630,10 +726,8 @@
                         </div>
                     </div>
 
-                    <!-- Interactive Canvas Container -->
                     <div id="global-chart-wrap" class="relative w-full h-56 sm:h-64 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden cursor-crosshair select-none">
                         <canvas id="tvGlobalChart" class="w-full h-full block"></canvas>
-                        <!-- Interactive Cursor Tooltip (Global Movement) -->
                         <div id="global-cursor-tooltip" class="hidden pointer-events-none absolute z-20 bg-slate-950/95 text-white rounded-xl px-3 py-2 text-[11px] font-mono shadow-xl border border-slate-700 min-w-[195px]">
                             <div id="glb-tt-date" class="text-slate-300 font-bold border-b border-slate-700 pb-1 mb-1">17 Nov</div>
                             <div class="flex justify-between gap-3">
@@ -644,9 +738,9 @@
                         </div>
                     </div>
 
-                    <!-- Timeframe Selector Buttons UNDER GRAPH -->
                     <div class="flex flex-wrap items-center justify-between gap-2 mt-3 bg-slate-100 p-1.5 rounded-xl">
                         <div class="flex flex-wrap items-center gap-1">
+                            <button onclick="setTvGlobalRange('1D', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1D</button>
                             <button onclick="setTvGlobalRange('1W', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs bg-sky-500 text-slate-950 font-extrabold shadow-sm">1W</button>
                             <button onclick="setTvGlobalRange('1M', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">1M</button>
                             <button onclick="setTvGlobalRange('3M', this)" class="tv-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900">3M</button>
@@ -659,7 +753,6 @@
                     </div>
                 </div>
 
-                <!-- GLOBAL MARKET: TODAY, WEEK, MONTH & YEAR BIAS + GLOBAL AI TRADE SUGGESTION -->
                 <div class="mt-4 pt-3 border-t border-slate-200 space-y-3">
                     <div>
                         <div class="flex items-center justify-between mb-2">
@@ -698,7 +791,6 @@
                         </div>
                     </div>
 
-                    <!-- GLOBAL MARKET AI TRADE SUGGESTION -->
                     <div class="bg-slate-50 border border-sky-500/40 rounded-xl p-3 space-y-2">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-extrabold text-sky-700" data-i18n="glbAiSuggestTitle">🌐 Global Market (XAU/USD) — AI Trade Suggestion</span>
@@ -719,58 +811,59 @@
             </div>
         </section>
 
-        <!-- 5. AI NEWS SUMMARY & UPCOMING GLOBAL CATALYSTS (IST) -->
+        <!-- 5. LIVE INDIA & GLOBAL NEWS DIGEST + UPCOMING GLOBAL CATALYSTS (IST) -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <!-- AI News Digest -->
             <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="aiNewsHeading">📰 AI Bullion News & Macro Impact Digest</h3>
-                        <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200" data-i18n="aiSentimentTag">
-                            AI SENTIMENT: BULLISH
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="aiNewsHeading">📰 Live India & Global Bullion News Digest</h3>
+                        <span id="news-live-badge" class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            ● LIVE NEWS FEED
                         </span>
                     </div>
-                    <div class="space-y-2.5 text-xs">
+                    <div id="live-news-cards" class="space-y-2.5 text-xs">
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
-                            <div class="font-extrabold text-slate-900 mb-1" data-i18n="news1Title">1. Central Bank Reserves & Asian Physical Demand</div>
+                            <div class="font-extrabold text-slate-900 mb-1" data-i18n="news1Title">🇮🇳 1. India & Tamil Nadu Gold Market Pulse</div>
                             <p class="text-slate-600 leading-relaxed" data-i18n="news1Body">Steady sovereign gold accumulation and strong South Indian wedding-season buying keep 24K & 22K floor protected on dips.</p>
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
-                            <div class="font-extrabold text-slate-900 mb-1" data-i18n="news2Title">2. US Yield & Dollar Index (DXY) Watch</div>
-                            <p class="text-slate-600 leading-relaxed" data-i18n="news2Body">Softening US Treasury yields support XAU/USD above $4,435; watch tonight's 7:00 PM IST US Housing data for intraday spikes.</p>
+                            <div class="font-extrabold text-slate-900 mb-1" data-i18n="news2Title">🌍 2. Global XAU/USD & US Yield Watch</div>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="news2Body">Softening US Treasury yields support XAU/USD above key support; watch tonight's 7:00 PM IST US Housing data for intraday spikes.</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] font-mono text-slate-500 flex justify-between">
-                    <span data-i18n="aiNewsFooter">Updated by Money Earth AI Macro Engine</span>
-                    <span class="text-emerald-600 font-bold">● LIVE SYNC</span>
+                    <span data-i18n="aiNewsFooter">Auto-synced via India & Global Bullion RSS</span>
+                    <span id="live-sync-timestamp" class="text-emerald-600 font-bold">● LIVE SYNC</span>
                 </div>
             </div>
 
-            <!-- Upcoming Global News Calendar -->
             <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="upcomingCalHeading">📅 Upcoming Global News & Events (IST)</h3>
-                    <span class="text-[10px] font-mono text-slate-500">NEXT 12–24 HRS</span>
+                    <span class="text-[10px] font-mono text-slate-500" data-i18n="next24HrsTag">NEXT 12–24 HRS</span>
                 </div>
                 <div class="space-y-2 text-xs font-mono">
-                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                    <div class="flex items-center justify-between gap-2 bg-slate-50 border border-slate-200 rounded-xl p-2.5">
                         <div>
-                            <span class="text-amber-600 font-extrabold">07:00 PM IST</span> • <span class="font-sans font-bold text-slate-800">US Housing Starts & Building Permits</span>
+                            <span class="text-amber-600 font-extrabold">07:00 PM IST</span> • <span class="font-sans font-bold text-slate-800" data-i18n="calEvent1Title">US Housing Starts & Building Permits</span>
+                            <div class="text-[10px] text-rose-600 font-sans font-semibold mt-0.5" data-i18n="calEvent1Window">⛔ No-Trade Buffer: 06:20 PM – 07:30 PM IST (40m before / 30m after)</div>
                         </div>
-                        <span class="px-2 py-0.5 rounded bg-rose-500/15 text-rose-600 font-bold text-[10px]">HIGH IMPACT</span>
+                        <span class="shrink-0 px-2 py-0.5 rounded bg-rose-500/15 text-rose-600 font-bold text-[10px]" data-i18n="calBadgeHigh">HIGH IMPACT</span>
                     </div>
-                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                    <div class="flex items-center justify-between gap-2 bg-slate-50 border border-slate-200 rounded-xl p-2.5">
                         <div>
-                            <span class="text-sky-600 font-extrabold">08:30 PM IST</span> • <span class="font-sans font-bold text-slate-800">Fed Monetary Policy Remarks</span>
+                            <span class="text-sky-600 font-extrabold">08:30 PM IST</span> • <span class="font-sans font-bold text-slate-800" data-i18n="calEvent2Title">Fed Monetary Policy Remarks</span>
+                            <div class="text-[10px] text-amber-700 font-sans font-semibold mt-0.5" data-i18n="calEvent2Window">⛔ No-Trade Buffer: 07:50 PM – 09:00 PM IST (40m before / 30m after)</div>
                         </div>
-                        <span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-700 font-bold text-[10px]">GOLD MOVER</span>
+                        <span class="shrink-0 px-2 py-0.5 rounded bg-amber-500/15 text-amber-700 font-bold text-[10px]" data-i18n="calBadgeGold">GOLD MOVER</span>
                     </div>
-                    <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                    <div class="flex items-center justify-between gap-2 bg-slate-50 border border-slate-200 rounded-xl p-2.5">
                         <div>
-                            <span class="text-emerald-600 font-extrabold">06:00 AM IST</span> • <span class="font-sans font-bold text-slate-800">Shanghai SGE Physical Gold Fix</span>
+                            <span class="text-emerald-600 font-extrabold">06:00 AM IST</span> • <span class="font-sans font-bold text-slate-800" data-i18n="calEvent3Title">Shanghai SGE Physical Gold Fix</span>
+                            <div class="text-[10px] text-slate-500 font-sans font-semibold mt-0.5" data-i18n="calEvent3Window">✅ Asia Physical Demand Open (05:20 AM – 06:30 AM IST Watch)</div>
                         </div>
-                        <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-700 font-bold text-[10px]">ASIA FLOW</span>
+                        <span class="shrink-0 px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-700 font-bold text-[10px]" data-i18n="calBadgeAsia">ASIA FLOW</span>
                     </div>
                 </div>
             </div>
@@ -778,7 +871,6 @@
 
         <!-- 6. TAMIL NADU TODAY GOLD & SILVER RATES + PERSONAL ALGO TRADE LEVELS BOARD -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <!-- Tamil Nadu Rates Table -->
             <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-sm sm:text-base font-extrabold text-slate-900" data-i18n="tnRatesHeading">🇮🇳 Tamil Nadu Today's Gold & Silver Rates</h3>
@@ -815,14 +907,13 @@
                             </tr>
                             <tr class="bg-slate-50">
                                 <td class="py-2.5 font-sans font-extrabold text-slate-800" data-i18n="wSilver">🥈 Silver (1g / 1kg)</td>
-                                <td class="py-2.5 font-extrabold text-sky-600" colspan="3">₹168.50 / gram &nbsp;|&nbsp; ₹1,68,500 / kg</td>
+                                <td class="py-2.5 font-extrabold text-sky-600" colspan="3" id="rate-silver-row">₹168.50 / gram &nbsp;|&nbsp; ₹1,68,500 / kg</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Interactive Algo Trade Levels Board -->
             <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
@@ -871,10 +962,7 @@
                 </span>
             </div>
 
-            <!-- TWO SEPARATE SECTIONS: 1. INDIAN MARKET ALGO & 2. GLOBAL MARKET ALGO -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-
-                <!-- SECTION 1: INDIAN MARKET ALGO STRATEGY -->
                 <div class="bg-slate-50 border border-amber-300/70 rounded-2xl p-4 space-y-3.5">
                     <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
                         <div class="flex items-center gap-2">
@@ -888,7 +976,6 @@
                     </div>
 
                     <div class="space-y-3 text-xs">
-                        <!-- India Swing -->
                         <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
                             <div class="flex items-center justify-between">
                                 <span class="font-extrabold text-sky-700" data-i18n="indAlgoSwingTitle">🌊 Swing Algo (5–21 Days)</span>
@@ -897,7 +984,6 @@
                             <p class="text-slate-600 leading-relaxed" data-i18n="indAlgoSwingDesc">Accumulate 24K Gold on intraday/4H dips near <strong>₹13,520–₹13,580/g</strong> with strict stop-loss below <strong>₹13,380/g</strong>; target <strong>₹13,880/g</strong>.</p>
                         </div>
 
-                        <!-- India Position -->
                         <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
                             <div class="flex items-center justify-between">
                                 <span class="font-extrabold text-amber-700" data-i18n="indAlgoPosTitle">🏛️ Position Algo (1–6 Months)</span>
@@ -906,7 +992,6 @@
                             <p class="text-slate-600 leading-relaxed" data-i18n="indAlgoPosDesc">Ride Tamil Nadu wedding & festive demand wave from <strong>₹13,350–₹13,550/g</strong> zone toward quarterly target <strong>₹14,450/g</strong> (22K lock near <strong>₹12,380/g</strong>).</p>
                         </div>
 
-                        <!-- India Long-Term -->
                         <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
                             <div class="flex items-center justify-between">
                                 <span class="font-extrabold text-emerald-700" data-i18n="indAlgoLongTitle">🌍 Long-Term Algo (1–5+ Years)</span>
@@ -917,7 +1002,6 @@
                     </div>
                 </div>
 
-                <!-- SECTION 2: GLOBAL MARKET ALGO STRATEGY -->
                 <div class="bg-slate-50 border border-sky-300/70 rounded-2xl p-4 space-y-3.5">
                     <div class="flex items-center justify-between border-b border-slate-200 pb-2.5">
                         <div class="flex items-center gap-2">
@@ -931,7 +1015,6 @@
                     </div>
 
                     <div class="space-y-3 text-xs">
-                        <!-- Global Swing -->
                         <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
                             <div class="flex items-center justify-between">
                                 <span class="font-extrabold text-sky-700" data-i18n="glbAlgoSwingTitle">🌊 Swing Algo (5–21 Days)</span>
@@ -940,53 +1023,26 @@
                             <p class="text-slate-600 leading-relaxed" data-i18n="glbAlgoSwingDesc">Enter XAU/USD pullbacks at <strong>$4,420–$4,440/oz</strong> with SL below <strong>$4,380</strong>; breakout close above <strong>$4,500</strong> targets <strong>$4,530–$4,620</strong>.</p>
                         </div>
 
-                        <!-- Global Position -->
                         <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
                             <div class="flex items-center justify-between">
                                 <span class="font-extrabold text-amber-700" data-i18n="glbAlgoPosTitle">🏛️ Position Algo (1–6 Months)</span>
                                 <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">Sovereign Flow</span>
                             </div>
                             <p class="text-slate-600 leading-relaxed" data-i18n="glbAlgoPosDesc">Aligned with Central Bank reserve buying & softening US real yields; hold core long from <strong>$4,350–$4,420/oz</strong> toward <strong>$4,700/oz</strong>.</p>
-                        </div>
-
-                        <!-- Global Long-Term -->
-                        <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1.5">
-                            <div class="flex items-center justify-between">
-                                <span class="font-extrabold text-emerald-700" data-i18n="glbAlgoLongTitle">🌍 Long-Term Algo (1–5+ Years)</span>
-                                <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Secular Bull</span>
-                            </div>
-                            <p class="text-slate-600 leading-relaxed" data-i18n="glbAlgoLongDesc">Core USD hedge portfolio (+31% YoY trend); scale into physical/ETF bullion on 3–5% macro corrections for multi-year compounding.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500 space-y-1">
-        <div class="font-bold text-slate-700" data-i18n="footerMain">Money Earth AI Dashboard • Tamil Nadu, India & Global Precious Metals Intelligence</div>
-        <div class="text-[11px]" data-i18n="footerSub">Educational & Algo Analytics Only. Verify live jeweller/MCX quotes before executing trades.</div>
-    </footer>
-
-    <!-- FLOATING SMILING AI CHATBOT ROBOT (ASK INVEST & ALGO + TODAY TRADE PLAN) -->
+    <!-- FLOATING ROAMING EMO HELPER ROBOT ("ANY HELP? ANY DOUBT? -> WHAT DO YOU NEED?") -->
     <div class="fixed bottom-5 right-5 z-50 flex flex-col items-end">
-        <!-- Chat Drawer -->
-        <div id="ai-chat-drawer" class="hidden mb-3 w-80 sm:w-96 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
+        <div id="ai-chat-drawer" class="hidden mb-3 w-80 sm:w-96 bg-white border-2 border-amber-400/70 rounded-2xl shadow-2xl overflow-hidden">
             <div class="bg-slate-950 text-white px-4 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
                     <span class="text-xl">🤖</span>
                     <div>
-                        <div class="font-extrabold text-sm">Money Earth AI Coach</div>
+                        <div class="font-extrabold text-sm text-amber-300">EMO AI Helper • Money Earth</div>
                         <div class="text-[10px] text-sky-400 font-semibold" data-i18n="coachSub">Gold Trade Plan, Invest & Algo</div>
                     </div>
                 </div>
                 <button onclick="toggleAiChat()" class="text-slate-400 hover:text-white text-lg font-bold px-2">✕</button>
             </div>
 
-            <!-- Topic Pills: Today Trade Plan, Ask Investment & Ask Invest & Algo -->
             <div class="bg-slate-100 px-2.5 py-2 flex flex-wrap gap-1.5 border-b border-slate-200">
                 <button onclick="askQuickCoach('TRADEPLAN')" class="flex-1 py-1.5 px-2 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-[11px] hover:bg-emerald-400 transition" data-i18n="pillTradePlan">
                     📊 Today Trade Plan
@@ -999,53 +1055,71 @@
                 </button>
             </div>
 
-            <!-- Chat Messages -->
             <div id="ai-chat-messages" class="p-3 h-64 overflow-y-auto space-y-2.5 text-xs bg-slate-50">
-                <div class="bg-white border border-slate-200 rounded-xl p-2.5 text-slate-700 leading-relaxed">
-                    Vanakkam! 🙏 I am your <strong>Money Earth Gold AI Coach</strong>. Tap <strong>Today Trade Plan</strong>, <strong>Ask Investment</strong>, or <strong>Ask Invest & Algo</strong> for Intraday, Swing & Position focus!
+                <div class="bg-amber-50 border border-amber-300 rounded-xl p-2.5 text-slate-800 leading-relaxed font-medium" data-i18n="emoGreetingMsg">
+                    👋 Hi friend! I’m your roaming <strong>EMO AI Robot</strong>. <strong>What do you need?</strong> Ask me any doubt about Gold rates, Intraday/Swing plans, or Algo strategy!
                 </div>
             </div>
 
-            <!-- Input -->
             <form onsubmit="handleChatSubmit(event)" class="p-2.5 bg-white border-t border-slate-200 flex gap-2">
-                <input id="ai-chat-input" type="text" placeholder="Ask Today Trade Plan, Swing, Position..." class="flex-1 text-xs px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 focus:outline-none focus:border-sky-500 text-slate-900">
-                <button type="submit" class="px-3.5 py-2 rounded-xl bg-slate-950 text-white text-xs font-extrabold hover:bg-slate-800" data-i18n="btnSend">Send</button>
+                <input id="ai-chat-input" type="text" placeholder="Type what you need or any doubt..." class="flex-1 text-xs px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 focus:outline-none focus:border-amber-500 text-slate-900">
+                <button type="submit" class="px-3.5 py-2 rounded-xl bg-slate-950 text-amber-300 text-xs font-extrabold hover:bg-slate-800" data-i18n="btnSend">Send</button>
             </form>
         </div>
 
-        <!-- Floating Smiling Robot Button -->
-        <button onclick="toggleAiChat()" class="robot-float group flex items-center gap-2.5 bg-slate-950 text-white border-2 border-sky-400 rounded-full px-4 py-2.5 shadow-2xl hover:scale-105 transition">
-            <!-- Smiling SVG Robot -->
-            <svg class="w-8 h-8 shrink-0" viewBox="0 0 64 64" fill="none">
-                <line x1="32" y1="6" x2="32" y2="15" stroke="#00B4D8" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="32" cy="5" r="4" fill="#FBBF24"/>
-                <rect x="12" y="15" width="40" height="34" rx="10" fill="#1E293B" stroke="#00B4D8" stroke-width="2.5"/>
-                <circle cx="24" cy="29" r="3.5" fill="#38BDF8"/>
-                <circle cx="40" cy="29" r="3.5" fill="#38BDF8"/>
-                <path d="M23 38C25.5 42 38.5 42 41 38" stroke="#34D399" stroke-width="3" stroke-linecap="round"/>
-                <rect x="22" y="51" width="20" height="7" rx="3.5" fill="#00B4D8"/>
-            </svg>
-            <div class="text-left">
-                <div class="text-[11px] font-black text-sky-400 leading-tight" data-i18n="coachBadge">Ask Invest & Algo</div>
-                <div class="text-[10px] text-slate-300 leading-tight">AI Coach</div>
+        <!-- Roaming EMO Robot Button with Floating Speech Bubble ("Any help? Any doubt?") -->
+        <div class="emo-roaming-wrap flex flex-col items-end">
+            <div onclick="openEmoHelper()" class="cursor-pointer mb-1.5 px-3 py-1 rounded-full bg-slate-950 text-amber-300 border border-amber-400/70 text-[11px] font-extrabold shadow-lg flex items-center gap-1.5 hover:scale-105 transition">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span data-i18n="emoRoamingBubble">Any help? Any doubt? 👋</span>
             </div>
-        </button>
+
+            <button onclick="openEmoHelper()" class="group flex items-center gap-2.5 bg-slate-950 text-white border-2 border-amber-400 rounded-full px-3.5 py-2 shadow-2xl hover:scale-105 transition" title="Click EMO Helper Robot">
+                <!-- Cute Blinking, Smiling EMO Robot SVG with Glowing Cyan/Gold Eyeballs -->
+                <svg class="w-10 h-10 shrink-0" viewBox="0 0 64 64" fill="none">
+                    <!-- EMO Headphones -->
+                    <rect x="6" y="22" width="6" height="18" rx="3" fill="#F59E0B"/>
+                    <rect x="52" y="22" width="6" height="18" rx="3" fill="#F59E0B"/>
+                    <path d="M12 22C12 12 52 12 52 22" stroke="#FBBF24" stroke-width="3" stroke-linecap="round"/>
+                    <!-- EMO Rounded Dark Visor Head -->
+                    <rect x="11" y="16" width="42" height="34" rx="12" fill="#090D16" stroke="#38BDF8" stroke-width="2.5"/>
+                    <!-- Blinking & Scanning Glowing Eyeballs -->
+                    <g class="emo-eye-scan">
+                        <g class="emo-eye-blink">
+                            <rect x="19" y="25" width="9" height="12" rx="4.5" fill="#38BDF8"/>
+                            <circle cx="22" cy="28.5" r="1.8" fill="#FFFFFF"/>
+                            <rect x="36" y="25" width="9" height="12" rx="4.5" fill="#38BDF8"/>
+                            <circle cx="39" cy="28.5" r="1.8" fill="#FFFFFF"/>
+                        </g>
+                    </g>
+                    <!-- Cute Rosy Cheeks -->
+                    <ellipse cx="18" cy="39" rx="2.5" ry="1.3" fill="#FB7185" opacity="0.65"/>
+                    <ellipse cx="46" cy="39" rx="2.5" ry="1.3" fill="#FB7185" opacity="0.65"/>
+                    <!-- Happy Smiling Mouth -->
+                    <path d="M26 40.5C28.5 44 35.5 44 38 40.5" stroke="#34D399" stroke-width="2.8" stroke-linecap="round"/>
+                </svg>
+                <div class="text-left pr-1">
+                    <div class="text-[11px] font-black text-amber-300 leading-tight" data-i18n="coachBadge">EMO AI Helper</div>
+                    <div class="text-[10px] text-sky-300 font-semibold leading-tight" data-i18n="emoSubTag">Ask Any Doubt</div>
+                </div>
+            </button>
+        </div>
     </div>
 
     <!-- API KEY MODAL -->
     <div id="api-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-5 shadow-2xl space-y-4">
             <div class="flex items-center justify-between">
-                <h3 class="text-base font-extrabold text-slate-900">🔑 Connect Live Bullion API Key</h3>
+                <h3 class="text-base font-extrabold text-slate-900">🔑 Connect Live GoldAPI.io Key</h3>
                 <button onclick="closeApiModal()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">✕</button>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed">
-                Enter your <strong>GoldAPI.io</strong> or <strong>Metals.dev</strong> key to sync live spot XAU/USD & Indian Rupee rates automatically.
+                Paste your <strong>GoldAPI.io</strong> key below (e.g., <code>goldapi-74fa4ba...</code>). To save your 150 free monthly requests, auto-sync runs every 30 minutes or whenever you click <strong>Live Sync ●</strong>!
             </p>
-            <input id="api-key-input" type="password" placeholder="Paste API key (e.g., goldapi-xxxx)..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono focus:outline-none focus:border-amber-500">
+            <input id="api-key-input" type="text" placeholder="Paste GoldAPI.io key here..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-mono focus:outline-none focus:border-amber-500">
             <div class="flex justify-end gap-2">
                 <button onclick="closeApiModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700">Cancel</button>
-                <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950">Save & Sync</button>
+                <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-amber-500 text-slate-950">Save & Sync Now</button>
             </div>
         </div>
     </div>
@@ -1056,9 +1130,17 @@
         let isDarkTheme = false;
         let currentIndiaRange = '1W';
         let currentGlobalRange = '1W';
+        let isBotTurnedOff = false;
+        let isEmergencyAlertActive = false;
+        let customGoldApiKey = localStorage.getItem('money_earth_gold_api_key') || '';
 
-        // --- HISTORICAL & MULTI-HORIZON SERIES DATA ---
+        // --- HISTORICAL & MULTI-HORIZON SERIES DATA (INCLUDING 1D INTRADAY) ---
         const INDIA_SERIES = {
+            '1D': {
+                labels: ['09:30', '11:00', '12:30', '02:00', '03:30', '05:00', 'NOW'],
+                values: [13568, 13590, 13582, 13615, 13640, 13662, 13679],
+                changeText: '+₹111 (+0.82%) 1D'
+            },
             '1W': {
                 labels: ['11 Nov', '12 Nov', '13 Nov', '14 Nov', '15 Nov', '16 Nov', '17 Nov'],
                 values: [13420, 13465, 13440, 13510, 13567, 13615, 13679],
@@ -1097,6 +1179,11 @@
         };
 
         const GLOBAL_SERIES = {
+            '1D': {
+                labels: ['09:30', '11:00', '12:30', '02:00', '03:30', '05:00', 'NOW'],
+                values: [4428.3, 4434.0, 4431.2, 4442.5, 4449.8, 4456.0, 4462.4],
+                changeText: '+$34.10 (+0.77%) 1D'
+            },
             '1W': {
                 labels: ['11 Nov', '12 Nov', '13 Nov', '14 Nov', '15 Nov', '16 Nov', '17 Nov'],
                 values: [4382.5, 4395.0, 4388.4, 4412.8, 4428.2, 4445.1, 4462.4],
@@ -1134,12 +1221,254 @@
             }
         };
 
+        // --- LIVE INDIA & GLOBAL NEWS RSS FETCHER (100% FREE, NO API KEY NEEDED) ---
+        async function fetchLiveGoldNews() {
+            const newsContainer = document.getElementById('live-news-cards');
+            const tickerTrack = document.getElementById('live-news-ticker-track');
+            const newsBadge = document.getElementById('news-live-badge');
+
+            try {
+                // Free RSS2JSON endpoint for Google News Gold Price India & Global
+                const indiaRss = encodeURIComponent('https://news.google.com/rss/search?q=gold+price+india+chennai+OR+mcx&hl=en-IN&gl=IN&ceid=IN:en');
+                const globalRss = encodeURIComponent('https://news.google.com/rss/search?q=gold+price+XAUUSD+OR+bullion&hl=en-US&gl=US&ceid=US:en');
+
+                const [indRes, glbRes] = await Promise.all([
+                    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${indiaRss}`),
+                    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${globalRss}`)
+                ]);
+
+                const indData = indRes.ok ? await indRes.json() : null;
+                const glbData = glbRes.ok ? await glbRes.json() : null;
+
+                const indItem = indData && indData.items && indData.items[0] ? indData.items[0] : null;
+                const glbItem = glbData && glbData.items && glbData.items[0] ? glbData.items[0] : null;
+
+                if (indItem || glbItem) {
+                    let cardsHtml = '';
+                    let tickerHtml = '';
+
+                    if (indItem) {
+                        const title = indItem.title.split(' - ')[0];
+                        cardsHtml += `
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+                                <div class="font-extrabold text-amber-700 mb-1">🇮🇳 LIVE INDIA NEWS • ${indItem.pubDate ? indItem.pubDate.slice(0, 16) : 'TODAY'}</div>
+                                <p class="text-slate-800 font-semibold leading-relaxed">${title}</p>
+                            </div>`;
+                        tickerHtml += `<span>🇮🇳 <strong>INDIA LIVE:</strong> ${title}</span>`;
+                    }
+
+                    if (glbItem) {
+                        const title = glbItem.title.split(' - ')[0];
+                        cardsHtml += `
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+                                <div class="font-extrabold text-sky-700 mb-1">🌍 LIVE GLOBAL NEWS • ${glbItem.pubDate ? glbItem.pubDate.slice(0, 16) : 'TODAY'}</div>
+                                <p class="text-slate-800 font-semibold leading-relaxed">${title}</p>
+                            </div>`;
+                        tickerHtml += `<span>🌍 <strong>GLOBAL LIVE:</strong> ${title}</span>`;
+                    }
+
+                    if (newsContainer && cardsHtml) newsContainer.innerHTML = cardsHtml;
+                    if (tickerTrack && tickerHtml) {
+                        tickerTrack.innerHTML = tickerHtml + tickerHtml;
+                    }
+                    if (newsBadge) newsBadge.textContent = '✅ LIVE NEWS SYNCED';
+                }
+            } catch (e) {
+                // Keep default digest gracefully if offline
+            }
+        }
+
+        // --- REAL-TIME LIVE BULLION & FOREX API ENGINE (GOLDAPI.IO + FREE FALLBACK) ---
+        async function fetchLiveMarketRates(isManualCheck = false) {
+            const syncBtn = document.getElementById('live-sync-label');
+            const feedBadge = document.getElementById('live-feed-badge');
+            const syncTs = document.getElementById('live-sync-timestamp');
+            if (syncBtn && isManualCheck) syncBtn.textContent = 'Syncing...';
+
+            let liveXauUsd = null;
+            let liveUsdInr = 84.42;
+            let tn24kDirect = null;
+            let tn22kDirect = null;
+            let tn18kDirect = null;
+            let chgPctStr = '+0.82%';
+            let sourceName = 'Free Spot API';
+
+            try {
+                // 1. Fetch Live USD/INR Forex Rate (100% Free Open API)
+                const fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
+                if (fxRes.ok) {
+                    const fxData = await fxRes.json();
+                    if (fxData && fxData.rates && fxData.rates.INR) {
+                        liveUsdInr = Number(fxData.rates.INR);
+                    }
+                }
+
+                // 2A. If GoldAPI.io key is saved, fetch direct XAU/INR (includes price_gram_24k, price_gram_22k, price_gram_18k!)
+                if (customGoldApiKey) {
+                    const gInrRes = await fetch('https://www.goldapi.io/api/XAU/INR', {
+                        headers: { 'x-access-token': customGoldApiKey, 'Content-Type': 'application/json' }
+                    });
+                    if (gInrRes.ok) {
+                        const gInr = await gInrRes.json();
+                        if (gInr && gInr.price) {
+                            // GoldAPI returns international spot INR; add Indian import duty + GST retail parity (~1.095x)
+                            const dutyFactor = 1.095;
+                            tn24kDirect = Math.round((gInr.price_gram_24k || (gInr.price / 31.1034768)) * dutyFactor);
+                            tn22kDirect = Math.round((gInr.price_gram_22k || (tn24kDirect * 0.9166)) * dutyFactor);
+                            tn18kDirect = Math.round((gInr.price_gram_18k || (tn24kDirect * 0.75)) * dutyFactor);
+                            liveXauUsd = Number((gInr.price / liveUsdInr).toFixed(2));
+                            if (gInr.chp !== undefined) {
+                                chgPctStr = `${gInr.chp >= 0 ? '+' : ''}${Number(gInr.chp).toFixed(2)}%`;
+                            }
+                            sourceName = 'GoldAPI.io Live';
+                        }
+                    }
+                }
+
+                // 2B. Fallback to 100% Free Public Spot API if no key or quota limit
+                if (!liveXauUsd) {
+                    try {
+                        const pubRes = await fetch('https://api.gold-api.com/price/XAU');
+                        if (pubRes.ok) {
+                            const pubData = await pubRes.json();
+                            if (pubData && pubData.price) {
+                                liveXauUsd = Number(pubData.price);
+                                sourceName = 'Public XAU Spot Live';
+                            }
+                        }
+                    } catch (e) {}
+                }
+
+                if (liveXauUsd && liveXauUsd > 1000) {
+                    const basePerGramInr = (liveXauUsd / 31.1034768) * liveUsdInr;
+                    const tn24k = tn24kDirect || Math.round(basePerGramInr * 1.128);
+                    const tn22k = tn22kDirect || Math.round(tn24k * 0.9166);
+                    const tn18k = tn18kDirect || Math.round(tn24k * 0.75);
+
+                    // Update Top Tickers
+                    document.querySelectorAll('.live-tn-24k').forEach(el => el.textContent = `₹${tn24k.toLocaleString('en-IN')}/g`);
+                    document.querySelectorAll('.live-tn-22k').forEach(el => el.textContent = `₹${tn22k.toLocaleString('en-IN')}/g`);
+                    document.querySelectorAll('.live-tn-chg').forEach(el => el.textContent = `(${chgPctStr})`);
+                    document.querySelectorAll('.live-xau-usd').forEach(el => el.textContent = `$${liveXauUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/oz`);
+                    document.querySelectorAll('.live-xau-chg').forEach(el => el.textContent = `(${chgPctStr})`);
+                    // Update Main Chart Headers & Latest Data Points (Both 24K and 22K!)
+                    document.getElementById('india-tv-price').textContent = `₹${tn24k.toLocaleString('en-IN')}`;
+                    const ind22kEl = document.getElementById('india-tv-price-22k');
+                    if (ind22kEl) ind22kEl.textContent = `₹${tn22k.toLocaleString('en-IN')}`;
+                    document.getElementById('global-tv-price').textContent = `$${liveXauUsd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+                    // Update latest data point in all chart series so charts match live prices
+                    Object.keys(INDIA_SERIES).forEach(tf => {
+                        const arr = INDIA_SERIES[tf].values;
+                        arr[arr.length - 1] = tn24k;
+                    });
+                    Object.keys(GLOBAL_SERIES).forEach(tf => {
+                        const arr = GLOBAL_SERIES[tf].values;
+                        arr[arr.length - 1] = liveXauUsd;
+                    });
+
+                    // Update Tamil Nadu Gold & Silver Rates Table (1g, 8g Sovereign, 10g)
+                    const silver1g = Number(((liveXauUsd / 72.5 / 31.1034768) * liveUsdInr * 1.13).toFixed(2));
+                    const silver1kg = Math.round(silver1g * 1000);
+                    document.querySelectorAll('.live-tn-silver').forEach(el => el.textContent = `₹${silver1g.toFixed(2)}/g (₹${silver1kg.toLocaleString('en-IN')}/kg)`);
+                    document.querySelectorAll('.live-usd-inr').forEach(el => el.textContent = `₹${liveUsdInr.toFixed(2)}`);
+
+                    const r24_1 = document.getElementById('rate-24k-1g');
+                    if (r24_1) {
+                        r24_1.textContent = `₹${tn24k.toLocaleString('en-IN')}`;
+                        document.getElementById('rate-22k-1g').textContent = `₹${tn22k.toLocaleString('en-IN')}`;
+                        document.getElementById('rate-18k-1g').textContent = `₹${tn18k.toLocaleString('en-IN')}`;
+
+                        document.getElementById('rate-24k-8g').textContent = `₹${(tn24k * 8).toLocaleString('en-IN')}`;
+                        document.getElementById('rate-22k-8g').textContent = `₹${(tn22k * 8).toLocaleString('en-IN')}`;
+                        document.getElementById('rate-18k-8g').textContent = `₹${(tn18k * 8).toLocaleString('en-IN')}`;
+
+                        document.getElementById('rate-24k-10g').textContent = `₹${(tn24k * 10).toLocaleString('en-IN')}`;
+                        document.getElementById('rate-22k-10g').textContent = `₹${(tn22k * 10).toLocaleString('en-IN')}`;
+                        document.getElementById('rate-18k-10g').textContent = `₹${(tn18k * 10).toLocaleString('en-IN')}`;
+
+                        document.getElementById('rate-silver-row').textContent = `₹${silver1g.toFixed(2)} / gram  |  ₹${silver1kg.toLocaleString('en-IN')} / kg`;
+                    }
+
+                    renderAllCharts();
+                    updateIndiaHighLow(currentIndiaRange);
+
+                    const nowTime = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
+                    if (feedBadge) feedBadge.textContent = `✅ LIVE API OK (${sourceName} • ${nowTime} IST)`;
+                    if (syncTs) syncTs.textContent = `● SYNCED ${nowTime} IST`;
+                }
+            } catch (err) {
+                if (feedBadge) feedBadge.textContent = '⚠️ Offline Fallback Mode';
+            } finally {
+                if (syncBtn) syncBtn.textContent = 'Live Sync ●';
+                fetchLiveGoldNews();
+            }
+        }
+
+        // --- EMERGENCY NEWS GUARD & ALGO BOT KILL-SWITCH ---
+        function updateBotAndEmergencyUI() {
+            const banner = document.getElementById('emergency-guard-banner');
+            const headerBtn = document.getElementById('header-emergency-btn');
+            const headerLbl = document.getElementById('header-emergency-label');
+            const botStatus = document.getElementById('bot-power-status');
+            const botBtn = document.getElementById('bot-kill-switch-btn');
+            const botBtnText = document.getElementById('bot-switch-btn-text');
+            const headline = document.getElementById('emergency-headline');
+
+            if (isEmergencyAlertActive) {
+                banner.className = 'bg-rose-950 text-white border-2 border-rose-500 rounded-2xl p-4 sm:p-5 shadow-2xl transition-all';
+                headerBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-extrabold bg-rose-600 text-white border border-rose-400 animate-pulse transition flex items-center gap-1.5';
+                headerLbl.textContent = currentLang === 'TA' ? '🚨 அவசர செய்தி எச்சரிக்கை!' : '🚨 EMERGENCY NEWS ALERT!';
+                headline.innerHTML = currentLang === 'TA'
+                    ? '🚨 அவசர எச்சரிக்கை: குளோபல் மார்க்கெட்டில் திடீர் செய்தி தாக்கம்! இன்று டிரேட் செய்ய வேண்டாம் (40 நிமிடம் முன் / 30 நிமிடம் பின்)!'
+                    : '🚨 SUDDEN GLOBAL MARKET NEWS EMERGENCY! DO NOT TRADE TODAY — 40 Mins Before & 30 Mins After News Lock Active!';
+            } else {
+                banner.className = 'bg-slate-900 text-white border-2 border-amber-500/60 rounded-2xl p-4 sm:p-5 shadow-lg transition-all';
+                headerBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-extrabold bg-rose-50 text-rose-700 border border-rose-300 hover:bg-rose-100 transition flex items-center gap-1.5';
+                headerLbl.textContent = currentLang === 'TA' ? 'செய்தி பாதுகாப்பு: SAFE' : 'News Guard: SAFE';
+                headline.innerHTML = I18N[currentLang].riskGuardHeadline;
+            }
+
+            if (isBotTurnedOff) {
+                botStatus.className = 'text-xs font-extrabold text-rose-400';
+                botStatus.textContent = currentLang === 'TA' ? '🛑 போட் நிறுத்தப்பட்டது (BOT OFF)' : '🛑 BOT TURNED OFF (SAFE PAUSE)';
+                botBtn.className = 'px-4 py-2 rounded-xl text-xs font-black bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition flex items-center gap-1.5';
+                botBtnText.textContent = currentLang === 'TA' ? 'போட்டை ஆன் செய்' : 'TURN ON BOT';
+            } else {
+                botStatus.className = 'text-xs font-extrabold text-emerald-400';
+                botStatus.textContent = currentLang === 'TA' ? '● போட் இயங்குகிறது (BOT ACTIVE)' : '● BOT ACTIVE (MONITORING)';
+                botBtn.className = 'px-4 py-2 rounded-xl text-xs font-black bg-rose-600 hover:bg-rose-500 text-white shadow-md transition flex items-center gap-1.5';
+                botBtnText.textContent = currentLang === 'TA' ? 'போட்டை ஆஃப் செய்' : 'TURN OFF BOT';
+            }
+        }
+
+        function toggleAlgoBotSwitch() {
+            isBotTurnedOff = !isBotTurnedOff;
+            updateBotAndEmergencyUI();
+        }
+
+        function toggleEmergencyMode() {
+            isEmergencyAlertActive = !isEmergencyAlertActive;
+            if (isEmergencyAlertActive) {
+                isBotTurnedOff = true; // Auto-turn off bot on emergency alert
+            }
+            updateBotAndEmergencyUI();
+        }
+
         // --- COMPLETE TAMIL & ENGLISH DICTIONARY ---
         const I18N = {
             EN: {
-                upcomingTickerLabel: '🌐 UPCOMING GLOBAL NEWS (IST)',
+                upcomingTickerLabel: '🌐 LIVE INDIA & GLOBAL NEWS',
                 subtitle: 'Tamil Nadu, India & Global Live Precious Metals & AI Algo Intelligence',
-                apiBtn: 'Live API Key',
+                emergencyBtnOff: 'News Guard: SAFE',
+                riskGuardPill: '🛡️ NEWS RISK MANAGEMENT GUARD • 40M BEFORE / 30M AFTER RULE',
+                newsWindowCountdown: 'Next High-Impact Window: 06:20 PM – 07:30 PM IST (US Housing)',
+                riskGuardHeadline: '⚠️ Risk Management Rule: DO NOT TRADE 40 Mins Before & 30 Mins After High-Impact Global News!',
+                riskGuardSubtext: 'Sudden global news spikes cause unpredictable slippage. Pause your Algo Bot <strong>40 minutes before</strong> major news (07:00 PM & 08:30 PM IST) and resume only <strong>30 minutes after</strong> volatility settles.',
+                botPowerLabel: 'ALGO BOT EXECUTION',
+                botStatusActive: '● BOT ACTIVE (MONITORING)',
+                btnTurnOffBot: 'TURN OFF BOT',
+                apiBtn: 'API Key',
                 themeBlack: 'Black',
                 themeWhite: 'White',
                 masterPlanBadge: '🧭 MASTER AI DIRECTION ENGINE • INDIA & GLOBAL',
@@ -1164,6 +1493,8 @@
                 indiaGrowthBadge: '🇮🇳 Weekly, Monthly & Yearly Growth Graph',
                 indiaGraphTitle: 'Gold Rate / Indian Rupee',
                 tnIndiaTag: 'TAMIL NADU & INDIA',
+                indRangeHighLbl: 'Range Highest',
+                indRangeLowLbl: 'Range Lowest',
                 indiaBiasHeading: '🇮🇳 India Bias: Today, Week, Month & Year',
                 holdingGuide: 'Detailed Horizon Bias',
                 lblToday: 'Today',
@@ -1192,14 +1523,23 @@
                 glbIntradayBody: 'Long above <strong>$4,435</strong> support; TP1 <strong>$4,495</strong>, TP2 <strong>$4,520</strong> | SL: <strong>$4,412</strong> before 7:00 PM IST.',
                 glbSwingTitle: '🌊 Global Swing (5–21 Days)',
                 glbSwingBody: 'Higher-low structure intact above <strong>$4,380</strong>; breakout close above <strong>$4,500</strong> opens <strong>$4,620</strong>.',
-                aiNewsHeading: '📰 AI Bullion News & Macro Impact Digest',
-                aiSentimentTag: 'AI SENTIMENT: BULLISH',
-                news1Title: '1. Central Bank Reserves & Asian Physical Demand',
+                aiNewsHeading: '📰 Live India & Global Bullion News Digest',
+                news1Title: '🇮🇳 1. India & Tamil Nadu Gold Market Pulse',
                 news1Body: 'Steady sovereign gold accumulation and strong South Indian wedding-season buying keep 24K & 22K floor protected on dips.',
-                news2Title: '2. US Yield & Dollar Index (DXY) Watch',
-                news2Body: "Softening US Treasury yields support XAU/USD above $4,435; watch tonight's 7:00 PM IST US Housing data for intraday spikes.",
-                aiNewsFooter: 'Updated by Money Earth AI Macro Engine',
+                news2Title: '🌍 2. Global XAU/USD & US Yield Watch',
+                news2Body: "Softening US Treasury yields support XAU/USD above key support; watch tonight's 7:00 PM IST US Housing data for intraday spikes.",
+                aiNewsFooter: 'Auto-synced via India & Global Bullion RSS',
                 upcomingCalHeading: '📅 Upcoming Global News & Events (IST)',
+                next24HrsTag: 'NEXT 12–24 HRS',
+                calEvent1Title: 'US Housing Starts & Building Permits',
+                calEvent1Window: '⛔ No-Trade Buffer: 06:20 PM – 07:30 PM IST (40m before / 30m after)',
+                calBadgeHigh: 'HIGH IMPACT',
+                calEvent2Title: 'Fed Monetary Policy Remarks',
+                calEvent2Window: '⛔ No-Trade Buffer: 07:50 PM – 09:00 PM IST (40m before / 30m after)',
+                calBadgeGold: 'GOLD MOVER',
+                calEvent3Title: 'Shanghai SGE Physical Gold Fix',
+                calEvent3Window: '✅ Asia Physical Demand Open (05:20 AM – 06:30 AM IST Watch)',
+                calBadgeAsia: 'ASIA FLOW',
                 tnRatesHeading: "🇮🇳 Tamil Nadu Today's Gold & Silver Rates",
                 thWeight: 'Weight',
                 th24k: '24K Pure',
@@ -1229,7 +1569,10 @@
                 glbAlgoLongTitle: '🌍 Long-Term Algo (1–5+ Years)',
                 glbAlgoLongDesc: 'Core USD hedge portfolio (+31% YoY trend); scale into physical/ETF bullion on 3–5% macro corrections for multi-year compounding.',
                 coachSub: 'Gold Trade Plan, Invest & Algo',
-                coachBadge: 'Ask Invest & Algo',
+                coachBadge: 'EMO AI Helper',
+                emoSubTag: 'Ask Any Doubt',
+                emoRoamingBubble: 'Any help? Any doubt? 👋',
+                emoGreetingMsg: '👋 Hi friend! I’m your roaming <strong>EMO AI Robot</strong>. <strong>What do you need?</strong> Ask me any doubt about Gold rates, Intraday/Swing plans, or Algo strategy!',
                 pillTradePlan: '📊 Today Trade Plan',
                 pillInvest: '🪙 Ask Investment',
                 pillAlgo: '🤖 Ask Invest & Algo',
@@ -1238,9 +1581,17 @@
                 footerSub: 'Educational & Algo Analytics Only. Verify live jeweller/MCX quotes before executing trades.'
             },
             TA: {
-                upcomingTickerLabel: '🌐 வரவிருக்கும் குளோபல் செய்திகள் (IST)',
+                upcomingTickerLabel: '🌐 நேரலை இந்தியா & குளோபல் செய்திகள்',
                 subtitle: 'தமிழ்நாடு, இந்தியா & குளோபல் நேரலை தங்கம், வெள்ளி & AI அல்கோ டேஷ்போர்டு',
-                apiBtn: 'நேரலை API இணைப்பு',
+                emergencyBtnOff: 'செய்தி பாதுகாப்பு: SAFE',
+                riskGuardPill: '🛡️ செய்தி ரிஸ்க் மேனேஜ்மென்ட் • 40 நிமிடம் முன் / 30 நிமிடம் பின் விதி',
+                newsWindowCountdown: 'அடுத்த முக்கிய செய்தி நேரம்: 06:20 PM – 07:30 PM IST (US Housing)',
+                riskGuardHeadline: '⚠️ ரிஸ்க் மேனேஜ்மென்ட் எச்சரிக்கை: முக்கிய குளோபல் செய்திக்கு 40 நிமிடம் முன்பும், 30 நிமிடம் பின்பும் டிரேட் செய்ய வேண்டாம்!',
+                riskGuardSubtext: 'திடீர் குளோபல் செய்திகளின் போது சந்தையில் அதிக ஏற்ற இறக்கம் இருக்கும். முக்கிய செய்திகளுக்கு (07:00 PM & 08:30 PM IST) <strong>40 நிமிடம் முன்பே</strong> அல்கோ போட்டை ஆஃப் செய்துவிட்டு, <strong>30 நிமிடம் கழித்தே</strong> மீண்டும் இயக்கவும்.',
+                botPowerLabel: 'அல்கோ போட் நிலை',
+                botStatusActive: '● போட் இயங்குகிறது (BOT ACTIVE)',
+                btnTurnOffBot: 'போட்டை ஆஃப் செய்',
+                apiBtn: 'API கீ',
                 themeBlack: 'கருப்பு',
                 themeWhite: 'வெள்ளை',
                 masterPlanBadge: '🧭 முதன்மை AI திசை வழிகாட்டி • இந்தியா & குளோபல்',
@@ -1265,6 +1616,8 @@
                 indiaGrowthBadge: '🇮🇳 வாராந்திர, மாதாந்திர & வருடாந்திர வளர்ச்சி வரைபடம்',
                 indiaGraphTitle: 'தங்கம் விலை / இந்திய ரூபாய் (INR)',
                 tnIndiaTag: 'தமிழ்நாடு & இந்தியா',
+                indRangeHighLbl: 'இந்தக் கால உச்சம் (Highest)',
+                indRangeLowLbl: 'இந்தக் கால குறைவு (Lowest)',
                 indiaBiasHeading: '🇮🇳 இந்தியா போக்கு: இன்று, வாரம், மாதம் & ஆண்டு',
                 holdingGuide: 'விரிவான கால அளவு போக்கு',
                 lblToday: 'இன்று',
@@ -1293,14 +1646,23 @@
                 glbIntradayBody: '<strong>$4,435</strong> சப்போர்ட்டுக்கு மேல் வாங்கலாம்; இலக்கு 1: <strong>$4,495</strong>, இலக்கு 2: <strong>$4,520</strong> | SL: <strong>$4,412</strong>.',
                 glbSwingTitle: '🌊 குளோபல் ஸ்விங் (5–21 நாட்கள்)',
                 glbSwingBody: '<strong>$4,380</strong>-க்கு மேல் ஏற்றம் வலுவாக உள்ளது; <strong>$4,500</strong>-க்கு மேல் நிலைத்தால் இலக்கு <strong>$4,620</strong>.',
-                aiNewsHeading: '📰 AI தங்கம்-வெள்ளி செய்திகள் & மார்க்கெட் தாக்கம்',
-                aiSentimentTag: 'AI போக்கு: ஏற்றம் (BULLISH)',
-                news1Title: '1. மத்திய வங்கிகள் கொள்முதல் & தென்னிந்திய தேவை',
+                aiNewsHeading: '📰 நேரலை இந்தியா & குளோபல் தங்கம் செய்திகள்',
+                news1Title: '🇮🇳 1. இந்தியா & தமிழ்நாடு தங்கம் சந்தை நிலவரம்',
                 news1Body: 'உலக மத்திய வங்கிகளின் தங்கம் சேமிப்பு மற்றும் தமிழக திருமண சீசன் தேவையால் 24K & 22K விலை சரிவில் வலுவான ஆதரவு உள்ளது.',
-                news2Title: '2. அமெரிக்க டாலர் குறியீடு (DXY) & வட்டி விகித கவனம்',
-                news2Body: 'அமெரிக்க பத்திர வட்டி குறைவதால் XAU/USD $4,435-க்கு மேல் வலுவாக உள்ளது; இரவு 7:00 PM IST செய்தியை கவனிக்கவும்.',
-                aiNewsFooter: 'Money Earth AI செய்தி பகுப்பாய்வு மையம்',
+                news2Title: '🌍 2. குளோபல் XAU/USD & அமெரிக்க வட்டி விகித கவனம்',
+                news2Body: 'அமெரிக்க பத்திர வட்டி குறைவதால் XAU/USD வலுவாக உள்ளது; இரவு 7:00 PM IST செய்தியை கவனிக்கவும்.',
+                aiNewsFooter: 'இந்தியா & குளோபல் செய்தி மையம் வழியாக இணைக்கப்பட்டது',
                 upcomingCalHeading: '📅 வரவிருக்கும் முக்கிய குளோபல் செய்திகள் (IST)',
+                next24HrsTag: 'அடுத்த 12–24 மணி நேரம்',
+                calEvent1Title: 'அமெரிக்க வீட்டுவசதி & கட்டுமான அனுமதி தரவு (US Housing Starts & Building Permits)',
+                calEvent1Window: '⛔ டிரேட் தடை நேரம்: 06:20 PM – 07:30 PM IST (40 நிமிடம் முன் / 30 நிமிடம் பின்)',
+                calBadgeHigh: 'அதிக தாக்கம்',
+                calEvent2Title: 'அமெரிக்க ஃபெடரல் வங்கி நிதிக் கொள்கை உரை (Fed Monetary Policy Remarks)',
+                calEvent2Window: '⛔ டிரேட் தடை நேரம்: 07:50 PM – 09:00 PM IST (40 நிமிடம் முன் / 30 நிமிடம் பின்)',
+                calBadgeGold: 'தங்கம் நகர்த்தி',
+                calEvent3Title: 'ஷாங்காய் SGE தங்கம் விலை நிர்ணயம் (Shanghai SGE Physical Gold Fix)',
+                calEvent3Window: '✅ ஆசிய தங்கம் தேவை தொடக்கம் (05:20 AM – 06:30 AM IST கவனம்)',
+                calBadgeAsia: 'ஆசிய வர்த்தகம்',
                 tnRatesHeading: '🇮🇳 தமிழ்நாடு இன்றைய தங்கம் & வெள்ளி விலை நிலவரம்',
                 thWeight: 'அளவு',
                 th24k: '24K சுத்தத் தங்கம்',
@@ -1330,7 +1692,10 @@
                 glbAlgoLongTitle: '🌍 நீண்ட கால அல்கோ (1–5+ ஆண்டுகள்)',
                 glbAlgoLongDesc: 'நீண்ட கால டாலர் பாதுகாப்பு போர்ட்ஃபோலியோ (+31% YoY); 3–5% சரிவுகளில் படிப்படியாகச் சேமிக்கவும்.',
                 coachSub: 'தங்கம் டிரேட் பிளான், முதலீடு & அல்கோ',
-                coachBadge: 'Ask Invest & Algo',
+                coachBadge: 'EMO AI உதவியாளர்',
+                emoSubTag: 'சந்தேகம் கேளுங்கள்',
+                emoRoamingBubble: 'உதவி வேண்டுமா? சந்தேகமா? 👋',
+                emoGreetingMsg: '👋 வணக்கம் நண்பா! நான் உங்கள் <strong>EMO AI ரோபோட்</strong>. <strong>உங்களுக்கு என்ன வேண்டும்?</strong> தங்கம் விலை, டிரேட் பிளான் அல்லது அல்கோ பற்றி எந்தச் சந்தேகமும் கேளுங்கள்!',
                 pillTradePlan: '📊 Today Trade Plan',
                 pillInvest: '🪙 முதலீட்டு ஆலோசனை',
                 pillAlgo: '🤖 அல்கோ & முதலீடு',
@@ -1340,7 +1705,7 @@
             }
         };
 
-        // --- DRAW TRADINGVIEW CHART (RIGHT SIDE PRICE AXIS & WHITE/BLACK ADAPTIVE) ---
+        // --- DRAW TRADINGVIEW CHART ---
         function drawAreaChart(canvasId, series, accentColor, hoverIndex = -1, prefix = '₹') {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
@@ -1354,7 +1719,7 @@
             const w = rect.width;
             const h = rect.height;
             const padLeft = 14;
-            const padRight = 64; // Right-side price Y-axis
+            const padRight = 64;
             const padTop = 16;
             const padBottom = 26;
             const plotW = w - padLeft - padRight;
@@ -1368,9 +1733,11 @@
             const maxVal = Math.max(...vals) * 1.004;
             const range = maxVal - minVal || 1;
 
-            // Grid lines & Right-side Price Labels
-            const gridColor = isDarkTheme ? 'rgba(148, 163, 184, 0.14)' : 'rgba(148, 163, 184, 0.25)';
-            const textColor = isDarkTheme ? '#94a3b8' : '#64748b';
+            const isGoldCard = canvasId === 'indiaTopChart';
+            const gridColor = isGoldCard
+                ? 'rgba(251, 191, 36, 0.14)'
+                : (isDarkTheme ? 'rgba(148, 163, 184, 0.14)' : 'rgba(148, 163, 184, 0.25)');
+            const textColor = isGoldCard ? '#fcd34d' : (isDarkTheme ? '#94a3b8' : '#64748b');
             ctx.font = '600 10px JetBrains Mono, monospace';
             ctx.textAlign = 'left';
 
@@ -1391,17 +1758,15 @@
                 ctx.fillText(formatted, w - padRight + 6, y + 3);
             }
 
-            // Compute Point Coordinates
             const points = vals.map((v, idx) => {
                 const x = padLeft + (plotW * idx) / (vals.length - 1 || 1);
                 const y = padTop + plotH - ((v - minVal) / range) * plotH;
                 return { x, y, v };
             });
 
-            // Area Gradient Fill
             const grad = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-            grad.addColorStop(0, accentColor + '44');
-            grad.addColorStop(1, accentColor + '02');
+            grad.addColorStop(0, isGoldCard ? 'rgba(251, 191, 36, 0.48)' : accentColor + '44');
+            grad.addColorStop(1, isGoldCard ? 'rgba(251, 191, 36, 0.02)' : accentColor + '02');
             ctx.beginPath();
             ctx.moveTo(points[0].x, padTop + plotH);
             points.forEach(p => ctx.lineTo(p.x, p.y));
@@ -1410,14 +1775,12 @@
             ctx.fillStyle = grad;
             ctx.fill();
 
-            // Main Trend Line
             ctx.beginPath();
             points.forEach((p, idx) => idx === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
-            ctx.strokeStyle = accentColor;
-            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = isGoldCard ? '#fbbf24' : accentColor;
+            ctx.lineWidth = 2.8;
             ctx.stroke();
 
-            // X-Axis Time Labels
             ctx.textAlign = 'center';
             ctx.fillStyle = textColor;
             points.forEach((p, idx) => {
@@ -1426,12 +1789,11 @@
                 }
             });
 
-            // Active Hover Crosshair & Dot
             if (hoverIndex >= 0 && hoverIndex < points.length) {
                 const hp = points[hoverIndex];
                 ctx.save();
                 ctx.setLineDash([4, 4]);
-                ctx.strokeStyle = isDarkTheme ? '#cbd5e1' : '#334155';
+                ctx.strokeStyle = isGoldCard ? '#fde68a' : (isDarkTheme ? '#cbd5e1' : '#334155');
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(hp.x, padTop);
@@ -1440,8 +1802,8 @@
                 ctx.restore();
 
                 ctx.beginPath();
-                ctx.arc(hp.x, hp.y, 5, 0, Math.PI * 2);
-                ctx.fillStyle = accentColor;
+                ctx.arc(hp.x, hp.y, 5.5, 0, Math.PI * 2);
+                ctx.fillStyle = isGoldCard ? '#fbbf24' : accentColor;
                 ctx.fill();
                 ctx.strokeStyle = '#ffffff';
                 ctx.lineWidth = 2;
@@ -1449,21 +1811,32 @@
             }
         }
 
+        function updateIndiaHighLow(range) {
+            const vals = INDIA_SERIES[range].values;
+            const hi = Math.max(...vals);
+            const lo = Math.min(...vals);
+            const hiEl = document.getElementById('india-high-val');
+            const loEl = document.getElementById('india-low-val');
+            if (hiEl) hiEl.textContent = `₹${hi.toLocaleString('en-IN')}/g`;
+            if (loEl) loEl.textContent = `₹${lo.toLocaleString('en-IN')}/g`;
+        }
+
         function renderAllCharts() {
-            drawAreaChart('indiaTopChart', INDIA_SERIES[currentIndiaRange], '#f59e0b', -1, '₹');
+            drawAreaChart('indiaTopChart', INDIA_SERIES[currentIndiaRange], '#fbbf24', -1, '₹');
             drawAreaChart('tvGlobalChart', GLOBAL_SERIES[currentGlobalRange], '#0ea5e9', -1, '$');
         }
 
         function setIndiaRange(range, btn) {
             currentIndiaRange = range;
             document.querySelectorAll('.india-range-btn').forEach(b => {
-                b.className = 'india-range-btn px-2.5 py-1 rounded-lg text-xs text-slate-600 font-semibold hover:text-slate-900';
+                b.className = 'india-range-btn px-2.5 py-1 rounded-lg text-xs text-amber-200/80 font-semibold hover:text-white';
             });
-            btn.className = 'india-range-btn px-2.5 py-1 rounded-lg text-xs bg-amber-500 text-slate-950 font-extrabold shadow-sm';
+            btn.className = 'india-range-btn px-2.5 py-1 rounded-lg text-xs bg-amber-400 text-slate-950 font-extrabold shadow-sm';
             document.getElementById('india-range-badge').textContent = range;
             document.getElementById('india-tf-label').textContent = range;
             document.getElementById('india-tv-change').textContent = INDIA_SERIES[range].changeText;
-            drawAreaChart('indiaTopChart', INDIA_SERIES[range], '#f59e0b', -1, '₹');
+            updateIndiaHighLow(range);
+            drawAreaChart('indiaTopChart', INDIA_SERIES[range], '#fbbf24', -1, '₹');
         }
 
         function setTvGlobalRange(range, btn) {
@@ -1478,7 +1851,6 @@
             drawAreaChart('tvGlobalChart', GLOBAL_SERIES[range], '#0ea5e9', -1, '$');
         }
 
-        // --- INTERACTIVE CURSOR HOVER MOVEMENT (24K/22K INDIA & GLOBAL XAU/USD) ---
         function attachChartHover() {
             const indWrap = document.getElementById('india-chart-wrap');
             const indTip = document.getElementById('india-cursor-tooltip');
@@ -1544,7 +1916,6 @@
             });
         }
 
-        // --- CARTOON GROK-STYLE BLOB BOT PREVIEW SWITCHER (UP HAPPY GREEN vs DOWN SAD RED) ---
         function setCartoonBiasPreview(mode) {
             const card = document.getElementById('cartoon-bias-card');
             const botUp = document.getElementById('blob-bot-up');
@@ -1583,7 +1954,6 @@
             }
         }
 
-        // --- WHITE / BLACK THEME SWITCHER ---
         function toggleTheme() {
             isDarkTheme = !isDarkTheme;
             document.body.classList.toggle('dark-theme', isDarkTheme);
@@ -1600,7 +1970,6 @@
             renderAllCharts();
         }
 
-        // --- COMPLETE TAMIL / ENGLISH LANGUAGE SWITCHER ---
         function toggleLanguage() {
             currentLang = currentLang === 'EN' ? 'TA' : 'EN';
             const dict = I18N[currentLang];
@@ -1610,9 +1979,9 @@
             });
             const label = document.getElementById('theme-label');
             label.textContent = isDarkTheme ? dict.themeWhite : dict.themeBlack;
+            updateBotAndEmergencyUI();
         }
 
-        // --- ALGO TRADE LEVELS ASSET SWITCHER ---
         function selectAlgoAsset(asset, btn) {
             document.querySelectorAll('.algo-asset-btn').forEach(b => {
                 b.className = 'algo-asset-btn px-2.5 py-1 rounded-lg text-slate-600';
@@ -1642,9 +2011,21 @@
             }
         }
 
-        // --- AI COACH CHAT (TODAY TRADE PLAN + INVEST & ALGO FOR GOLD) ---
         function toggleAiChat() {
             document.getElementById('ai-chat-drawer').classList.toggle('hidden');
+        }
+
+        function openEmoHelper() {
+            const drawer = document.getElementById('ai-chat-drawer');
+            const wasHidden = drawer.classList.contains('hidden');
+            drawer.classList.remove('hidden');
+            if (wasHidden) {
+                appendChatBubble(currentLang === 'TA'
+                    ? '🤖 <strong>EMO:</strong> வணக்கம்! <strong>உங்களுக்கு என்ன வேண்டும்? (What do you need?)</strong> எந்த சந்தேகமும் கேளுங்கள்!'
+                    : '🤖 <strong>EMO:</strong> Hey there! <strong>What do you need?</strong> Ask me any doubt about Gold prices, Buy/Sell levels, or Algo!');
+            }
+            const inp = document.getElementById('ai-chat-input');
+            if (inp) inp.focus();
         }
 
         function appendChatBubble(text, isUser = false) {
@@ -1662,18 +2043,18 @@
             if (topic === 'TRADEPLAN') {
                 appendChatBubble(currentLang === 'TA' ? '📊 இன்றைய தங்கம் டிரேட் பிளான் (Today Trade Plan) என்ன?' : '📊 What is Today’s Gold Trade Plan (Intraday, Swing & Position)?', true);
                 appendChatBubble(currentLang === 'TA'
-                    ? '<strong>📊 இன்றைய தங்கம் (Gold) டிரேட் பிளான்:</strong><br>• <strong>⚡ Intraday Focus (UP ↑):</strong> அவசரப்பட்டு உச்சத்தில் வாங்காமல், 5m/15m சார்ட்டில் விலை சப்போர்ட் அருகே குறையும்போது (Buy Low) வாங்கி உயரும்போது (Sell High) லாபம் எடுக்கவும். இரவு 7:00 PM IST அமெரிக்க செய்தி நேர ஏற்ற இறக்கத்தைக் கவனிக்கவும்.<br>• <strong>🌊 Swing Focus (5–21 நாட்கள்):</strong> ஏற்றப் போக்கு (Higher-Lows) வலுவாக உள்ளதால் சிறிய சரிவுகளைப் பயன்படுத்தி வாங்கித் தொடரலாம்.<br>• <strong>🏛️ Position Focus (1–6 மாதங்கள்):</strong> மத்திய வங்கிகள் கொள்முதல் மற்றும் உள்ளூர் தேவை காரணமாக முதன்மை ஏற்றத் திசையில் படிப்படியாகச் சேமிப்பது சிறந்தது.'
-                    : '<strong>📊 Today’s Gold Market Trade Plan:</strong><br>• <strong>⚡ Intraday Focus (UP ↑):</strong> Avoid chasing spikes; wait for low dips on 5m/15m timeframes to <strong>Buy Low & Sell High</strong> before tonight’s 7:00 PM IST US macro data volatility.<br>• <strong>🌊 Swing Focus (5–21 Days):</strong> Higher-low structure remains intact — ride pullbacks in the upward wave with disciplined risk control.<br>• <strong>🏛️ Position Focus (1–6 Months):</strong> Backed by sovereign reserve buying & festive demand, stay aligned with the primary uptrend via staggered accumulation.');
+                    ? '<strong>📊 இன்றைய தங்கம் (Gold) டிரேட் பிளான்:</strong><br>• <strong>⚡ Intraday Focus (UP ↑):</strong> அவசரப்பட்டு உச்சத்தில் வாங்காமல், 5m/15m சார்ட்டில் விலை சப்போர்ட் அருகே குறையும்போது (Buy Low) வாங்கி உயரும்போது (Sell High) லாபம் எடுக்கவும்.<br>• <strong>🌊 Swing Focus (5–21 நாட்கள்):</strong> ஏற்றப் போக்கு (Higher-Lows) வலுவாக உள்ளதால் சிறிய சரிவுகளைப் பயன்படுத்தி வாங்கித் தொடரலாம்.<br>• <strong>🏛️ Position Focus (1–6 மாதங்கள்):</strong> மத்திய வங்கிகள் கொள்முதல் மற்றும் உள்ளூர் தேவை காரணமாக முதன்மை ஏற்றத் திசையில் படிப்படியாகச் சேமிப்பது சிறந்தது.'
+                    : '<strong>📊 Today’s Gold Market Trade Plan:</strong><br>• <strong>⚡ Intraday Focus (UP ↑):</strong> Avoid chasing spikes; wait for low dips on 5m/15m timeframes to <strong>Buy Low & Sell High</strong>.<br>• <strong>🌊 Swing Focus (5–21 Days):</strong> Higher-low structure remains intact — ride pullbacks in the upward wave.<br>• <strong>🏛️ Position Focus (1–6 Months):</strong> Stay aligned with the primary uptrend via staggered accumulation.');
             } else if (topic === 'INVEST') {
                 appendChatBubble(currentLang === 'TA' ? '🪙 தங்கம் முதலீட்டு ஆலோசனை என்ன?' : '🪙 What is the best Gold Investment plan?', true);
                 appendChatBubble(currentLang === 'TA'
-                    ? '<strong>🪙 Money Earth தங்கம் முதலீட்டு வழிகாட்டி:</strong><br>• <strong>80% 24K தங்கம் + 20% 22K/Bullion</strong> விகிதத்தில் மாதாந்திர SIP செய்யுங்கள்.<br>• விலை 3% குறையும்போதெல்லாம் கூடுதல் யூனிட் சேர்ப்பது நீண்ட காலத்தில் சிறந்த லாபம் தரும்.'
-                    : '<strong>🪙 Money Earth Gold Investment Plan:</strong><br>• Allocate <strong>80% in 24K Pure Gold + 20% in Physical/ETF Bullion</strong> via disciplined monthly SIP.<br>• Double your tranche whenever Gold dips 3% near S1 support for superior compounding.');
+                    ? '<strong>🪙 Money Earth தங்கம் முதலீட்டு வழிகாட்டி:</strong><br>• <strong>80% 24K தங்கம் + 20% 22K/Bullion</strong> விகிதத்தில் மாதாந்திர SIP செய்யுங்கள்.'
+                    : '<strong>🪙 Money Earth Gold Investment Plan:</strong><br>• Allocate <strong>80% in 24K Pure Gold + 20% in Physical/ETF Bullion</strong> via disciplined monthly SIP.');
             } else {
                 appendChatBubble(currentLang === 'TA' ? '🤖 Invest & Algo வியூகம் விளக்கவும்' : '🤖 Explain Gold Invest & Algo Strategy', true);
                 appendChatBubble(currentLang === 'TA'
-                    ? '<strong>🤖 Invest Earth Gold Algo (Swing • Position • Long-Term):</strong><br>• <strong>Swing (5–21 நாட்கள்):</strong> 4H சார்ட்டில் சப்போர்ட் சரிவில் நுழைந்து ஏற்ற அலையில் லாபம் எடுக்கவும்.<br>• <strong>Position (1–6 மாதங்கள்):</strong> மத்திய வங்கிகள் கொள்முதல் போக்குடன் 70% இருப்பு தொடரலாம்.<br>• <strong>Long-Term (1–5+ ஆண்டுகள்):</strong> ஸ்மார்ட் SIP மூலம் செல்வத்தைப் பெருக்குங்கள்.'
-                    : '<strong>🤖 Invest Earth Gold Algo [Swing • Position • Long-Term]:</strong><br>• <strong>Swing (5–21D):</strong> Buy 4H pullbacks near support & trail upward momentum.<br>• <strong>Position (1–6M):</strong> Ride sovereign reserve & festive demand wave.<br>• <strong>Long-Term (1–5Y+):</strong> Automated Gold Smart SIP on 3–5% macro dips.');
+                    ? '<strong>🤖 Invest Earth Gold Algo [Swing • Position • Long-Term]:</strong><br>• <strong>Swing (5–21D):</strong> 4H சார்ட்டில் சப்போர்ட் சரிவில் நுழையவும்.<br>• <strong>Position (1–6M):</strong> மத்திய வங்கிகள் கொள்முதல் போக்குடன் தொடரலாம்.'
+                    : '<strong>🤖 Invest Earth Gold Algo [Swing • Position • Long-Term]:</strong><br>• <strong>Swing (5–21D):</strong> Buy 4H pullbacks near support & trail upward momentum.<br>• <strong>Position (1–6M):</strong> Ride sovereign reserve & festive demand wave.');
             }
         }
 
@@ -1691,18 +2072,26 @@
             setTimeout(() => askQuickCoach(topic), 350);
         }
 
-        // --- API KEY MODAL ---
-        function openApiModal() { document.getElementById('api-modal').classList.remove('hidden'); }
+        function openApiModal() {
+            const inp = document.getElementById('api-key-input');
+            if (inp && customGoldApiKey) inp.value = customGoldApiKey;
+            document.getElementById('api-modal').classList.remove('hidden');
+        }
         function closeApiModal() { document.getElementById('api-modal').classList.add('hidden'); }
         function saveApiKey() {
             const val = document.getElementById('api-key-input').value.trim();
+            customGoldApiKey = val;
             if (val) {
-                document.getElementById('api-status-text').textContent = 'API Connected ●';
+                localStorage.setItem('money_earth_gold_api_key', val);
+                document.getElementById('api-status-text').textContent = 'Key Saved ●';
+            } else {
+                localStorage.removeItem('money_earth_gold_api_key');
+                document.getElementById('api-status-text').textContent = 'API Key';
             }
             closeApiModal();
+            fetchLiveMarketRates(true);
         }
 
-        // --- LIVE IST CLOCK ---
         function updateIstClock() {
             const now = new Date();
             const ist = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
@@ -1712,9 +2101,16 @@
 
         window.addEventListener('load', () => {
             renderAllCharts();
+            updateIndiaHighLow(currentIndiaRange);
             attachChartHover();
             updateIstClock();
             setInterval(updateIstClock, 1000);
+            if (customGoldApiKey) {
+                document.getElementById('api-status-text').textContent = 'Key Saved ●';
+            }
+            // Fetch live rates + India/Global news on load, and auto-refresh every 30 mins to protect your 150 free GoldAPI quota
+            fetchLiveMarketRates(false);
+            setInterval(() => fetchLiveMarketRates(false), 1800000);
         });
         window.addEventListener('resize', renderAllCharts);
     </script>
